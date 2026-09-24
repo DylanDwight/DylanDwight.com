@@ -1,0 +1,146 @@
+/* ============================================================
+   DYLAN DWIGHT CREATIVE TECHNOLOGIES — Design tokens
+   Direction: "Signal & Paper" — warm paper surfaces, one precise
+   accent, instrument-panel labels. Evolution of the 2026 site.
+
+   Theme handling:
+   - Light tokens live on :root and are the no-JS default.
+   - Dark tokens live on [data-theme='dark'] only. An inline
+     pre-paint script in <head> sets data-theme from the saved
+     preference or the OS setting, so there is one dark block
+     to maintain instead of two.
+   ============================================================ */
+
+:root {
+  color-scheme: light;
+
+  /* Surfaces — paper / concrete */
+  --color-bg: #f3f2ef;
+  --color-surface: #ffffff;
+  --color-surface-2: #fbfbfa;
+  --color-surface-offset: #eae9e5;
+  --color-surface-offset-2: #dedcd7;
+  --color-surface-dynamic: #d2d0cb;
+  --color-divider: #dcdad5;
+  --color-border: #cecdc7;
+
+  /* Text
+     --color-text-subtle is the darkest "quiet" text that still
+     passes WCAG AA (5.03:1 on --color-bg). Use it for eyebrows,
+     labels, indexes, tags, captions, and footer text.
+     --color-text-faint is decorative only (rules, borders,
+     hairlines). Never use it for words. */
+  --color-text: #15161a;
+  --color-text-muted: #55565d;
+  --color-text-subtle: #66676d;
+  --color-text-faint: #8d8e93;
+  --color-text-inverse: #f3f2ef;
+
+  /* Primary accent — signal teal */
+  --color-primary: #067a6a;
+  --color-primary-hover: #056156;
+  --color-primary-active: #044a42;
+  --color-primary-highlight: #d6ede8;
+
+  /* Secondary accent — hazard amber (structural divider only) */
+  --color-warning: #a85a08;
+  --color-warning-hover: #8a4a07;
+  --color-warning-active: #6e3b05;
+  --color-warning-highlight: #f2ddc0;
+
+  --color-error: #a12c46;
+  --color-success: #3f7a3a;
+
+  /* Per-project accent. Neutral default equals the primary so
+     nothing changes globally. Case-study pages override this
+     inside their own scope (Milestone 1B). */
+  --project-accent: var(--color-primary);
+
+  --radius-sm: 0.25rem;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.625rem;
+  --radius-xl: 1rem;
+  --radius-full: 9999px;
+
+  --transition-interactive: 180ms cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --shadow-sm: 0 1px 2px oklch(0.2 0.01 80 / 0.08);
+  --shadow-md: 0 6px 20px oklch(0.2 0.01 80 / 0.1);
+  --shadow-lg: 0 20px 48px oklch(0.2 0.01 80 / 0.14);
+  --shadow-glow: 0 0 0 1px oklch(from var(--color-primary) l c h / 0.3);
+
+  --content-narrow: 640px;
+  --content-default: 980px;
+  --content-wide: 1240px;
+  --content-full: 100%;
+  --measure-narrow: 38ch;
+  --measure-default: 60ch;
+
+  --font-display: 'Cabinet Grotesk', 'General Sans', system-ui, sans-serif;
+  --font-body: 'General Sans', 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', 'IBM Plex Mono', ui-monospace, monospace;
+
+  /* Type scale */
+  --text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.8125rem);
+  --text-sm: clamp(0.875rem, 0.83rem + 0.2vw, 0.9375rem);
+  --text-base: clamp(1rem, 0.96rem + 0.2vw, 1.0625rem);
+  --text-lg: clamp(1.125rem, 1.02rem + 0.5vw, 1.375rem);
+  --text-xl: clamp(1.5rem, 1.25rem + 1vw, 2rem);
+  --text-2xl: clamp(2rem, 1.4rem + 2.2vw, 3.25rem);
+  --text-3xl: clamp(2.5rem, 1.2rem + 4vw, 4.75rem);
+  --text-hero: clamp(2.75rem, 0.6rem + 7vw, 7.25rem);
+
+  /* Spacing */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
+  --space-32: 8rem;
+  --space-40: 10rem;
+}
+
+[data-theme='dark'] {
+  color-scheme: dark;
+
+  --color-bg: #0a0a0c;
+  --color-surface: #111114;
+  --color-surface-2: #16161a;
+  --color-surface-offset: #1b1b20;
+  --color-surface-offset-2: #212127;
+  --color-surface-dynamic: #292930;
+  --color-divider: #212126;
+  --color-border: #2c2c33;
+
+  --color-text: #ecedee;
+  --color-text-muted: #96979d;
+  --color-text-subtle: #8e8f95; /* 6.14:1 on bg, 5.32:1 on offset */
+  --color-text-faint: #5a5b62;
+  --color-text-inverse: #0a0a0c;
+
+  --color-primary: #35e6c8;
+  --color-primary-hover: #63efd4;
+  --color-primary-active: #1fb99f;
+  --color-primary-highlight: #113330;
+
+  --color-warning: #ff9d3d;
+  --color-warning-hover: #ffb567;
+  --color-warning-active: #e0821f;
+  --color-warning-highlight: #392713;
+
+  --color-error: #e0688a;
+  --color-success: #7fbf6a;
+
+  --shadow-sm: 0 1px 2px oklch(0 0 0 / 0.3);
+  --shadow-md: 0 6px 20px oklch(0 0 0 / 0.4);
+  --shadow-lg: 0 20px 48px oklch(0 0 0 / 0.55);
+  --shadow-glow: 0 0 0 1px oklch(from var(--color-primary) l c h / 0.35), 0 0 32px oklch(from var(--color-primary) l c h / 0.18);
+}
