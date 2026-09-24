@@ -1,4 +1,7 @@
-/* base.css */
+/* ============================================================
+   base.css — reset, element defaults, focus, motion, utilities
+   ============================================================ */
+
 *,
 *::before,
 *::after {
@@ -16,7 +19,7 @@ html {
   text-rendering: optimizeLegibility;
   scroll-behavior: smooth;
   hanging-punctuation: first last;
-  scroll-padding-top: var(--space-16);
+  scroll-padding-top: var(--space-20);
 }
 
 body {
@@ -37,10 +40,12 @@ svg {
   max-width: 100%;
   height: auto;
 }
+
 ul[role='list'],
 ol[role='list'] {
   list-style: none;
 }
+
 input,
 button,
 textarea,
@@ -58,11 +63,17 @@ h6 {
   text-wrap: balance;
   line-height: 1.15;
 }
+
 p,
 li,
-figcaption {
+figcaption,
+dd {
   text-wrap: pretty;
   max-width: 72ch;
+}
+
+a {
+  color: var(--color-primary);
 }
 
 ::selection {
@@ -76,30 +87,18 @@ figcaption {
   border-radius: var(--radius-sm);
 }
 
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
-}
-
 button {
   cursor: pointer;
   background: none;
   border: none;
 }
+
 table {
   border-collapse: collapse;
   width: 100%;
 }
 
-/* Interactive elements: animate hover/focus transitions.
-   Only clickable elements get hover states — see `shared/03-motion.md`.
-   Never add :hover styles to non-interactive elements. */
+/* Only interactive elements animate state changes. */
 a,
 button,
 [role='button'],
@@ -114,6 +113,18 @@ select {
     box-shadow var(--transition-interactive);
 }
 
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Visually hidden, still announced */
 .sr-only {
   position: absolute;
   width: 1px;
@@ -124,4 +135,32 @@ select {
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border-width: 0;
+}
+
+/* Skip link: hidden until focused, then becomes a visible button
+   pinned to the top-left so keyboard users can see and use it. */
+.skip-link {
+  position: absolute;
+  top: var(--space-3);
+  left: var(--space-3);
+  z-index: 200;
+  padding: var(--space-3) var(--space-5);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--color-text-inverse);
+  background: var(--color-primary);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  transform: translateY(-200%);
+  opacity: 0;
+}
+.skip-link:focus-visible {
+  transform: translateY(0);
+  opacity: 1;
+  outline-offset: 2px;
+}
+
+/* Scroll lock while the mobile drawer is open */
+body.is-locked {
+  overflow: hidden;
 }
