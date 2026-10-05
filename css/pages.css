@@ -521,6 +521,9 @@
 }
 
 @media (max-width: 480px) {
+  .hero ~ .section .cta-actions .text-link {
+    align-self: center;
+  }
   .hero {
     padding-top: var(--space-10);
   }
