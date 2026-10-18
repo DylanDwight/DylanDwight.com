@@ -657,7 +657,6 @@ h3,
   display: block;
   width: 100%;
   height: auto;
-  aspect-ratio: 1600 / 1006;
   object-fit: cover;
   border-radius: var(--radius-md);
   background: var(--color-surface-offset);
