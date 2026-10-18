@@ -1047,38 +1047,12 @@ html.js [data-reveal].is-visible {
   grid-column: 1 / -1;
 }
 .work-shot-link {
-  position: relative;
   display: block;
   border-radius: var(--radius-md);
   overflow: hidden;
-  isolation: isolate;
 }
-/* Shared screenshot grade: every project shot is muted, cooled toward the
-   site blue, and darkened at the bottom so bright client sites sit evenly
-   on the dark page. Hover or keyboard focus shows the true colours. */
 .work-shot-link .work-shot {
-  filter: saturate(0.7) contrast(1.06) brightness(0.86);
-  transition: transform 300ms ease, filter 300ms ease;
-}
-.work-shot-link::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  pointer-events: none;
-  background:
-    linear-gradient(to bottom, transparent 55%, oklch(from var(--color-bg) l c h / 0.45)),
-    oklch(from var(--color-primary) l c h / 0.1);
-  box-shadow: inset 0 0 0 1px oklch(from var(--color-text) l c h / 0.08);
-  transition: opacity 300ms ease;
-}
-.work-shot-link:hover .work-shot,
-.work-shot-link:focus-visible .work-shot {
-  filter: none;
-}
-.work-shot-link:hover::after,
-.work-shot-link:focus-visible::after {
-  opacity: 0.25;
+  transition: transform 300ms ease;
 }
 .work-shot-link:hover .work-shot {
   transform: scale(1.02);
@@ -1088,8 +1062,7 @@ html.js [data-reveal].is-visible {
   outline-offset: 3px;
 }
 @media (prefers-reduced-motion: reduce) {
-  .work-shot-link .work-shot,
-  .work-shot-link::after { transition: none; }
+  .work-shot-link .work-shot { transition: none; }
   .work-shot-link:hover .work-shot { transform: none; }
 }
 
