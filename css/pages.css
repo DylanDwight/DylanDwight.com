@@ -622,13 +622,8 @@
   box-shadow: 0 30px 70px -30px rgb(3 105 161 / 0.55), inset 0 0 0 1px rgb(103 212 255 / 0.12);
   isolation: isolate;
 }
-.hero-3d .grid-texture {
-  --color-divider: rgb(103 212 255 / 0.07);
-  z-index: -2;
-}
-
-/* Tech-city silhouettes on the left and right edges */
-.hero-3d-city {
+/* Circuit traces with travelling pulses */
+.hero-3d-circuits {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -636,40 +631,56 @@
   z-index: -1;
   pointer-events: none;
 }
-.city-blocks rect {
-  fill: rgb(14 165 233 / 0.07);
-  stroke: rgb(103 212 255 / 0.28);
-  stroke-width: 0.6;
-}
-.city-windows rect {
-  fill: rgb(103 212 255 / 0.55);
-  animation: city-blink 6s steps(1) infinite;
-}
-.city-windows rect:nth-child(3n) { animation-delay: -2s; }
-.city-windows rect:nth-child(5n) { animation-delay: -4s; opacity: 0.4; }
-.city-traces path,
-.city-pulses path {
+.circ-traces path,
+.circ-pulses path {
   fill: none;
   stroke-linecap: round;
   stroke-linejoin: round;
 }
-.city-traces path {
-  stroke: rgb(103 212 255 / 0.25);
+.circ-traces path {
+  stroke: rgb(103 212 255 / 0.22);
   stroke-width: 0.8;
 }
-.city-nodes circle {
+.circ-nodes circle {
   fill: #0a2238;
-  stroke: rgb(103 212 255 / 0.6);
+  stroke: rgb(103 212 255 / 0.55);
   stroke-width: 0.8;
 }
-.city-pulses path {
+.circ-pulses path {
   stroke: #b9ecff;
   stroke-width: 1.2;
-  stroke-dasharray: 6 120;
-  stroke-dashoffset: 126;
+  stroke-dasharray: 8 108;
+  stroke-dashoffset: 8;
   filter: drop-shadow(0 0 2px #38bdf8);
-  animation: city-pulse 5.2s linear infinite;
+  animation: circ-pulse var(--t, 5s) linear infinite;
   animation-delay: var(--d, 0s);
+}
+
+/* Blue light running around the frame edge */
+@property --edge-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+.hero-3d::before,
+.hero-3d::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 2px;
+  background: conic-gradient(from var(--edge-angle), transparent 0deg 220deg, rgb(56 189 248 / 0.7) 290deg, #e0f7ff 345deg, transparent 360deg);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  animation: edge-spin 6s linear infinite;
+  pointer-events: none;
+  z-index: 3;
+}
+.hero-3d::after {
+  padding: 4px;
+  filter: blur(8px);
+  opacity: 1;
 }
 
 /* The mark */
@@ -742,18 +753,18 @@
   0%, 100% { opacity: 1; }
   50% { opacity: 0.7; }
 }
-@keyframes city-pulse {
-  to { stroke-dashoffset: 0; }
+@keyframes circ-pulse {
+  to { stroke-dashoffset: -100; }
 }
-@keyframes city-blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.35; }
+@keyframes edge-spin {
+  to { --edge-angle: 360deg; }
 }
 @media (prefers-reduced-motion: reduce) {
   .logo3d-stage,
   .logo3d-node,
-  .city-windows rect,
-  .city-pulses path { animation: none; }
-  .city-pulses { display: none; }
+  .circ-pulses path,
+  .hero-3d::before,
+  .hero-3d::after { animation: none; }
+  .circ-pulses { display: none; }
   .logo3d-stage { rotate: y -14deg; }
 }

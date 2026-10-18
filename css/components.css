@@ -540,12 +540,13 @@ h3,
   pointer-events: none;
   overflow: hidden;
   z-index: 0;
+  --grid-line: color-mix(in oklch, var(--color-primary) 18%, var(--color-divider));
   background-image:
-    linear-gradient(var(--color-divider) 1px, transparent 1px),
-    linear-gradient(90deg, var(--color-divider) 1px, transparent 1px);
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
   background-size: 56px 56px;
-  mask-image: linear-gradient(to bottom, rgb(0 0 0 / 0.9), transparent 90%);
-  -webkit-mask-image: linear-gradient(to bottom, rgb(0 0 0 / 0.9), transparent 90%);
+  mask-image: linear-gradient(to bottom, #000 30%, transparent 98%);
+  -webkit-mask-image: linear-gradient(to bottom, #000 30%, transparent 98%);
 }
 
 /* ---------- Cards ---------- */
