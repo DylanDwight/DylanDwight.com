@@ -7,9 +7,9 @@
 import { initNav } from './nav.js';
 import { initTheme } from './theme.js';
 import { initReveal } from './reveal.js';
-import { initPortraitWave } from './portrait-wave.js';
+import { initHeroField } from './hero-field.js';
 
 initNav();
 initTheme();
 initReveal();
-initPortraitWave();
+initHeroField();
