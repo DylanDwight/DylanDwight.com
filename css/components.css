@@ -264,7 +264,7 @@ h3 {
   animation: cta-orbit 4.5s linear infinite;
 }
 /* Ring CTAs don't press in or underline. On hover they cast a drop
-   shadow and a thin inner border frames the label. */
+   shadow and the label turns bold (monospace, so the width doesn't shift). */
 .btn-nav-cta:hover,
 .btn-nav-cta:active,
 .cta-panel .btn-primary:hover,
@@ -272,8 +272,7 @@ h3 {
   transform: none;
   text-decoration-color: transparent;
   box-shadow: 0 8px 22px -6px rgb(0 0 0 / 0.75);
-  outline: 1px solid oklch(from var(--color-text-inverse) l c h / 0.55);
-  outline-offset: -5px;
+  font-weight: 700;
 }
 @keyframes cta-orbit {
   to {
