@@ -661,6 +661,12 @@ h3,
   border-radius: var(--radius-md);
   background: var(--color-surface-offset);
 }
+/* Grid-card screenshots share one frame so paired cards line up */
+.work-card:not(.work-card--featured) > .work-shot {
+  aspect-ratio: 1440 / 774;
+  object-fit: cover;
+  object-position: top;
+}
 
 .work-card--progress {
   border-style: dashed;
