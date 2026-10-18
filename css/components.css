@@ -644,6 +644,31 @@ h3,
   letter-spacing: 0.04em;
 }
 
+/* One confirmed, sourced result on a project card. The label carries the
+   metric's source and date range, so it is never read as a combined figure. */
+.work-card .work-card-result {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: var(--space-1) var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  border-left: 2px solid var(--color-primary);
+  background: var(--color-surface-2);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.02em;
+  color: var(--color-text-subtle);
+}
+.work-card-result strong {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 1;
+  color: var(--color-text);
+}
+
 /* Approved project screenshot (replaces a .placeholder-frame once delivered) */
 .work-shot {
   display: block;

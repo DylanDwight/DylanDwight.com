@@ -20,7 +20,8 @@ index.html              Home
 services/index.html     Services
 about/index.html        About (copy from the Phase 1 spec, section 7)
 work/index.html         Work index (finished projects only; in-progress coursework stays on Home)
-work/sand-dollar-case-study.pdf   Sand Dollar case study (10-page PDF)
+work/sand-dollar/index.html      Sand Dollar case study (HTML, same copy as the PDF)
+work/sand-dollar-case-study.pdf   Sand Dollar case study (10-page PDF download)
 resume/dylan-dwight-resume.pdf   Résumé (linked from the footer, drawer, and Work page)
 contact/index.html      Contact / project inquiry
 404.html                Not found (served automatically by Vercel)
@@ -38,6 +39,7 @@ js/
   app.js                Entry (type="module"); imports the modules below
   nav.js                Mobile drawer: hidden when closed, aria-expanded, focus trap, Escape
   theme.js              Light/dark toggle with persisted preference
+  case-study.js         Case study reading progress bar and table-of-contents scroll-spy
   reveal.js             Scroll reveal (disabled under reduced motion; no-JS safe)
 
 assets/

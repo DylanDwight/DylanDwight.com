@@ -1,0 +1,705 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Sand Dollar Restaurant &amp; Lounge Website Redesign — Case Study · Dylan Dwight</title>
+<meta name="description" content="How Dylan Dwight redesigned an oceanfront restaurant’s website in Rockaway Beach, Oregon, and tied it into ordering, reservations, gift cards, and Google on the Shift4 / SkyTab ecosystem." />
+<meta name="theme-color" content="#f1f3f6" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#0a0a0c" media="(prefers-color-scheme: dark)" />
+
+<link rel="canonical" href="https://dylandwight.com/work/sand-dollar/" />
+
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://dylandwight.com/work/sand-dollar/" />
+<meta property="og:title" content="Sand Dollar Restaurant &amp; Lounge Website Redesign — Case Study · Dylan Dwight" />
+<meta property="og:description" content="How Dylan Dwight redesigned an oceanfront restaurant’s website in Rockaway Beach, Oregon, and tied it into ordering, reservations, gift cards, and Google on the Shift4 / SkyTab ecosystem." />
+<meta property="og:site_name" content="Dylan Dwight Creative Technologies" />
+<meta property="og:image" content="https://dylandwight.com/assets/og/og-default.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="Dylan Dwight Creative Technologies — web design and front-end development for independent businesses." />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Sand Dollar Restaurant &amp; Lounge Website Redesign — Case Study · Dylan Dwight" />
+<meta name="twitter:description" content="How Dylan Dwight redesigned an oceanfront restaurant’s website in Rockaway Beach, Oregon, and tied it into ordering, reservations, gift cards, and Google on the Shift4 / SkyTab ecosystem." />
+<meta name="twitter:image" content="https://dylandwight.com/assets/og/og-default.png" />
+
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+<link rel="icon" href="/assets/favicon-32.png" sizes="32x32" type="image/png" />
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
+<link rel="icon" href="/favicon.ico" sizes="48x48" />
+<link rel="manifest" href="/site.webmanifest" />
+
+<!-- Theme before first paint: saved choice, else OS preference. Also marks JS as available. -->
+<script>
+(function () {
+  var t = null;
+  try { t = localStorage.getItem('ddct-theme'); } catch (e) {}
+  if (t !== 'dark' && t !== 'light') {
+    t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  }
+  document.documentElement.setAttribute('data-theme', t);
+  document.documentElement.classList.add('js');
+})();
+</script>
+
+<link rel="preconnect" href="https://api.fontshare.com" />
+<link rel="preconnect" href="https://cdn.fontshare.com" crossorigin />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<!-- One Fontshare request per family: the combined multi-family request has been observed
+     returning the wrong second family, which left body text on the fallback font. -->
+<link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@700&display=swap" rel="stylesheet" />
+<link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+<link rel="stylesheet" href="/css/tokens.css" />
+<link rel="stylesheet" href="/css/base.css" />
+<link rel="stylesheet" href="/css/components.css" />
+<link rel="stylesheet" href="/css/pages.css" />
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "ProfessionalService",
+      "@id": "https://dylandwight.com/#business",
+      "name": "Dylan Dwight Creative Technologies",
+      "url": "https://dylandwight.com/",
+      "email": "dylan@dylandwight.com",
+      "telephone": "+1-347-379-3273",
+      "description": "Web design and front-end development for restaurants, artists, musicians, and small businesses.",
+      "areaServed": ["Brooklyn, NY", "Remote"],
+      "address": { "@type": "PostalAddress", "addressLocality": "Brooklyn", "addressRegion": "NY", "addressCountry": "US" },
+      "founder": { "@id": "https://dylandwight.com/#person" },
+      "sameAs": ["https://www.linkedin.com/in/dylan-dwight/", "https://github.com/DylanDwight"],
+      "knowsAbout": ["Web design", "Front-end development", "UX/UI design", "Responsive design", "Web accessibility", "SEO foundations", "Website maintenance"]
+    },
+    {
+      "@type": "Person",
+      "@id": "https://dylandwight.com/#person",
+      "name": "Dylan Dwight",
+      "jobTitle": "Web designer and front-end developer",
+      "url": "https://dylandwight.com/",
+      "email": "dylan@dylandwight.com",
+      "telephone": "+1-347-379-3273",
+      "worksFor": { "@id": "https://dylandwight.com/#business" },
+      "sameAs": ["https://www.linkedin.com/in/dylan-dwight/", "https://github.com/DylanDwight"]
+    },
+    {
+      "@type": "Article",
+      "@id": "https://dylandwight.com/work/sand-dollar/#article",
+      "headline": "Sand Dollar Restaurant & Lounge — Website Redesign",
+      "url": "https://dylandwight.com/work/sand-dollar/",
+      "author": { "@id": "https://dylandwight.com/#person" },
+      "image": "https://dylandwight.com/assets/work/sand-dollar-home-desktop.jpg",
+      "inLanguage": "en"
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://dylandwight.com/#website",
+      "url": "https://dylandwight.com/",
+      "name": "Dylan Dwight Creative Technologies",
+      "publisher": { "@id": "https://dylandwight.com/#business" }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<a href="#main" class="skip-link">Skip to content</a>
+
+<!-- ============ HEADER ============ -->
+<header class="header" id="site-header">
+  <div class="wrap header-inner">
+    <a href="/" class="logo-link" aria-label="Dylan Dwight — home">
+      <svg class="logo-mark" viewBox="0 0 64 60" fill="none" aria-hidden="true"><path d="M10 14 H16 A16 16 0 0 1 16 46 H10 Z" fill="currentColor"/><path d="M54 14 H48 A16 16 0 0 0 48 46 H54 Z" fill="currentColor"/><circle class="logo-node" cx="32" cy="30" r="2.5"/></svg>
+    </a>
+
+    <nav aria-label="Primary">
+      <ul class="nav-links">
+        <li><a href="/work/" aria-current="page">Work</a></li>
+<li><a href="/services/">Services</a></li>
+<li><a href="/about/">About</a></li>
+<li><a href="/contact/">Contact</a></li>
+      </ul>
+    </nav>
+
+    <div class="header-actions">
+      <a class="btn btn-primary btn-compact" href="/contact/">Start a project</a>
+      <button class="icon-btn theme-toggle" type="button" data-theme-toggle aria-label="Switch to dark mode" aria-pressed="false">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+      <button class="icon-btn nav-toggle" type="button" data-mobile-nav-open aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile drawer: hidden (out of the tab order) until opened -->
+<div class="mobile-nav" id="mobile-nav" data-mobile-nav role="dialog" aria-modal="true" aria-label="Site menu" hidden>
+  <div class="mobile-nav-top">
+    <a href="/" class="logo-link" aria-label="Dylan Dwight — home">
+      <svg class="logo-mark" viewBox="0 0 64 60" fill="none" aria-hidden="true"><path d="M10 14 H16 A16 16 0 0 1 16 46 H10 Z" fill="currentColor"/><path d="M54 14 H48 A16 16 0 0 0 48 46 H54 Z" fill="currentColor"/><circle class="logo-node" cx="32" cy="30" r="2.5"/></svg>
+    </a>
+    <button class="icon-btn" type="button" data-mobile-nav-close aria-label="Close menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </div>
+  <nav aria-label="Mobile">
+    <ul class="mobile-nav-links">
+      <li><a href="/work/" aria-current="page">Work</a></li>
+<li><a href="/services/">Services</a></li>
+<li><a href="/about/">About</a></li>
+<li><a href="/contact/">Contact</a></li>
+    </ul>
+  </nav>
+  <div class="mobile-nav-cta">
+    <a class="btn btn-primary" href="/contact/">Start a project</a>
+  </div>
+  <div class="mobile-nav-meta">
+    <a href="mailto:dylan@dylandwight.com">dylan@dylandwight.com</a>
+    <a href="tel:+13473793273">(347) 379-3273</a>
+    <a href="https://www.linkedin.com/in/dylan-dwight/" target="_blank" rel="noopener noreferrer">LinkedIn<span class="sr-only"> (opens in a new tab)</span></a>
+    <a href="https://github.com/DylanDwight" target="_blank" rel="noopener noreferrer">GitHub<span class="sr-only"> (opens in a new tab)</span></a>
+    <a href="/resume/dylan-dwight-resume.pdf" target="_blank" rel="noopener">Résumé (PDF)<span class="sr-only"> (opens in a new tab)</span></a>
+  </div>
+</div>
+
+<main id="main" class="cs-page">
+
+  <div class="cs-progress" aria-hidden="true"><span class="cs-progress-bar" data-cs-progress></span></div>
+
+  <section class="page-hero cs-hero" aria-labelledby="page-heading">
+    <div class="grid-texture" aria-hidden="true"></div>
+    <div class="wrap">
+      <a href="/work/" class="text-link cs-back"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg> All work</a>
+      <p class="eyebrow eyebrow--wrap"><span>Client project</span><span class="eyebrow-sep" aria-hidden="true">·</span><span>Restaurant website</span><span class="eyebrow-sep" aria-hidden="true">·</span><span>Case study</span></p>
+      <h1 id="page-heading">Sand Dollar Restaurant &amp; Lounge <span class="cs-subtitle">Website Redesign</span></h1>
+      <p class="lede">I rebuilt an oceanfront restaurant’s website &amp; tied it into ordering, reservations, gift cards, and Google. Guests can check the hours, see the menu, then open ordering or reservations right from their phone.</p>
+
+      <dl class="cs-facts">
+        <div><dt>Designer</dt><dd>Dylan Dwight</dd></div>
+        <div><dt>Role</dt><dd>Front-End Web Designer &amp; Developer, UX/UI</dd></div>
+        <div><dt>Timeline</dt><dd>April–September 2026<span>Plus a remote seasonal refresh, October 2026</span></dd></div>
+        <div><dt>Platform</dt><dd>Shift4 / SkyTab ecosystem</dd></div>
+      </dl>
+
+      <div class="cs-hero-actions">
+        <a href="https://sanddollarrestaurant.com" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Visit the live site<span class="sr-only"> (opens in a new tab)</span></a>
+        <a href="/work/sand-dollar-case-study.pdf" class="btn btn-secondary" target="_blank" rel="noopener">Download the PDF <span class="work-card-meta">10 pages</span><span class="sr-only"> (opens in a new tab)</span></a>
+      </div>
+
+      <figure class="cs-hero-shot corner-panel">
+        <img src="/assets/work/sand-dollar-home-desktop.jpg" srcset="/assets/work/sand-dollar-home-desktop-860.jpg 860w, /assets/work/sand-dollar-home-desktop.jpg 1720w" sizes="(max-width: 1240px) 100vw, 1180px" width="1720" height="1080" decoding="async" fetchpriority="high" alt="The redesigned Sand Dollar Restaurant and Lounge homepage on desktop: logo, Menu, Gift Cards, Reservations, and an Order Now button above a seafood hero photo with the headline Where Ocean Views Meet Coastal Flavor.">
+        <figcaption class="cs-cap"><span class="label-chip label-chip--accent">After</span> Redesigned homepage · Desktop</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <div class="wrap cs-layout">
+
+    <nav class="cs-toc" aria-label="Case study sections">
+      <p class="cs-toc-title">On this page</p>
+      <ol>
+        <li><a href="#overview">Overview</a></li>
+        <li><a href="#role">My Role</a></li>
+        <li><a href="#research">UX Research &amp; Discovery</a></li>
+        <li><a href="#before-after">Before &amp; After</a></li>
+        <li><a href="#approach">Design &amp; Development Approach</a></li>
+        <li><a href="#ecosystem">Building an Ecosystem</a></li>
+        <li><a href="#build">The Build</a></li>
+        <li><a href="#seo-geo">SEO &amp; GEO</a></li>
+        <li><a href="#results">Results &amp; Impact</a></li>
+        <li><a href="#reflection">Reflection &amp; Next Steps</a></li>
+      </ol>
+    </nav>
+
+    <article class="cs-body">
+
+      <!-- ============ OVERVIEW ============ -->
+      <section class="cs-section" id="overview" aria-labelledby="overview-h">
+        <h2 id="overview-h">Overview</h2>
+        <p>Sand Dollar Restaurant &amp; Lounge is a restaurant, bar, and live events venue in Rockaway Beach, Oregon. New competition was opening nearby. The old website wasn’t pulling its weight.</p>
+        <p>Hours &amp; menus were out of date. The main actions were hard to find. Nothing on the site connected to ordering, reservations, or gift cards. For a restaurant that depends on visitors finding it fast, that’s a real problem. It gets worse in summer, Sand Dollar’s busiest season.</p>
+        <p>I moved the site from GoDaddy to Shift4 &amp; redesigned it around what guests actually come to do. Then I tied it into online ordering, reservations, gift cards, and the restaurant’s Google listing. The goal was one connected system instead of a website sitting off on its own. I wanted guests to find what they need in summer so the restaurant could hold on to its regulars &amp; long term guests instead of losing them to other businesses nearby.</p>
+
+        <h3 class="cs-kicker">At a Glance <span>Google numbers: April–September 2026</span></h3>
+        <ul class="cs-glance" role="list">
+          <li><strong>100,000</strong><span>Google Business Profile views</span></li>
+          <li><strong>One System</strong><span>Website, ordering, reservations, gift cards &amp; POS on Shift4</span></li>
+          <li><strong>Rehired</strong><span>The owner brought me back for remote seasonal work in October 2026</span></li>
+          <li><strong>Positive</strong><span>Feedback from staff, the owner &amp; guests</span></li>
+        </ul>
+      </section>
+
+      <!-- ============ ROLE ============ -->
+      <section class="cs-section" id="role" aria-labelledby="role-h">
+        <h2 id="role-h">My Role</h2>
+        <p>My scope was the website, the Google Business Profile, and the restaurant systems connected to them. The owner handled other listings like Yelp &amp; TripAdvisor. I’m a front-end oriented web designer &amp; developer. I use UX/UI principles to decide what goes where: clear hierarchy, short paths to the main actions, and layouts that work on any screen.</p>
+        <ul class="cs-skills" role="list">
+          <li><strong>UX Research</strong><span>Guest needs, site audit, page structure</span></li>
+          <li><strong>UI Design</strong><span>Layout, navigation, visual direction</span></li>
+          <li><strong>Front-End Build</strong><span>Responsive pages in the Shift4 website editor</span></li>
+          <li><strong>Content</strong><span>Copy, current photos, menus, hours</span></li>
+          <li><strong>SEO &amp; GEO</strong><span>Google listing, search &amp; AI search visibility</span></li>
+          <li><strong>Systems &amp; Support</strong><span>Ordering, reservations, gift cards, the POS (point of sale system), staff training</span></li>
+        </ul>
+        <dl class="cs-table cs-table--kv">
+          <div><dt>Moved from</dt><dd>GoDaddy Website Builder</dd></div>
+          <div><dt>Moved to</dt><dd>Shift4 website, Shift4 POS, SkyTab online ordering, Shift4 reservations linked with OpenTable, Google Business Profile</dd></div>
+          <div><dt>Shift4 supplied</dt><dd>The website editor, online ordering, reservations, gift cards, and the POS</dd></div>
+          <div><dt>I designed &amp; set up</dt><dd>Page layout, navigation, copy, photos, menus, ordering &amp; reservation settings, plus the links between systems</dd></div>
+        </dl>
+      </section>
+
+      <!-- ============ RESEARCH ============ -->
+      <section class="cs-section" id="research" aria-labelledby="research-h">
+        <h2 id="research-h">UX Research &amp; Discovery</h2>
+        <p class="cs-intro">Most people who look up a restaurant want a few things, fast: Is it open? Where is it? What’s on the menu? Can I order or book a table?</p>
+        <p>I went through the old site the way a guest would, then lined that up with the questions guests kept asking staff in person &amp; on the phone.</p>
+
+        <div class="cs-split">
+          <div>
+            <h3>What the Old Site Showed</h3>
+            <ul>
+              <li>The main navigation only had Home &amp; About. The menu, reservations, and online ordering were hard to find.</li>
+              <li>The photos were strong, but the page didn’t put the most important guest actions first.</li>
+              <li>Contact details &amp; hours sat low on the page.</li>
+              <li>The contact form was generic &amp; didn’t match the decisions restaurant guests are trying to make.</li>
+              <li>Food, drinks, catering, and venue info existed but wasn’t organized into a clear path.</li>
+            </ul>
+            <h3>Behind the Scenes</h3>
+            <p>Working with the site day to day showed what screenshots can’t. Menus &amp; hours were outdated. Pages took a lot of scrolling. Photos didn’t always match the restaurant. There was no real support for online ordering, reservations, gift cards, or events.</p>
+          </div>
+          <figure class="cs-figure">
+            <img src="/assets/work/sand-dollar/old-events-catering.jpg" width="1066" height="670" loading="lazy" decoding="async" alt="The old site's Special Events and Catering section: a plated seafood photo with a short paragraph about private events and a phone number, and no button or link to act on it.">
+            <figcaption class="cs-cap"><span class="label-chip">Before</span> Events &amp; catering. Events info existed but had no clear path.</figcaption>
+          </figure>
+        </div>
+
+        <h3>The Guest Path I Designed Around</h3>
+        <ol class="cs-path" role="list">
+          <li><span class="cs-path-n" aria-hidden="true">1</span><strong>Discover</strong><span>Find Sand Dollar on Google, Maps, or an AI search</span></li>
+          <li><span class="cs-path-n" aria-hidden="true">2</span><strong>Confirm</strong><span>Check the location, hours, and what they serve</span></li>
+          <li><span class="cs-path-n" aria-hidden="true">3</span><strong>Review</strong><span>Look through the current menu</span></li>
+          <li><span class="cs-path-n" aria-hidden="true">4</span><strong>Act</strong><span>Order online, book a table, or buy a gift card</span></li>
+        </ol>
+
+        <h3>From Problem to Design Decision</h3>
+        <div class="cs-table-scroll" role="region" aria-label="Problems on the old site and what changed" tabindex="0">
+          <table class="cs-table">
+            <thead><tr><th scope="col">Problem on the old site</th><th scope="col">What I changed</th></tr></thead>
+            <tbody>
+              <tr><td data-label="Problem on the old site">Navigation only had Home &amp; About</td><td data-label="What I changed">The header leads with Menu, Gift Cards, Reservations &amp; Order Now</td></tr>
+              <tr><td data-label="Problem on the old site">Hours sat low on the page, with only today’s showing</td><td data-label="What I changed">Visit Us lists hours for every day, plus ordering &amp; reservation cutoffs</td></tr>
+              <tr><td data-label="Problem on the old site">No clear path to ordering, reservations, or gift cards</td><td data-label="What I changed">An Order Now button plus shortcuts right under the top banner</td></tr>
+              <tr><td data-label="Problem on the old site">Menus &amp; hours were out of date</td><td data-label="What I changed">The menu is real text that I kept current with each seasonal update</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ============ BEFORE & AFTER ============ -->
+      <section class="cs-section" id="before-after" aria-labelledby="ba-h">
+        <h2 id="ba-h">Before &amp; After: The Homepage</h2>
+        <div class="cs-compare">
+          <figure class="cs-figure">
+            <img src="/assets/work/sand-dollar/old-home.jpg" width="1367" height="915" loading="lazy" decoding="async" alt="The old GoDaddy homepage: a dusk photo of the restaurant with the headline Taste the Ocean's Best, the address, and a single Visit Us button. No menu, ordering, or reservation links.">
+            <figcaption class="cs-cap"><span class="label-chip">Before</span> GoDaddy</figcaption>
+            <h3>Nice Photo, No Clear Next Step</h3>
+            <ul>
+              <li>Navigation: just Home &amp; About</li>
+              <li>One button, “Visit Us”</li>
+              <li>No link to the menu, ordering, or reservations</li>
+              <li>Hours further down the page</li>
+            </ul>
+          </figure>
+          <figure class="cs-figure">
+            <img src="/assets/work/sand-dollar-home-desktop-860.jpg" width="860" height="540" loading="lazy" decoding="async" alt="The redesigned Shift4 homepage: Menu, Gift Cards, Reservations, and an Order Now button in the header, with a See Menu button on the top banner.">
+            <figcaption class="cs-cap"><span class="label-chip label-chip--accent">After</span> Shift4 · Redesigned Around Guest Actions</figcaption>
+            <h3>Every Main Action Up Front</h3>
+            <ul>
+              <li>Menu, Gift Cards, and Reservations in the header</li>
+              <li>Order Now stands out as the main button</li>
+              <li>“See Menu” right on the top banner</li>
+              <li>The same actions carry over to mobile</li>
+            </ul>
+          </figure>
+        </div>
+
+        <h2 class="cs-h2-sub">Before &amp; After: Hours &amp; Contact</h2>
+        <div class="cs-compare">
+          <figure class="cs-figure">
+            <img src="/assets/work/sand-dollar/old-hours.jpg" width="1420" height="660" loading="lazy" decoding="async" alt="The old contact page footer: address, phone, and email, then Hours showing only Open today 12:00 pm to 08:00 pm in a dropdown.">
+            <figcaption class="cs-cap"><span class="label-chip">Before</span> Bottom of the contact page. Only today’s hours, tucked in a dropdown under the contact form.</figcaption>
+          </figure>
+          <figure class="cs-figure">
+            <img src="/assets/work/sand-dollar/new-hours-desktop.jpg" width="790" height="420" loading="lazy" decoding="async" alt="The new Visit Us section: address, phone, email, Monday to Sunday hours, happy hour, holiday closures, last orders and reservations at 7:30 PM, doors close at 8 PM, and no same-day reservations.">
+            <figcaption class="cs-cap"><span class="label-chip label-chip--accent">After</span> Desktop Visit Us. Hours, happy hour, holiday closures, and ordering &amp; reservation cutoffs, right on the page. Captured from the live site in October 2026.</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <!-- ============ APPROACH ============ -->
+      <section class="cs-section" id="approach" aria-labelledby="approach-h">
+        <h2 id="approach-h">Design &amp; Development Approach</h2>
+        <h3>Mobile First: That’s Where Guests Are</h3>
+        <p>Lots of people look up a restaurant on their phone right before they decide where to eat, often from the beach, a hotel room, or the car. If the site is cramped or hard to use on a small screen, they move on to the next place. So I laid out every page for a phone first, then scaled it up for desktop.</p>
+        <ul>
+          <li>Navigation turns into a full screen menu on mobile, led by the main guest actions.</li>
+          <li>Shortcuts for gift cards, reservations, and ordering sit right under the top banner.</li>
+          <li>The menu is real text with descriptions &amp; prices that fits any screen size.</li>
+          <li>Ordering gets its own section with a direct takeout button.</li>
+        </ul>
+        <ul class="cs-phones" role="list">
+          <li>
+            <figure class="cs-figure cs-figure--phone">
+              <img src="/assets/work/sand-dollar/mobile-nav.jpg" width="720" height="1354" loading="lazy" decoding="async" alt="Mobile full screen menu listing Menu, Gift Cards, Reservations, About Us, and Order Now.">
+              <figcaption class="cs-cap"><span class="label-chip label-chip--accent">After</span> Full screen navigation</figcaption>
+            </figure>
+          </li>
+          <li>
+            <figure class="cs-figure cs-figure--phone">
+              <img src="/assets/work/sand-dollar/mobile-shortcuts.jpg" width="720" height="1354" loading="lazy" decoding="async" alt="Mobile homepage: a See Menu button on the banner, then Gift Cards, Reservations, and Order Online shortcuts above the About Us section.">
+              <figcaption class="cs-cap"><span class="label-chip label-chip--accent">After</span> Action shortcuts</figcaption>
+            </figure>
+          </li>
+          <li>
+            <figure class="cs-figure cs-figure--phone">
+              <img src="/assets/work/sand-dollar/mobile-order.jpg" width="720" height="1354" loading="lazy" decoding="async" alt="Mobile Order Online section with the heading Order Online, Fresh from the Coast, a short description, and a Get Takeout button.">
+              <figcaption class="cs-cap"><span class="label-chip label-chip--accent">After</span> Order online section</figcaption>
+            </figure>
+          </li>
+          <li>
+            <figure class="cs-figure cs-figure--phone">
+              <img src="/assets/work/sand-dollar/mobile-ordering-menu.jpg" width="720" height="1354" loading="lazy" decoding="async" alt="The SkyTab online ordering menu on mobile: Sand Dollar logo, address and phone, and the Starters category with Calamari at 21 dollars.">
+              <figcaption class="cs-cap"><span class="label-chip label-chip--accent">After</span> Online ordering menu</figcaption>
+            </figure>
+          </li>
+        </ul>
+
+        <h3>Visual Direction</h3>
+        <p>The look pulls from the restaurant itself: the teal logo, current food &amp; dining photos, plus a wave divider that nods to the coast. Simple, warm, and easy to scan.</p>
+        <figure class="cs-figure cs-figure--light">
+          <img src="/assets/work/sand-dollar/menu-starters.jpg" width="1600" height="430" loading="lazy" decoding="async" alt="The Starters section of the website menu: Calamari, Garlic Feta Fries, and Prawn Cocktail, each with a short description and price.">
+          <figcaption class="cs-cap"><span class="label-chip label-chip--accent">After</span> Desktop menu. Close view of the Starters section: real text grouped by course with descriptions &amp; prices.</figcaption>
+        </figure>
+      </section>
+
+      <!-- ============ ECOSYSTEM ============ -->
+      <section class="cs-section" id="ecosystem" aria-labelledby="eco-h">
+        <h2 id="eco-h">Building an Ecosystem, Not Just a Website</h2>
+        <p class="cs-intro">Most of Sand Dollar’s guest tools run on Shift4. I set them up to work as one system instead of separate tools.</p>
+        <p>The website, online ordering, Shift4 reservations, gift cards, and the POS menu all live in Shift4. Google, OpenTable, and the QR codes in the restaurant link back into it.</p>
+        <p>Not everything synced on its own. I kept hours, menus, and prices consistent by updating each place, publishing the changes, then checking the live pages.</p>
+
+        <div class="cs-eco corner-panel">
+          <div class="cs-eco-hub"><strong>Shift4</strong><span>POS + SkyTab</span></div>
+          <div class="cs-eco-group">
+            <p class="cs-eco-label"><span class="cs-eco-key cs-eco-key--solid" aria-hidden="true"></span>Runs inside Shift4</p>
+            <ul role="list">
+              <li><strong>Website</strong><span>Menu, hours, visit info</span></li>
+              <li><strong>Online Ordering</strong><span>SkyTab pickup orders</span></li>
+              <li><strong>Gift Cards</strong><span>Digital &amp; physical</span></li>
+              <li><strong>Shift4 Reservations</strong><span>Bookings in the POS</span></li>
+            </ul>
+          </div>
+          <div class="cs-eco-group cs-eco-group--linked">
+            <p class="cs-eco-label"><span class="cs-eco-key cs-eco-key--dashed" aria-hidden="true"></span>Linked in, some updates by hand</p>
+            <ul role="list">
+              <li><strong>Google Business Profile</strong><span>Search, Maps, menu links</span></li>
+              <li><strong>QR Codes</strong><span>On site in the restaurant</span></li>
+              <li><strong>OpenTable</strong><span>Linked to Shift4 bookings</span></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="cs-split">
+          <div>
+            <h3>OpenTable &amp; Shift4 Reservations</h3>
+            <p>The restaurant took bookings through both OpenTable &amp; Shift4 reservations. I linked the two so bookings landed in the POS. Staff could see reservations alongside orders in the same system.</p>
+            <h3>QR Codes in the Physical Restaurant</h3>
+            <p>I made QR codes &amp; placed them around the physical restaurant. Guests at a table or by the door could jump straight to the website, menu, or ordering on their own phone.</p>
+          </div>
+          <figure class="cs-figure cs-figure--narrow">
+            <img src="/assets/work/sand-dollar/qr-sign.jpg" width="900" height="1034" loading="lazy" decoding="async" alt="A teal QR code sign with the Sand Dollar logo in the center and the words Scan me.">
+            <figcaption class="cs-cap"><span class="label-chip">On site</span> QR sign in the restaurant.</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <!-- ============ BUILD ============ -->
+      <section class="cs-section" id="build" aria-labelledby="build-h">
+        <h2 id="build-h">The Build</h2>
+
+        <h3>Website</h3>
+        <ul>
+          <li>Moved the site from GoDaddy Website Builder to Shift4 &amp; redesigned it.</li>
+          <li>Clearer desktop &amp; mobile navigation, new copy, current photos, social links, plus correct hours &amp; location.</li>
+        </ul>
+        <div class="cs-navmap">
+          <div class="cs-navmap-row">
+            <span class="label-chip">Before</span>
+            <ul class="cs-navmap-items" role="list" aria-label="Old navigation"><li>Home</li><li>About</li></ul>
+            <p>One button, “Visit Us.” No link to the menu, ordering, or reservations.</p>
+          </div>
+          <div class="cs-navmap-row">
+            <span class="label-chip label-chip--accent">After</span>
+            <ul class="cs-navmap-items cs-navmap-items--after" role="list" aria-label="New navigation"><li>Menu</li><li>Gift Cards</li><li>Reservations</li><li class="is-cta">Order Now</li></ul>
+            <p>The mobile menu adds About Us. Shortcuts for gift cards, reservations &amp; ordering sit under the top banner.</p>
+          </div>
+        </div>
+
+        <div class="cs-split">
+          <div>
+            <h3>Ordering, Reservations &amp; Gift Cards</h3>
+            <ul>
+              <li>Built &amp; kept up a website menu &amp; a Shift4 online ordering menu, with rules for items that can’t be ordered online.</li>
+              <li>Set up online ordering, reservation settings, and seasonal hours.</li>
+              <li>Linked OpenTable &amp; Shift4 reservations so bookings flowed into the POS.</li>
+              <li>Set up digital gift cards &amp; physical gift card options.</li>
+            </ul>
+          </div>
+          <figure class="cs-figure">
+            <img src="/assets/work/sand-dollar/reservations.jpg" width="1110" height="726" loading="lazy" decoding="async" alt="The Make a Reservation form with party size, date, and time fields, a Check Availability button, and a note that groups larger than 16 should call the restaurant.">
+            <figcaption class="cs-cap"><span class="label-chip label-chip--accent">After</span> Reservations. Party size, date, and time in one step, with a phone option for big groups.</figcaption>
+          </figure>
+        </div>
+
+        <div class="cs-split">
+          <div>
+            <h3>Day to Day Operations</h3>
+            <ul>
+              <li>POS menu &amp; price updates.</li>
+              <li>Device &amp; connection troubleshooting.</li>
+              <li>Staff training on payments &amp; gift cards.</li>
+              <li>Filed Shift4 support tickets &amp; feature requests on a regular basis whenever I hit a gap in their ecosystem, like reservations not being able to block same day bookings or close a single holiday. Online ordering already supported holiday closures.</li>
+            </ul>
+          </div>
+          <figure class="cs-figure cs-figure--narrow">
+            <img src="/assets/work/sand-dollar/gift-cards.jpg" width="900" height="1080" loading="lazy" decoding="async" alt="The Order Gift Cards page with a Send Digitally option, a gift card image, and an Order Gift Card button.">
+            <figcaption class="cs-cap"><span class="label-chip label-chip--accent">After</span> Gift cards. Guests can order digital gift cards online. The live page also has a balance check.</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <!-- ============ SEO & GEO ============ -->
+      <section class="cs-section" id="seo-geo" aria-labelledby="seo-h">
+        <h2 id="seo-h">SEO &amp; GEO: Getting Found</h2>
+        <p class="cs-intro">SEO helps a restaurant show up in search results. GEO (generative engine optimization) is the same idea for AI answers, like when someone asks an AI assistant “where should I eat in Rockaway Beach?”</p>
+        <p>I treated the restaurant’s info like content that has to be easy for both people &amp; machines to read: clear, current, and the same everywhere it appears.</p>
+        <div class="cs-cols">
+          <div class="card cs-card">
+            <h3>SEO</h3>
+            <ul>
+              <li>Site submission, page titles, and descriptions.</li>
+              <li>Location keywords &amp; real menu content on the page.</li>
+              <li>Google Maps &amp; Google Business Profile upkeep: hours, photos, plus links to the website, menu, ordering, and reservations.</li>
+            </ul>
+          </div>
+          <div class="card cs-card">
+            <h3>GEO</h3>
+            <ul>
+              <li>The same name, address, phone, and hours everywhere: the site, the Google listing, the ordering pages.</li>
+              <li>Menus as real text, with dishes &amp; prices that can be read &amp; quoted.</li>
+              <li>Plain, descriptive copy that answers what guests ask: what it is, where, when it’s open, and what it serves.</li>
+              <li>A complete, current Google listing.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="cs-note">
+          <h3>After the Work: My AI Prompt Test</h3>
+          <p>I tested local prompts across these AI tools. Sand Dollar’s name &amp; website came up as the number one result.</p>
+          <dl class="cs-table cs-table--kv">
+            <div><dt>Tools</dt><dd>ChatGPT by OpenAI, Claude by Anthropic, Google Gemini, Google AI Overviews, Perplexity</dd></div>
+            <div><dt>Perplexity models</dt><dd>Sonar 2, GPT-5.6 Terra, GPT-6.1, Gemini 3.7 Flash, Claude Sonnet 5, Claude Opus 5.5, Kimi K3, GLM 5.3, Grok 4.6, Nemotron 3 Ultra</dd></div>
+          </dl>
+          <p class="cs-fine">These were my own tests, not a tracked ranking. AI answers can change over time.</p>
+        </div>
+      </section>
+
+      <!-- ============ RESULTS ============ -->
+      <section class="cs-section" id="results" aria-labelledby="results-h">
+        <h2 id="results-h">Results &amp; Impact</h2>
+        <p class="cs-intro">These numbers come from two different dashboards with different time frames. I keep them apart because they aren’t steps in one path.</p>
+
+        <!-- Two separate panels on purpose: Google Business Profile (Apr–Sep 2026)
+             and Website & SkyTab (latest 31 days) must never be combined. -->
+        <div class="cs-metrics">
+          <section class="cs-metric-panel" aria-labelledby="gbp-h">
+            <header>
+              <h3 id="gbp-h">Google Business Profile</h3>
+              <p>April–September 2026 <span>September is a partial month</span></p>
+            </header>
+            <ul class="cs-stats" role="list">
+              <li><strong>100,000</strong><span>Profile views</span></li>
+              <li><strong>39,000</strong><span>Searches</span></li>
+              <li><strong>15,187</strong><span>Customer interactions</span></li>
+              <li><strong>5,592</strong><span>Website clicks</span></li>
+              <li><strong>5,876</strong><span>Menu content views</span></li>
+            </ul>
+            <p class="cs-fine">In August 2026 alone, the profile logged 709 direction requests.</p>
+          </section>
+
+          <section class="cs-metric-panel" aria-labelledby="web-h">
+            <header>
+              <h3 id="web-h">Website &amp; SkyTab</h3>
+              <p>Latest 31 day reporting window</p>
+            </header>
+            <ul class="cs-stats" role="list">
+              <li><strong>3,542</strong><span>Website visitors</span></li>
+              <li><strong>6m 43s</strong><span>Average visit time</span></li>
+              <li><strong>178</strong><span>Clicks into the SkyTab online ordering flow</span></li>
+              <li><strong>~5.0%</strong><span>Ordering clicks ÷ website visitors (178 ÷ 3,542)</span></li>
+            </ul>
+            <p class="cs-fine">Online ordering clicks are clicks into the ordering flow, not completed orders or revenue.</p>
+          </section>
+        </div>
+
+        <div class="cs-note">
+          <h3>A Gap in the Reporting</h3>
+          <p>The same reporting view showed 0 attributed orders &amp; $0 in attributed sales alongside the 178 clicks into ordering. It didn’t establish how those clicks related to completed orders. That’s a reporting gap I’d like to see Shift4 close.</p>
+        </div>
+
+        <h3>What People Noticed</h3>
+        <ul>
+          <li>Staff responded well to the new website &amp; the cleaner POS workflow.</li>
+          <li>Training got easier because menus &amp; payment steps were clearer.</li>
+          <li>The owner &amp; guests gave positive feedback. Guests used the site.</li>
+          <li>Clear, current info online meant fewer basic questions from guests.</li>
+        </ul>
+        <p class="cs-fine">These results reflect the combined effect of the redesigned website, updated local search presence, restaurant operations, seasonality, and guest interest, not the redesign alone. No revenue, completed orders, or sole cause is claimed.</p>
+
+        <details class="cs-method">
+          <summary>Method and limitations</summary>
+          <p>Source materials: Google Business Profile performance dashboards supplied by the client/project owner and the SkyTab website analytics dashboard. Google metrics cover April–September 2026, with September incomplete as of September 20, 2026. Website/SkyTab metrics use a separate latest-31-days window. Google views, searches, and interactions are platform-reported performance measures and should not be interpreted as a deduplicated, step-by-step user funnel. Online-order clicks show intent to open the order flow; they are not attributed orders or revenue. The August direction request figure comes from the same Google Business Profile records. The AI prompt results come from my own tests after the work was done, across the tools &amp; Perplexity models listed on the SEO &amp; GEO page, not a tracked metric, and AI answers can change over time.</p>
+        </details>
+
+        <div class="cs-takeaway">
+          <h3>Key Takeaway</h3>
+          <p>A restaurant website only works when it’s connected. Google, the site, the menu, ordering, and reservations all have to tell guests the same thing, especially on a phone. People went for the menu &amp; the website most. That backs up putting the menu, hours, and main actions first.</p>
+        </div>
+      </section>
+
+      <!-- ============ REFLECTION ============ -->
+      <section class="cs-section" id="reflection" aria-labelledby="reflection-h">
+        <h2 id="reflection-h">Reflection &amp; Next Steps</h2>
+        <h3>What I Learned</h3>
+        <p>The best call I made was treating the website, ordering, POS, and Google listing as one system &amp; keeping hours &amp; menus the same in each place. Most of the old site’s problems were really consistency problems. Staying consistent is as much an operations habit as a design choice.</p>
+        <p>Working inside the restaurant while building for it changed how I prioritize. The questions guests ask at the door or on the phone became the site structure. Next time I’d set up better tracking on day one so the impact is easier to measure.</p>
+
+        <h3>Working Within Shift4’s Template</h3>
+        <p>Shift4’s website editor set the page layout. My design work was in what I could control: section order, navigation, copy, photos &amp; settings. This diagram shows the top of the mobile homepage. I drew it after launch from the live site.</p>
+        <div class="cs-template">
+          <div class="cs-template-phone" aria-hidden="true">
+            <div class="cs-tp-bar"><span class="cs-tp-logo"></span><span class="cs-tp-burger">1</span></div>
+            <div class="cs-tp-banner"><span class="cs-tp-btn">See Menu</span><span class="cs-tp-n">2</span></div>
+            <div class="cs-tp-shortcuts"><span>Gift Cards</span><span>Reservations</span><span>Order Online</span><span class="cs-tp-n">3</span></div>
+            <div class="cs-tp-about"><span>About Us</span><span class="cs-tp-n">4</span></div>
+          </div>
+          <ol class="cs-template-key">
+            <li>The menu button opens a full screen menu led by the main guest actions.</li>
+            <li>“See Menu” sits right on the top banner.</li>
+            <li>Shortcuts for gift cards, reservations &amp; ordering sit right under the banner.</li>
+            <li>About Us comes after the main actions.</li>
+          </ol>
+        </div>
+
+        <h3>After the Job: Rehired for Seasonal Work</h3>
+        <ol class="cs-timeline" role="list">
+          <li>
+            <p class="cs-timeline-date">April–September 2026</p>
+            <p>Redesign, launch, and ongoing upkeep while employed at the restaurant.</p>
+          </li>
+          <li>
+            <p class="cs-timeline-date">October 7–8, 2026</p>
+            <p>The owner was happy with the results &amp; brought me back for remote seasonal work. I handled the Fall/Winter refresh: new hours, ordering cutoffs, reservation windows, menu updates, and holiday notices. I updated the website, Shift4, and Google, then checked the website, ordering &amp; reservation changes live. One hours change touched eight different places.</p>
+          </li>
+        </ol>
+
+        <h3>How I Use AI in My Workflow</h3>
+        <p>I use AI tools for research, drafts, and checks. This case study was put together with generative AI help from my own notes, screenshots, and data. I edited it &amp; checked every claim myself.</p>
+
+        <h3>Next Steps</h3>
+        <ul>
+          <li>A regular seasonal update routine so hours, menus, ordering, and listings stay in sync every time the menu changes.</li>
+          <li>Keep pushing Shift4 on feature requests, like letting reservations block same day bookings &amp; close single holidays.</li>
+          <li>Set up better before &amp; after tracking for future changes.</li>
+        </ul>
+      </section>
+
+      <div class="cs-end">
+        <a href="https://sanddollarrestaurant.com" class="text-link" target="_blank" rel="noopener noreferrer">Visit sanddollarrestaurant.com <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg><span class="sr-only"> (opens in a new tab)</span></a>
+        <a href="/work/sand-dollar-case-study.pdf" class="text-link" target="_blank" rel="noopener">Download the PDF <span class="work-card-meta">10 pages</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg><span class="sr-only"> (opens in a new tab)</span></a>
+        <a href="/work/" class="text-link">Back to all work <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </div>
+
+    </article>
+  </div>
+
+  <div class="wrap"><div class="divider-hazard" aria-hidden="true"></div></div>
+  <section class="section section--tight" aria-labelledby="cta-heading">
+    <div class="wrap">
+      <div class="cta-panel" data-reveal>
+        <div class="grid-texture" aria-hidden="true"></div>
+        <span class="eyebrow eyebrow--accent">Contact</span>
+        <h2 id="cta-heading">Have a project in mind?</h2>
+        <p class="lede">Tell me what you're working on and what isn't working today. I aim to reply within two business days.</p>
+        <div class="cta-actions">
+          <a href="/contact/" class="btn btn-primary btn-lg">Start a project</a>
+          <a href="/resume/dylan-dwight-resume.pdf" class="text-link" target="_blank" rel="noopener">Hiring? Download my résumé <span class="work-card-meta">PDF</span><span class="sr-only"> (opens in a new tab)</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <svg class="logo-mark" viewBox="0 0 64 60" fill="none" aria-hidden="true"><path d="M10 14 H16 A16 16 0 0 1 16 46 H10 Z" fill="currentColor"/><path d="M54 14 H48 A16 16 0 0 0 48 46 H54 Z" fill="currentColor"/><circle class="logo-node" cx="32" cy="30" r="2.5"/></svg>
+        <strong>Dylan Dwight Creative Technologies</strong>
+        <p>Web design and front-end development for restaurants, artists, musicians, and small businesses.</p>
+        <span class="mono">Brooklyn, NY · Remote</span>
+      </div>
+      <nav aria-label="Footer">
+        <h2 class="footer-heading">Site</h2>
+        <ul class="footer-list">
+          <li><a href="/work/">Work</a></li>
+          <li><a href="/services/">Services</a></li>
+          <li><a href="/about/">About</a></li>
+          <li><a href="/contact/">Contact</a></li>
+        </ul>
+      </nav>
+      <div>
+        <h2 class="footer-heading">Elsewhere</h2>
+        <ul class="footer-list">
+          <li><a href="mailto:dylan@dylandwight.com">dylan@dylandwight.com</a></li>
+          <li><a href="tel:+13473793273">(347) 379-3273</a></li>
+          <li><a href="https://www.linkedin.com/in/dylan-dwight/" target="_blank" rel="noopener noreferrer">LinkedIn<span class="sr-only"> (opens in a new tab)</span></a></li>
+          <li><a href="https://github.com/DylanDwight" target="_blank" rel="noopener noreferrer">GitHub<span class="sr-only"> (opens in a new tab)</span></a></li>
+          <li><a href="/resume/dylan-dwight-resume.pdf" target="_blank" rel="noopener">Résumé (PDF)<span class="sr-only"> (opens in a new tab)</span></a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Dylan Dwight Creative Technologies</span>
+      <a href="/contact/">Start a project →</a>
+    </div>
+  </div>
+</footer>
+
+<script type="module" src="/js/app.js"></script>
+</body>
+</html>
