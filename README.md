@@ -20,6 +20,7 @@ index.html              Home
 services/index.html     Services
 work/index.html         Work index (finished projects only; in-progress coursework stays on Home)
 work/sand-dollar-case-study.pdf   Sand Dollar case study (10-page PDF)
+resume/dylan-dwight-foottit-resume.pdf   Résumé (linked from the footer, drawer, and Work page)
 contact/index.html      Contact / project inquiry
 404.html                Not found (served automatically by Vercel)
 robots.txt, sitemap.xml
