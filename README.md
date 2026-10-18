@@ -56,7 +56,6 @@ Paths are root-relative (`/css/...`, `/js/...`) so nested pages resolve correctl
 - Text colors: `--color-text-subtle` is the quietest color allowed for words (WCAG AA). `--color-text-faint` is for decorative rules only.
 - Icons are inlined SVGs; edit the source in `assets/icons/` and update the inline copies.
 - Sand Dollar case study images have their frame baked in by `scripts/frame-shots.py` (needs Pillow). Frame new screenshots with it so they match.
-- Placeholder frames (`.placeholder-frame`) mark where approved screenshots will go. They are labeled and carry `role="img"` with a description.
 
 ## Running locally
 
