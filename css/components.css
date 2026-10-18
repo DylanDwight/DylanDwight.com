@@ -36,11 +36,8 @@
     transparent 20px
   );
   opacity: 0.55;
-}
-
-/* Animated variant: stripes crawl sideways like caution tape and the
-   amber pulses slowly. One stripe period along x is 20px * sqrt(2). */
-.divider-hazard--live {
+  /* Stripes crawl sideways like caution tape and the amber pulses
+     slowly. One stripe period along x is 20px * sqrt(2). */
   background-size: 28.2843px 100%;
   border-radius: 3px;
   animation:
@@ -61,7 +58,7 @@
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  .divider-hazard--live { animation: none; }
+  .divider-hazard { animation: none; }
 }
 
 /* ---------- Text primitives ---------- */
