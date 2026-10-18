@@ -655,7 +655,7 @@
 }
 .about-portrait--home:hover .portrait-bubble-wave,
 .about-portrait--home:focus-visible .portrait-bubble-wave {
-  animation: portrait-wave 1s ease-in-out 0.2s 2;
+  animation: portrait-wave 1s ease-in-out 0.2s 6;
 }
 @keyframes portrait-wave {
   0%, 100% { rotate: 0deg; }
