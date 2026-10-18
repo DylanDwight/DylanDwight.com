@@ -178,6 +178,21 @@ h3 {
   text-decoration: none;
   border: 1px solid transparent;
   text-align: center;
+  transition: transform var(--transition-interactive), box-shadow var(--transition-interactive);
+}
+/* Hover: no colour change. The button lifts slightly and gets a thin
+   shadow ring plus a soft drop shadow, so it pops off the page. */
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 0 0 3px oklch(from var(--color-primary) l c h / 0.18),
+    0 10px 24px -8px rgb(0 0 0 / 0.7);
+}
+.btn:active {
+  transform: translateY(0);
+}
+@media (prefers-reduced-motion: reduce) {
+  .btn:hover { transform: none; }
 }
 .btn svg {
   width: 15px;
@@ -187,10 +202,6 @@ h3 {
 .btn-primary {
   background: var(--color-primary);
   color: var(--color-text-inverse);
-}
-/* Hover keeps the fill colour and only adds a soft glow. */
-.btn-primary:hover {
-  box-shadow: 0 0 14px oklch(from var(--color-primary) l c h / 0.1);
 }
 /* CTA ring: the header "Start a project" button and the primary button in
    the bottom-of-page contact panel. A hairline ring sits 4px outside the
@@ -239,17 +250,11 @@ h3 {
   mask-composite: exclude;
   animation: cta-orbit 4.5s linear infinite;
 }
-.btn-nav-cta:hover::after,
-.btn-nav-cta:focus-visible::after,
-.cta-panel .btn-primary:hover::after,
-.cta-panel .btn-primary:focus-visible::after {
-  border-color: oklch(from var(--color-primary) l c h / 0.36);
-  box-shadow: 0 0 16px 1px oklch(from var(--color-primary) l c h / 0.2);
-}
-/* The ring already glows, so the button itself adds no hover shadow. */
+/* These already wear a ring, so on hover they only lift and take the
+   drop shadow, not a second ring. */
 .btn-nav-cta:hover,
 .cta-panel .btn-primary:hover {
-  box-shadow: none;
+  box-shadow: 0 10px 24px -8px rgb(0 0 0 / 0.7);
 }
 @keyframes cta-orbit {
   to {
@@ -276,10 +281,6 @@ h3 {
   background: transparent;
   color: var(--color-text);
   border-color: var(--color-border);
-}
-.btn-secondary:hover {
-  border-color: var(--color-primary);
-  color: var(--color-primary);
 }
 .btn-compact {
   padding: var(--space-2) var(--space-4);
