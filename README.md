@@ -18,9 +18,12 @@ A hand-built, dependency-free static site focused on clarity, accessibility, per
 ```
 index.html              Home
 services/index.html     Services
+work/index.html         Work index (project cards)
+work/sand-dollar-case-study.pdf   Sand Dollar case study (10-page PDF)
 contact/index.html      Contact / project inquiry
 404.html                Not found (served automatically by Vercel)
 robots.txt, sitemap.xml
+favicon.ico, site.webmanifest   Root icon fallback and manifest (icons exported from assets/favicon.svg)
 
 css/
   tokens.css            Colors (both themes), type scale, spacing, radii, shadows, fonts
@@ -36,7 +39,8 @@ js/
   reveal.js             Scroll reveal (disabled under reduced motion; no-JS safe)
 
 assets/
-  favicon.svg, favicon-32.png, apple-touch-icon.png
+  favicon.svg, favicon-32.png, apple-touch-icon.png, icon-192.png, icon-512.png
+  work/                 Approved project screenshots
   icons/                SVG sources for the inline icons (see icons/README.md)
   og/og-default.png     Default 1200×630 share image
 ```

@@ -28,6 +28,8 @@
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
 <link rel="icon" href="/assets/favicon-32.png" sizes="32x32" type="image/png" />
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
+<link rel="icon" href="/favicon.ico" sizes="48x48" />
+<link rel="manifest" href="/site.webmanifest" />
 
 <!-- Theme before first paint: saved choice, else OS preference. Also marks JS as available. -->
 <script>
@@ -111,7 +113,7 @@
 
     <nav aria-label="Primary">
       <ul class="nav-links">
-        <li><span class="nav-pending">Work <span class="soon" aria-hidden="true">soon</span><span class="sr-only"> (coming in the next milestone)</span></span></li>
+        <li><a href="/work/">Work</a></li>
 <li><a href="/services/">Services</a></li>
 <li><span class="nav-pending">About <span class="soon" aria-hidden="true">soon</span><span class="sr-only"> (coming in the next milestone)</span></span></li>
 <li><a href="/contact/">Contact</a></li>
@@ -144,7 +146,7 @@
   </div>
   <nav aria-label="Mobile">
     <ul class="mobile-nav-links">
-      <li><span class="nav-pending">Work <span class="soon" aria-hidden="true">soon</span><span class="sr-only"> (coming in the next milestone)</span></span></li>
+      <li><a href="/work/">Work</a></li>
 <li><a href="/services/">Services</a></li>
 <li><span class="nav-pending">About <span class="soon" aria-hidden="true">soon</span><span class="sr-only"> (coming in the next milestone)</span></span></li>
 <li><a href="/contact/">Contact</a></li>
@@ -216,16 +218,12 @@
               <span class="tag">Restaurant</span><span class="tag">Web design</span><span class="tag">Front-end</span><span class="tag">Content</span><span class="tag">Local search</span><span class="tag">Ordering integration</span>
             </div>
             <div class="work-card-links">
-              <span class="work-card-pending">Case study coming in the next milestone</span>
+              <a href="/work/sand-dollar-case-study.pdf" class="text-link" target="_blank" rel="noopener">Read the case study <span class="work-card-meta">PDF · 10 pages</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg><span class="sr-only"> (opens in a new tab)</span></a>
               <a href="https://sanddollarrestaurant.com" class="text-link" target="_blank" rel="noopener noreferrer">Visit site <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg><span class="sr-only"> (opens in a new tab)</span></a>
             </div>
           </div>
           <div class="corner-panel" style="padding: var(--space-3);">
-            <div class="placeholder-frame " role="img" aria-label="Placeholder for an approved screenshot of the Sand Dollar Restaurant and Lounge homepage on desktop and mobile. The image has not been added yet.">
-  <div class="ph-top"><span class="ph-title">Sand Dollar — desktop + mobile</span><span class="ph-note">Screenshot pending approval</span></div>
-  <svg class="ph-mark" viewBox="0 0 64 60" fill="none" aria-hidden="true"><path d="M10 14 H16 A16 16 0 0 1 16 46 H10 Z" fill="currentColor" fill-opacity="0.5"/><path d="M54 14 H48 A16 16 0 0 0 48 46 H54 Z" fill="currentColor" fill-opacity="0.5"/><circle cx="32" cy="30" r="2.5" fill="currentColor"/></svg>
-  <div class="ph-bottom"><span>1600 × 1000</span><span>Placeholder — not final artwork</span></div>
-</div>
+            <img class="work-shot" src="/assets/work/sand-dollar-home-desktop.jpg" srcset="/assets/work/sand-dollar-home-desktop-800.jpg 800w, /assets/work/sand-dollar-home-desktop.jpg 1600w" sizes="(max-width: 900px) 100vw, 640px" width="1600" height="1006" loading="lazy" decoding="async" alt="The redesigned Sand Dollar Restaurant and Lounge homepage on desktop: logo, Menu, Gift Cards, Reservations, and an Order Now button above a seafood hero photo with the headline Where Ocean Views Meet Coastal Flavor.">
           </div>
         </article>
 
@@ -306,10 +304,27 @@
           </div>
         </article>
 
+        <article class="card work-card work-card--progress" data-reveal>
+          <div class="work-card-top">
+            <span class="work-card-index">05 / Development coursework</span>
+            <span class="label-chip">Coursework in progress</span>
+          </div>
+          <h3>JavaScript Programming with React, Node &amp; MongoDB</h3>
+          <p class="work-card-summary">IBM Specialization on Coursera · In progress alongside the Google UX Design Certificate</p>
+          <p>I'm extending my front-end work into full-stack JavaScript: component-based interfaces in React, server-side code in Node, and data in MongoDB. Paired with the UX course, the aim is to carry a project from research and design through to the working code behind it.</p>
+          <p><strong>Why it matters for your project:</strong> for teams hiring, it builds toward a designer who understands how interfaces are built and can work alongside developers in a modern JavaScript stack. For freelance clients, the goal is that features beyond a static page, like custom forms, menus, or small booking tools, can be designed and built by the same person.</p>
+          <div class="work-card-tags">
+            <span class="tag">JavaScript</span><span class="tag">React</span><span class="tag">Node.js</span><span class="tag">MongoDB</span><span class="tag">Full-stack</span>
+          </div>
+          <div class="work-card-links">
+            <a href="/contact/" class="text-link">Ask about this coursework <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          </div>
+        </article>
+
       </div>
 
       <div class="work-more">
-        <span class="work-card-pending">The full Work index, case studies, and project pages are being added in the next milestone.</span>
+        <a href="/work/" class="text-link">See all work <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
       </div>
     </div>
   </section>
@@ -435,7 +450,7 @@
       <nav aria-label="Footer">
         <h2 class="footer-heading">Site</h2>
         <ul class="footer-list">
-          <li><span class="nav-pending">Work <span class="soon" aria-hidden="true">soon</span><span class="sr-only"> (coming in the next milestone)</span></span></li>
+          <li><a href="/work/">Work</a></li>
           <li><a href="/services/">Services</a></li>
           <li><span class="nav-pending">About <span class="soon" aria-hidden="true">soon</span><span class="sr-only"> (coming in the next milestone)</span></span></li>
           <li><a href="/contact/">Contact</a></li>
