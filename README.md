@@ -8,8 +8,8 @@ A hand-built, dependency-free static site focused on clarity, accessibility, per
 
 - No build step, no framework, no bundler, no runtime third-party scripts
 - Semantic HTML, one `h1` per page, landmark regions, visible skip link
-- Design-token-driven CSS with light and dark themes (single dark token block). The site is dark-only for now: the pre-paint script forces dark and the toggle is hidden; see the note in `js/app.js` to bring light mode back
-- Native ES modules for the small amount of JavaScript (nav drawer, theme, reveal)
+- Design-token-driven CSS, dark theme only (the light theme and toggle were removed in Oct 2026 and are in git history)
+- Native ES modules for the small amount of JavaScript (nav drawer, scroll reveal, case study progress)
 - Works without JavaScript; respects `prefers-reduced-motion`
 - Per-page metadata, Open Graph / Twitter cards, JSON-LD (`ProfessionalService`, `Person`, `WebSite`), `robots.txt`, `sitemap.xml`, branded 404
 
@@ -29,7 +29,7 @@ robots.txt, sitemap.xml
 favicon.ico, site.webmanifest   Root icon fallback and manifest (icons exported from assets/favicon.svg)
 
 css/
-  tokens.css            Colors (both themes), type scale, spacing, radii, shadows, fonts
+  tokens.css            Colors, type scale, spacing, radii, shadows, fonts
   base.css              Reset, element defaults, focus styles, reduced motion, skip link
   components.css        Header, drawer, footer, buttons, cards, fact strip, process,
                         CTA panel, page hero, placeholder frames, reveal
@@ -38,7 +38,6 @@ css/
 js/
   app.js                Entry (type="module"); imports the modules below
   nav.js                Mobile drawer: hidden when closed, aria-expanded, focus trap, Escape
-  theme.js              Light/dark toggle with persisted preference
   case-study.js         Case study reading progress bar and table-of-contents scroll-spy
   reveal.js             Scroll reveal (disabled under reduced motion; no-JS safe)
 
@@ -53,9 +52,8 @@ Paths are root-relative (`/css/...`, `/js/...`) so nested pages resolve correctl
 
 ## Conventions
 
-- Theme: an inline script in `<head>` sets `data-theme` from the saved choice or the OS setting before first paint, and adds `html.js`. Dark tokens live only on `[data-theme='dark']`.
+- An inline script in `<head>` adds `html.js` before first paint; progressive-enhancement styles key off it.
 - Text colors: `--color-text-subtle` is the quietest color allowed for words (WCAG AA). `--color-text-faint` is for decorative rules only.
-- `--project-accent` defaults to the primary color; case-study pages override it within their own scope.
 - Icons are inlined SVGs; edit the source in `assets/icons/` and update the inline copies.
 - Placeholder frames (`.placeholder-frame`) mark where approved screenshots will go. They are labeled and carry `role="img"` with a description.
 

@@ -43,7 +43,6 @@ export function initCaseStudy() {
     links.forEach((link, i) => {
       if (i === index) link.setAttribute('aria-current', 'true');
       else link.removeAttribute('aria-current');
-
     });
   }
 
