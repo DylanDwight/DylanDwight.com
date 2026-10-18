@@ -1,7 +1,7 @@
 /* ============================================================
    components.css — shared UI components
    Order: layout primitives → text primitives → buttons → header
-   → drawer → footer → cards & panels → figures/placeholders
+   → drawer → footer → cards & panels → figures
    → reveal → responsive
    ============================================================ */
 
@@ -85,15 +85,6 @@
 .eyebrow--wrap .eyebrow-sep {
   color: var(--color-text-subtle);
 }
-.eyebrow--status::before {
-  content: '';
-  width: 7px;
-  height: 7px;
-  border-radius: var(--radius-full);
-  background: var(--color-primary);
-  box-shadow: 0 0 10px oklch(from var(--color-primary) l c h / 0.7);
-  flex-shrink: 0;
-}
 
 .mono {
   font-family: var(--font-mono);
@@ -104,8 +95,7 @@
 
 h1,
 h2,
-h3,
-.font-display {
+h3 {
   font-family: var(--font-display);
   font-weight: 700;
   letter-spacing: -0.015em;
@@ -161,8 +151,8 @@ h3,
   white-space: nowrap;
 }
 .label-chip--accent {
-  color: var(--project-accent);
-  border-color: oklch(from var(--project-accent) l c h / 0.45);
+  color: var(--color-primary);
+  border-color: oklch(from var(--color-primary) l c h / 0.45);
 }
 
 .text-link {
@@ -208,9 +198,37 @@ h3,
   padding: var(--space-3) var(--space-6);
   min-height: 44px;
   border-radius: var(--radius-md);
-  text-decoration: none;
   border: 1px solid transparent;
   text-align: center;
+  transition: transform var(--transition-interactive), box-shadow var(--transition-interactive),
+    text-decoration-color var(--transition-interactive);
+  text-decoration: underline 1.5px transparent;
+  text-underline-offset: 0.3em;
+}
+/* Hover: the button presses in like a hardware key. No colour change and
+   no glow: it sinks 1px and takes an inner shadow along the top edge.
+   Clicking presses it a little further. The label gets an underline while
+   pressed. */
+.btn:hover {
+  transform: translateY(1px);
+  text-decoration-color: currentColor;
+  box-shadow:
+    inset 0 2px 4px rgb(0 0 0 / 0.35),
+    inset 0 0 0 1px rgb(0 0 0 / 0.12);
+}
+.btn:active {
+  transform: translateY(2px);
+  box-shadow:
+    inset 0 3px 6px rgb(0 0 0 / 0.45),
+    inset 0 0 0 1px rgb(0 0 0 / 0.18);
+}
+@media (prefers-reduced-motion: reduce) {
+  .btn:hover,
+  .btn:active { transform: none; }
+}
+/* inline-block keeps the button underline off small meta text like "10 pages" */
+.btn .work-card-meta {
+  display: inline-block;
 }
 .btn svg {
   width: 15px;
@@ -221,18 +239,95 @@ h3,
   background: var(--color-primary);
   color: var(--color-text-inverse);
 }
-.btn-primary:hover {
-  background: var(--color-primary-hover);
-  box-shadow: var(--shadow-glow);
+/* CTA ring: the header "Start a project" button and the primary button in
+   the bottom-of-page contact panel. A hairline ring sits 4px outside the
+   button with a soft steady halo, and a brighter arc travels slowly around
+   it. Reduced motion keeps the ring and halo, without the moving arc. */
+@property --cta-angle {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
 }
+.btn-nav-cta,
+.cta-panel .btn-primary {
+  position: relative;
+}
+.btn-nav-cta::before,
+.btn-nav-cta::after,
+.cta-panel .btn-primary::before,
+.cta-panel .btn-primary::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: calc(var(--radius-md) + 4px);
+  pointer-events: none;
+}
+/* Halo: hairline ring + soft glow */
+.btn-nav-cta::after,
+.cta-panel .btn-primary::after {
+  border: 1px solid oklch(from var(--color-primary) l c h / 0.28);
+  box-shadow: 0 0 16px 1px oklch(from var(--color-primary) l c h / 0.28);
+  transition: box-shadow var(--transition-interactive), border-color var(--transition-interactive);
+}
+/* Travelling arc, masked to a 1.5px ring */
+.btn-nav-cta::before,
+.cta-panel .btn-primary::before {
+  padding: 1.5px;
+  background: conic-gradient(
+    from var(--cta-angle),
+    transparent 0deg,
+    var(--color-primary) 50deg,
+    transparent 110deg,
+    transparent 360deg
+  );
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  animation: cta-orbit 4.5s linear infinite;
+}
+/* Ring CTAs don't press in or underline. On hover they cast a drop
+   shadow and the label turns bold (monospace, so the width doesn't shift). */
+.btn-nav-cta:hover,
+.btn-nav-cta:active,
+.cta-panel .btn-primary:hover,
+.cta-panel .btn-primary:active {
+  transform: none;
+  text-decoration-color: transparent;
+  box-shadow: 0 8px 22px -6px rgb(0 0 0 / 0.75);
+  font-weight: 700;
+}
+@keyframes cta-orbit {
+  to {
+    --cta-angle: 360deg;
+  }
+}
+.btn-nav-cta svg {
+  width: 13px;
+  height: 13px;
+  transition: transform var(--transition-interactive);
+}
+.btn-nav-cta:hover svg,
+.btn-nav-cta:focus-visible svg {
+  transform: translateX(3px);
+}
+@media (prefers-reduced-motion: reduce) {
+  .btn-nav-cta::before,
+  .cta-panel .btn-primary::before {
+    animation: none;
+  }
+}
+
 .btn-secondary {
   background: transparent;
   color: var(--color-text);
   border-color: var(--color-border);
 }
+/* On the dark outlined button an inner shadow alone is invisible, so the
+   pressed face also sinks a shade darker. */
 .btn-secondary:hover {
-  border-color: var(--color-primary);
-  color: var(--color-primary);
+  background: rgb(0 0 0 / 0.35);
+  text-decoration-color: var(--color-primary);
 }
 .btn-compact {
   padding: var(--space-2) var(--space-4);
@@ -312,8 +407,7 @@ h3,
   gap: var(--space-8);
   list-style: none;
 }
-.nav-links a,
-.nav-links .nav-pending {
+.nav-links a {
   display: inline-flex;
   align-items: center;
   min-height: 44px;
@@ -341,36 +435,8 @@ h3,
 .nav-links a[aria-current='page']::after {
   width: 100%;
 }
-/* Pages that exist in a later milestone: shown for shape, not clickable */
-.nav-pending {
-  color: var(--color-text-subtle);
-  cursor: default;
-}
-.soon {
-  display: inline-block;
-  vertical-align: middle;
-  margin-left: 2px;
-  padding: 0 var(--space-2);
-  font-family: var(--font-mono);
-  font-size: 0.625rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--color-text-subtle);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-full);
-  line-height: 1.6;
-}
 .nowrap {
   white-space: nowrap;
-}
-.nav-pending::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  bottom: 10px;
-  width: 100%;
-  height: 1px;
-  border-bottom: 1px dashed var(--color-border);
 }
 
 .header-actions {
@@ -380,15 +446,6 @@ h3,
 }
 .nav-toggle {
   display: none;
-}
-.theme-toggle .icon-moon {
-  display: none;
-}
-[data-theme='dark'] .theme-toggle .icon-sun {
-  display: none;
-}
-[data-theme='dark'] .theme-toggle .icon-moon {
-  display: block;
 }
 
 /* ---------- Mobile drawer ---------- */
@@ -418,8 +475,7 @@ h3,
   gap: var(--space-2);
   list-style: none;
 }
-.mobile-nav-links a,
-.mobile-nav-links .nav-pending {
+.mobile-nav-links a {
   display: flex;
   align-items: center;
   min-height: 48px;
@@ -429,12 +485,6 @@ h3,
   color: var(--color-text);
   text-decoration: none;
   padding-block: var(--space-2);
-}
-.mobile-nav-links .nav-pending {
-  color: var(--color-text-subtle);
-}
-.mobile-nav-links .nav-pending::after {
-  border-bottom: none;
 }
 .mobile-nav-links a[aria-current='page'] {
   color: var(--color-primary);
@@ -513,8 +563,7 @@ h3,
   flex-direction: column;
   gap: 0;
 }
-.footer-list a,
-.footer-list .nav-pending {
+.footer-list a {
   display: inline-flex;
   align-items: center;
   min-height: 44px;
@@ -525,12 +574,6 @@ h3,
 }
 .footer-list a:hover {
   color: var(--color-primary);
-}
-.footer-list .nav-pending {
-  color: var(--color-text-subtle);
-}
-.footer-list .nav-pending::after {
-  border-bottom: none;
 }
 .footer-bottom {
   display: flex;
@@ -652,12 +695,6 @@ h3,
   align-items: center;
   margin-top: auto;
 }
-.work-card-pending {
-  font-family: var(--font-mono);
-  font-size: var(--text-xs);
-  color: var(--color-text-subtle);
-  letter-spacing: 0.04em;
-}
 
 .work-card-meta {
   font-family: var(--font-mono);
@@ -667,7 +704,32 @@ h3,
   letter-spacing: 0.04em;
 }
 
-/* Approved project screenshot (replaces a .placeholder-frame once delivered) */
+/* One confirmed, sourced result on a project card. The label carries the
+   metric's source and date range, so it is never read as a combined figure. */
+.work-card .work-card-result {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: var(--space-1) var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  border-left: 2px solid var(--color-primary);
+  background: var(--color-surface-2);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.02em;
+  color: var(--color-text-subtle);
+}
+.work-card-result strong {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 1;
+  color: var(--color-text);
+}
+
+/* Project screenshot */
 .work-shot {
   display: block;
   width: 100%;
@@ -852,7 +914,7 @@ h3,
   position: absolute;
   width: 14px;
   height: 14px;
-  border: 1px solid var(--project-accent);
+  border: 1px solid var(--color-primary);
   pointer-events: none;
 }
 .corner-panel::before {
@@ -866,84 +928,6 @@ h3,
   right: -1px;
   border-left: none;
   border-top: none;
-}
-
-/* ---------- Placeholder frame ----------
-   Used wherever an approved screenshot has not been delivered yet.
-   It is a real, labeled element (not an empty box): a mono label
-   names the pending asset, the hatch pattern reads as "reserved",
-   and role="img" + aria-label describe the intended image. */
-
-.placeholder-frame {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  aspect-ratio: 3 / 2;
-  padding: var(--space-4);
-  background-color: var(--color-surface-offset);
-  background-image: repeating-linear-gradient(
-    -45deg,
-    transparent 0 14px,
-    oklch(from var(--color-text-faint) l c h / 0.18) 14px 15px
-  );
-  color: var(--color-text-subtle);
-  font-family: var(--font-mono);
-  font-size: var(--text-xs);
-  letter-spacing: 0.06em;
-  overflow: hidden;
-}
-.placeholder-frame--portrait {
-  aspect-ratio: 9 / 16;
-}
-.placeholder-frame--square {
-  aspect-ratio: 1;
-}
-.placeholder-frame--wide {
-  aspect-ratio: 16 / 10;
-}
-.placeholder-frame .ph-top,
-.placeholder-frame .ph-bottom {
-  display: flex;
-  justify-content: space-between;
-  gap: var(--space-3);
-}
-.placeholder-frame .ph-bottom span {
-  white-space: nowrap;
-}
-.placeholder-frame--mini {
-  padding: var(--space-3);
-  justify-content: flex-start;
-}
-.placeholder-frame--mini .ph-note,
-.placeholder-frame--mini .ph-bottom {
-  display: none;
-}
-.placeholder-frame--mini .ph-title {
-  font-size: 0.6875rem;
-  letter-spacing: 0.04em;
-}
-.placeholder-frame .ph-title {
-  color: var(--color-text);
-  font-weight: 500;
-  text-transform: uppercase;
-}
-.placeholder-frame .ph-note {
-  text-transform: uppercase;
-  text-align: right;
-}
-.placeholder-frame .ph-mark {
-  align-self: center;
-  width: 40px;
-  height: 40px;
-  color: var(--color-text-faint);
-}
-
-.figure-caption {
-  margin-top: var(--space-3);
-  font-family: var(--font-mono);
-  font-size: var(--text-xs);
-  color: var(--color-text-subtle);
-  letter-spacing: 0.04em;
 }
 
 /* ---------- Reveal (progressive enhancement) ----------
@@ -1054,21 +1038,6 @@ html.js [data-reveal].is-visible {
   }
   .work-card--featured {
     gap: var(--space-5);
-  }
-  .placeholder-frame {
-    padding: var(--space-3);
-  }
-  .placeholder-frame .ph-top,
-  .placeholder-frame .ph-bottom {
-    flex-direction: column;
-    gap: var(--space-1);
-  }
-  .placeholder-frame .ph-note {
-    text-align: left;
-  }
-  .placeholder-frame .ph-mark {
-    width: 32px;
-    height: 32px;
   }
   .cta-panel {
     padding: var(--space-8) var(--space-5);

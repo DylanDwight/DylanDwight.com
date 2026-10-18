@@ -1,6 +1,6 @@
 /* ============================================================
    pages.css — page-specific layouts
-   Home · Services · Contact · 404
+   Home · Services · Contact · 404 · Case study
    ============================================================ */
 
 /* ---------- Home: hero ---------- */
@@ -63,6 +63,22 @@
   box-shadow: 0 0 10px oklch(from var(--color-primary) l c h / 0.7);
   flex-shrink: 0;
 }
+/* Hiring path: direct links for recruiters, kept quieter than the main CTAs */
+.hero-hiring {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0 var(--space-5);
+  margin-top: calc(var(--space-4) * -1);
+  padding-left: calc(8px + var(--space-3));
+}
+.hero-hiring-label {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--color-text);
+  font-weight: 500;
+}
+
 .hero-actions {
   display: flex;
   gap: var(--space-4);
@@ -84,9 +100,6 @@
   align-items: center;
   gap: var(--space-4);
   flex-wrap: wrap;
-}
-.work-more .work-card-pending {
-  max-width: 60ch;
 }
 
 /* ---------- Home: about preview ---------- */
@@ -151,41 +164,6 @@
   gap: var(--space-4) var(--space-6);
   margin-top: var(--space-6);
   align-items: center;
-}
-
-.schematic {
-  padding: var(--space-8);
-  aspect-ratio: 4 / 5;
-  max-height: 460px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-.schematic-label,
-.schematic-footer {
-  font-family: var(--font-mono);
-  font-size: var(--text-xs);
-  color: var(--color-text-subtle);
-  letter-spacing: 0.08em;
-  display: flex;
-  justify-content: space-between;
-  gap: var(--space-3);
-}
-.schematic-footer {
-  border-top: 1px dashed var(--color-divider);
-  padding-top: var(--space-4);
-}
-.schematic-visual {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: var(--space-6) 0;
-}
-.schematic-visual svg {
-  width: 100%;
-  height: 100%;
-  max-height: 240px;
 }
 
 /* ---------- Services page ---------- */
@@ -518,10 +496,6 @@
     justify-self: start;
     max-width: 260px;
   }
-  .schematic {
-    aspect-ratio: 16 / 9;
-    max-width: 520px;
-  }
   .faq {
     grid-template-columns: 1fr;
   }
@@ -571,10 +545,6 @@
   }
     .about-grid {
     gap: var(--space-8);
-  }
-  .schematic {
-    padding: var(--space-5);
-    aspect-ratio: 4 / 3;
   }
   .inquiry-panel {
     padding: var(--space-6) var(--space-5);
@@ -671,4 +641,811 @@
   .portrait-bubble { transition: none; }
   .about-portrait--home:hover .portrait-media img { transform: none; }
   .about-portrait--home:hover .portrait-bubble-wave { animation: none; }
+}
+
+/* ============================================================
+   Case study: Sand Dollar (/work/sand-dollar/)
+   Uses the site's own palette (signal blue accents), like every
+   other page.
+   ============================================================ */
+
+/* ---------- Reading progress ----------
+   Minimal: a thin signal-blue bar across the top, and a matching line
+   beside the TOC that fills down to the current reading position.
+   js/case-study.js sets --cs-progress (0-1) and --cs-toc-fill (px).
+   Both are hidden without JS. */
+
+.cs-progress,
+.cs-toc-rail {
+  display: none;
+}
+html.js .cs-progress {
+  display: block;
+  position: fixed;
+  inset: 0 0 auto;
+  height: 2px;
+  z-index: 60;
+  pointer-events: none;
+  background: var(--color-primary);
+  transform: scaleX(var(--cs-progress, 0));
+  transform-origin: left;
+}
+html.js .cs-toc-rail {
+  display: block;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -1px;
+  width: 2px;
+  pointer-events: none;
+  background: var(--color-primary);
+  clip-path: inset(0 0 calc(100% - var(--cs-toc-fill, 0px)) 0);
+}
+
+.cs-hero .wrap {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+.cs-hero h1 {
+  max-width: 20ch;
+  margin-top: 0;
+}
+.cs-subtitle {
+  display: block;
+  color: var(--color-text-muted);
+  font-size: 0.6em;
+  margin-top: var(--space-2);
+}
+.cs-hero .lede {
+  margin-top: 0;
+  max-width: 56ch;
+}
+.cs-back {
+  min-height: 32px;
+}
+.cs-back:hover svg {
+  transform: translateX(-2px);
+}
+.cs-facts {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--space-4) var(--space-6);
+  padding-block: var(--space-5);
+  border-block: 1px solid var(--color-divider);
+}
+.cs-facts dt,
+.cs-table--kv dt,
+.cs-cap,
+.cs-toc-title,
+.cs-kicker span,
+.cs-metric-panel header p,
+.cs-timeline-date,
+.cs-eco-label {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.06em;
+  color: var(--color-text-subtle);
+}
+.cs-facts dt {
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-bottom: var(--space-1);
+}
+.cs-facts dd {
+  font-weight: 500;
+  font-size: var(--text-sm);
+}
+.cs-facts dd span {
+  display: block;
+  font-weight: 400;
+  color: var(--color-text-muted);
+}
+.cs-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+.cs-hero-actions .work-card-meta {
+  color: inherit;
+  opacity: 0.75;
+}
+.cs-hero-shot {
+  margin-top: var(--space-6);
+  padding: var(--space-3);
+}
+.cs-hero-shot img {
+  width: 100%;
+}
+.cs-hero-shot .cs-cap {
+  margin-top: var(--space-3);
+}
+
+/* ---------- Layout: sticky table of contents + article ---------- */
+
+.cs-layout {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  gap: clamp(var(--space-8), 5vw, var(--space-16));
+  align-items: start;
+  padding-block: var(--space-12) var(--space-16);
+}
+.cs-toc {
+  position: sticky;
+  top: calc(var(--space-20) + var(--space-4));
+  max-height: calc(100dvh - var(--space-32));
+  overflow-y: auto;
+}
+.cs-toc-title {
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-bottom: var(--space-3);
+}
+.cs-toc ol {
+  position: relative;
+  list-style: none;
+  border-left: 1px solid var(--color-divider);
+}
+.cs-toc a {
+  position: relative;
+  display: block;
+  padding: var(--space-1) 0 var(--space-1) var(--space-4);
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  text-decoration: none;
+  transition: color var(--transition-interactive);
+}
+.cs-toc a:hover {
+  color: var(--color-text);
+}
+.cs-toc a[aria-current='true'] {
+  color: var(--color-text);
+  font-weight: 500;
+}
+
+.cs-body {
+  min-width: 0;
+  max-width: 760px;
+}
+.cs-section {
+  padding-block: var(--space-12);
+  border-top: 1px solid var(--color-divider);
+}
+.cs-section:first-child {
+  padding-top: 0;
+  border-top: 0;
+}
+.cs-section > * + *,
+.cs-split > div > * + *,
+.cs-compare figure > * + *,
+.cs-note > * + *,
+.cs-card > * + *,
+.cs-takeaway > * + * {
+  margin-top: var(--space-4);
+}
+.cs-section h2 {
+  font-size: var(--text-xl);
+}
+.cs-section > h2 + *,
+.cs-section > h3 + * {
+  margin-top: var(--space-3);
+}
+.cs-section h3 {
+  font-size: var(--text-lg);
+}
+.cs-section > h3,
+.cs-section .cs-h2-sub {
+  margin-top: var(--space-10);
+}
+.cs-body p,
+.cs-body li {
+  color: var(--color-text-muted);
+  max-width: var(--measure-default);
+}
+.cs-body ul:not([role]),
+.cs-body ol:not([role]) {
+  padding-left: var(--space-5);
+}
+.cs-body ul:not([role]) li + li,
+.cs-body ol:not([role]) li + li {
+  margin-top: var(--space-2);
+}
+.cs-body li::marker {
+  color: var(--color-primary);
+}
+.cs-intro {
+  font-size: var(--text-lg);
+  color: var(--color-text) !important;
+}
+.cs-fine {
+  font-size: var(--text-sm);
+  font-style: italic;
+}
+.cs-kicker {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-1) var(--space-3);
+}
+.cs-kicker span {
+  font-weight: 400;
+}
+
+/* ---------- Figures ---------- */
+
+/* Case study images have their frame (browser window, phone, or photo
+   mat) baked into the file, so the img itself is unstyled. */
+.cs-figure img {
+  width: 100%;
+}
+.cs-figure--narrow {
+  max-width: 280px;
+}
+.cs-cap {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-2);
+  line-height: 1.5;
+}
+.cs-phones {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--space-4);
+}
+.cs-split {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+  gap: var(--space-8);
+  align-items: start;
+}
+.cs-section > .cs-split {
+  margin-top: var(--space-10);
+}
+.cs-compare {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-6);
+  align-items: start;
+}
+
+/* ---------- Lists as tiles ---------- */
+
+.cs-glance,
+.cs-skills,
+.cs-stats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-3);
+}
+.cs-glance li,
+.cs-skills li,
+.cs-stats li {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+}
+.cs-glance strong,
+.cs-stats strong {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  line-height: 1.1;
+  color: var(--color-text);
+}
+.cs-glance span,
+.cs-skills span,
+.cs-stats span {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+.cs-skills strong {
+  font-size: var(--text-sm);
+  color: var(--color-text);
+}
+.cs-skills {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.cs-path {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--space-3);
+  counter-reset: none;
+}
+.cs-path li {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding: var(--space-4);
+  border-top: 2px solid var(--color-primary);
+  background: var(--color-surface);
+  border-radius: 0 0 var(--radius-md) var(--radius-md);
+}
+.cs-path-n {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-primary);
+}
+.cs-path strong {
+  color: var(--color-text);
+}
+.cs-path li > span:last-child {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+/* ---------- Tables ---------- */
+
+.cs-table-scroll {
+  overflow-x: auto;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+.cs-table-scroll:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+table.cs-table {
+  width: 100%;
+  min-width: 480px;
+  border-collapse: collapse;
+  font-size: var(--text-sm);
+  background: var(--color-surface);
+}
+table.cs-table th {
+  text-align: left;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: var(--color-text-subtle);
+  background: var(--color-surface-2);
+}
+table.cs-table th,
+table.cs-table td {
+  padding: var(--space-3) var(--space-4);
+  border-bottom: 1px solid var(--color-divider);
+  vertical-align: top;
+}
+table.cs-table tr:last-child td {
+  border-bottom: 0;
+}
+table.cs-table td:first-child {
+  color: var(--color-text-muted);
+}
+.cs-table--kv {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  font-size: var(--text-sm);
+}
+.cs-table--kv > div {
+  display: grid;
+  grid-template-columns: 11rem minmax(0, 1fr);
+  gap: var(--space-4);
+  padding: var(--space-3) var(--space-4);
+}
+.cs-table--kv > div + div {
+  border-top: 1px solid var(--color-divider);
+}
+
+/* ---------- Ecosystem ---------- */
+
+.cs-eco {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--space-6);
+  align-items: center;
+  padding: var(--space-6);
+}
+.cs-eco-hub {
+  display: grid;
+  place-content: center;
+  text-align: center;
+  width: 8.5rem;
+  aspect-ratio: 1;
+  border-radius: var(--radius-full);
+  background: var(--color-text);
+  color: var(--color-bg);
+}
+.cs-eco-hub strong {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+}
+.cs-eco-hub span {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  opacity: 0.8;
+}
+.cs-eco-group ul {
+  display: grid;
+  gap: var(--space-2);
+  margin-top: var(--space-3);
+}
+.cs-eco-group li {
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-2) var(--space-3);
+  border: 1.5px solid var(--color-primary);
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+}
+.cs-eco-group--linked li {
+  border: 1.5px dashed var(--color-text-faint);
+}
+.cs-eco-group li strong {
+  color: var(--color-text);
+}
+.cs-eco-group li span {
+  font-size: var(--text-xs);
+}
+.cs-eco-label {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+.cs-eco-key {
+  width: 20px;
+  border-top: 2px solid var(--color-primary);
+}
+.cs-eco-key--dashed {
+  border-top: 2px dashed var(--color-text-faint);
+}
+
+/* ---------- Navigation map ---------- */
+
+.cs-navmap {
+  display: grid;
+  gap: var(--space-3);
+}
+.cs-navmap-row {
+  display: grid;
+  grid-template-columns: 5rem auto minmax(0, 1fr);
+  gap: var(--space-4);
+  align-items: center;
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+}
+.cs-navmap-row .label-chip {
+  justify-self: start;
+}
+.cs-navmap-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+.cs-navmap-items li {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface-offset);
+  color: var(--color-text) !important;
+}
+.cs-navmap-items li.is-cta {
+  background: var(--color-primary);
+  color: var(--color-surface) !important;
+}
+.cs-navmap-row p {
+  font-size: var(--text-sm);
+}
+
+/* ---------- Cards, notes, metrics ---------- */
+
+.cs-cols {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-4);
+}
+.cs-card {
+  padding: var(--space-5);
+}
+.cs-card ul {
+  font-size: var(--text-sm);
+}
+.cs-note,
+.cs-takeaway {
+  padding: var(--space-5) var(--space-6);
+  border-left: 2px solid var(--color-primary);
+  background: var(--color-surface-2);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+}
+.cs-section > .cs-note,
+.cs-section > .cs-takeaway {
+  margin-top: var(--space-8);
+}
+.cs-takeaway p {
+  color: var(--color-text);
+  font-size: var(--text-lg);
+}
+.cs-metrics {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-5);
+  align-items: start;
+}
+.cs-metric-panel {
+  padding: var(--space-5);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface-2);
+}
+.cs-metric-panel header {
+  margin-bottom: var(--space-4);
+}
+.cs-metric-panel header p {
+  margin-top: var(--space-1);
+}
+.cs-metric-panel header p span {
+  display: block;
+  font-style: italic;
+}
+.cs-metric-panel .cs-fine {
+  margin-top: var(--space-4);
+}
+.cs-stats {
+  grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr));
+}
+.cs-stats strong {
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.cs-method {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+}
+.cs-method summary {
+  cursor: pointer;
+  padding: var(--space-3) var(--space-4);
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--color-primary);
+}
+.cs-method summary:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+.cs-method p {
+  padding: 0 var(--space-4) var(--space-4);
+  font-size: var(--text-sm);
+}
+
+/* ---------- Template schematic (drawn after launch) ---------- */
+
+.cs-template {
+  display: grid;
+  grid-template-columns: 200px minmax(0, 1fr);
+  gap: var(--space-8);
+  align-items: center;
+}
+.cs-template-phone {
+  display: grid;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  border: 1.5px solid var(--color-border);
+  border-radius: 22px;
+  background: var(--color-surface);
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  color: var(--color-text-muted);
+}
+.cs-template-phone > div {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-1);
+  padding: var(--space-2);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface-offset);
+}
+.cs-tp-bar {
+  justify-content: space-between;
+}
+.cs-tp-logo {
+  width: 18px;
+  height: 18px;
+  border-radius: var(--radius-full);
+  background: var(--color-primary);
+}
+.cs-tp-banner {
+  min-height: 56px;
+  align-items: flex-end !important;
+}
+.cs-tp-btn {
+  padding: 2px var(--space-2);
+  border-radius: var(--radius-sm);
+  background: var(--color-primary);
+  color: var(--color-surface);
+}
+.cs-tp-shortcuts span:not(.cs-tp-n) {
+  flex: 1 1 auto;
+  text-align: center;
+}
+.cs-tp-burger,
+.cs-tp-n {
+  display: inline-grid;
+  place-items: center;
+  width: 18px;
+  height: 18px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--color-primary);
+  color: var(--color-primary);
+  font-size: 0.625rem;
+}
+.cs-tp-n {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  background: var(--color-surface);
+}
+.cs-template-key li + li {
+  margin-top: var(--space-2);
+}
+
+.cs-timeline {
+  border-left: 1px solid var(--color-divider);
+  padding-left: var(--space-5);
+}
+.cs-timeline li {
+  position: relative;
+}
+.cs-timeline li + li {
+  margin-top: var(--space-5);
+}
+.cs-timeline li::before {
+  content: '';
+  position: absolute;
+  left: calc(var(--space-5) * -1 - 5px);
+  top: 0.4em;
+  width: 9px;
+  height: 9px;
+  border-radius: var(--radius-full);
+  background: var(--color-primary);
+}
+.cs-timeline-date {
+  margin-bottom: var(--space-1);
+}
+
+.cs-end {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-6);
+  padding-top: var(--space-8);
+  border-top: 1px solid var(--color-divider);
+}
+
+/* ---------- Case study: responsive ---------- */
+
+@media (max-width: 1024px) {
+  .cs-layout {
+    grid-template-columns: minmax(0, 1fr);
+    padding-top: var(--space-8);
+  }
+  .cs-toc {
+    position: static;
+    max-height: none;
+    padding: var(--space-4) var(--space-5);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+  }
+  .cs-toc ol {
+    columns: 2;
+    column-gap: var(--space-6);
+  }
+  html.js .cs-toc-rail {
+    display: none;
+  }
+  .cs-body {
+    max-width: none;
+  }
+  .cs-facts {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 720px) {
+  .cs-split,
+  .cs-compare,
+  .cs-cols,
+  .cs-template {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  /* Problem/decision table: one stacked card per row on phones */
+  table.cs-table {
+    min-width: 0;
+  }
+  table.cs-table thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+  }
+  table.cs-table tr {
+    display: block;
+    padding: var(--space-3) var(--space-4);
+    border-bottom: 1px solid var(--color-divider);
+  }
+  table.cs-table tr:last-child {
+    border-bottom: 0;
+  }
+  table.cs-table td {
+    display: block;
+    padding: var(--space-1) 0;
+    border-bottom: 0;
+  }
+  table.cs-table td::before {
+    content: attr(data-label);
+    display: block;
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    letter-spacing: 0.06em;
+    color: var(--color-text-subtle);
+  }
+  .cs-phones,
+  .cs-path {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .cs-skills {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .cs-eco {
+    grid-template-columns: minmax(0, 1fr);
+    justify-items: stretch;
+  }
+  .cs-eco-hub {
+    justify-self: center;
+    width: 7rem;
+  }
+  .cs-navmap-row {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-2);
+  }
+  .cs-template-phone {
+    max-width: 220px;
+  }
+  .cs-figure--narrow {
+    max-width: 240px;
+  }
+}
+
+@media (max-width: 480px) {
+  .cs-toc ol {
+    columns: 1;
+  }
+  .cs-facts,
+  .cs-glance,
+  .cs-skills {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .cs-table--kv > div {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-1);
+  }
+  .cs-hero-actions .btn {
+    width: 100%;
+  }
+  .cs-note,
+  .cs-takeaway {
+    padding: var(--space-4);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cs-toc a {
+    transition: none;
+  }
 }
