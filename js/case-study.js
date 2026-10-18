@@ -4,11 +4,13 @@
 // rAF-throttled scroll handler drives everything, so scrolling
 // does at most one round of layout reads per frame.
 //
-// - Top bar: --cs-progress (0–1) reveals the gradient; the tip's
-//   color tracks the gradient; .is-complete makes the whole bar glow.
-// - TOC rail: --cs-toc-fill (px) fills the rail down to the current
-//   reading position; .is-complete glows once the last section
-//   is reached.
+// The TOC is drawn as a subway line: sections are stations and a
+// small train rides between them as you read.
+// - Top bar: --cs-progress (0–1) lights the track up to the amber
+//   signal; .is-complete lights the whole bar at the end.
+// - TOC line: --cs-toc-fill (px) moves the train and lights the line
+//   behind it; passed stations get data-passed; .is-complete lights
+//   the whole line once the last stop (Reflection) is reached.
 // - Scroll-spy: aria-current="true" on the current section's link.
 //
 // Without JS the bar and rail are hidden and the TOC is still a
@@ -29,27 +31,11 @@ export function initCaseStudy() {
     .map((link) => document.getElementById(link.hash.slice(1)))
     .filter(Boolean);
 
-  // The tip's color is read from the same tokens the gradient uses, so it
-  // follows the theme without hard-coding colors here.
-  const styles = getComputedStyle(document.documentElement);
-  const warm = styles.getPropertyValue('--color-warning').trim();
-  const cool = styles.getPropertyValue('--color-primary').trim();
-  const tipColor = (t) =>
-    CSS.supports('color', 'color-mix(in oklch decreasing hue, red, blue)')
-      ? `color-mix(in oklch decreasing hue, ${cool} ${(t * 100).toFixed(1)}%, ${warm})`
-      : cool;
-
-  // Link midpoints within the TOC list. Cached, and refreshed on resize,
-  // since they only change when the layout does.
+  // Station positions (link midpoints) within the TOC list. Cached, and
+  // refreshed on resize, since they only change when the layout does.
   let mids = [];
-  let railHeight = 0;
   function measureRail() {
-    if (!rail || !rail.offsetParent) {
-      mids = [];
-      return;
-    }
-    mids = links.map((link) => link.offsetTop + link.offsetHeight / 2);
-    railHeight = rail.offsetHeight;
+    mids = rail && rail.offsetParent ? links.map((link) => link.offsetTop + link.offsetHeight / 2) : [];
   }
 
   let active = null;
@@ -61,6 +47,8 @@ export function initCaseStudy() {
     links.forEach((link, i) => {
       if (i === index) link.setAttribute('aria-current', 'true');
       else link.removeAttribute('aria-current');
+      // Purely visual (filled station dot); aria-current carries the meaning.
+      link.toggleAttribute('data-passed', i < index);
     });
   }
 
@@ -76,7 +64,6 @@ export function initCaseStudy() {
       const total = rect.height - vh;
       const p = atEnd ? 1 : total > 0 ? clamp(-rect.top / total) : 1;
       progress.style.setProperty('--cs-progress', p.toFixed(4));
-      progress.style.setProperty('--cs-tip', tipColor(p));
       progress.style.setProperty('--cs-tip-on', p > 0.002 && p < 0.999 ? '1' : '0');
       progress.classList.toggle('is-complete', p >= 0.999);
     }
@@ -95,29 +82,23 @@ export function initCaseStudy() {
     if (atEnd) index = sections.length - 1;
     setActive(index);
 
-    // ---- TOC rail: fill from the current link toward the next one in
-    // step with how far through the current section the reader is.
+    // ---- TOC line: the train waits at the first station, then travels
+    // from the current station toward the next one in step with how far
+    // through the current section the reader is, and parks at the last.
     if (mids.length) {
       const last = sections.length - 1;
       let fill;
       if (tops[0] > line) {
-        fill = 0;
-      } else if (atEnd) {
-        fill = railHeight;
+        fill = mids[0];
+      } else if (index === last) {
+        fill = mids[last];
       } else {
-        const end =
-          index < last ? tops[index + 1] : body.getBoundingClientRect().bottom - vh + line;
-        const span = end - tops[index];
+        const span = tops[index + 1] - tops[index];
         const t = span > 0 ? clamp((line - tops[index]) / span) : 1;
-        const from = mids[index];
-        const to = index < last ? mids[index + 1] : railHeight;
-        fill = from + (to - from) * t;
+        fill = mids[index] + (mids[index + 1] - mids[index]) * t;
       }
-      const ratio = railHeight ? fill / railHeight : 0;
       toc.style.setProperty('--cs-toc-fill', `${fill.toFixed(1)}px`);
-      toc.style.setProperty('--cs-toc-tip', tipColor(ratio));
-      toc.style.setProperty('--cs-toc-tip-on', fill > 0 && index < last ? '1' : '0');
-      // "Finished" glow as soon as the last section (Reflection) is reached.
+      // Last stop: the whole line lights up.
       toc.classList.toggle('is-complete', index === last);
     }
   }

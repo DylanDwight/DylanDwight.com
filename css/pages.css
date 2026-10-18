@@ -703,24 +703,13 @@
   --project-accent: #5eead4;
 }
 
-/* ---------- Reading progress (top bar + TOC rail) ----------
-   Both use the same sunset-to-ocean gradient: the site's amber and blue,
-   interpolated through warm pinks and violets in OKLCH so the middle stays
-   bright instead of going muddy. Browsers without OKLCH interpolation keep
-   the plain two-stop gradient declared first. js/case-study.js sets
-   --cs-progress (0-1) and --cs-toc-fill (px), and toggles .is-complete. */
-
-.cs-page {
-  --cs-grad-x: linear-gradient(90deg, var(--color-warning), var(--color-primary));
-  --cs-grad-y: linear-gradient(180deg, var(--color-warning), var(--color-primary));
-  --cs-tip: var(--color-primary);
-}
-@supports (background: linear-gradient(in oklch decreasing hue, red, blue)) {
-  .cs-page {
-    --cs-grad-x: linear-gradient(90deg in oklch decreasing hue, var(--color-warning), var(--color-primary));
-    --cs-grad-y: linear-gradient(180deg in oklch decreasing hue, var(--color-warning), var(--color-primary));
-  }
-}
+/* ---------- Reading progress: a subway line ----------
+   The TOC is drawn as a subway line map: each section is a station, the
+   line lights up in signal blue behind a small train, and passed stations
+   fill in. The top bar is the same line seen from above: faint track ties
+   ahead, lit blue track behind, an amber signal at the head. Reaching the
+   last stop lights the whole line. js/case-study.js sets --cs-progress
+   (0-1), --cs-toc-fill (px), data-passed on links, and .is-complete. */
 
 /* Top bar: hidden without JS, since only the script can drive it. */
 .cs-progress {
@@ -730,53 +719,46 @@ html.js .cs-progress {
   display: block;
   position: fixed;
   inset: 0 0 auto;
-  height: 3px;
+  height: 4px;
   z-index: 60;
   pointer-events: none;
+  /* Track ties ahead of the train */
+  background: repeating-linear-gradient(90deg, var(--color-border) 0 2px, transparent 2px 12px);
 }
-/* The full-width gradient is revealed with clip-path, so the colors stay
-   put instead of squashing as it grows. */
 .cs-progress-bar {
   position: absolute;
   inset: 0;
-  background: var(--cs-grad-x);
+  background: var(--color-primary);
   clip-path: inset(0 calc(100% - var(--cs-progress, 0) * 100%) 0 0);
 }
-/* Glowing tip at the leading edge; its color is the gradient's color at
-   that point. */
+/* Amber signal light riding the head of the lit track */
 .cs-progress-tip {
   position: absolute;
-  top: 50%;
+  top: 0;
   left: 0;
-  width: 28px;
-  height: 7px;
-  margin-top: -3.5px;
-  border-radius: var(--radius-full);
-  background: radial-gradient(closest-side, #fff, var(--cs-tip) 45%, transparent);
-  box-shadow: 0 0 10px 2px var(--cs-tip);
+  width: 18px;
+  height: 100%;
+  background: var(--color-warning);
+  box-shadow: 0 0 8px 1px oklch(from var(--color-warning) l c h / 0.8);
   transform: translateX(calc(var(--cs-progress, 0) * 100vw - 100%));
   opacity: var(--cs-tip-on, 0);
   transition: opacity 300ms ease;
 }
-/* Finished: the whole bar glows. A blurred copy fades in underneath. */
+/* Last stop: the whole line lights up */
 .cs-progress::before {
   content: '';
   position: absolute;
-  inset: -2px 0 -4px;
-  background: var(--cs-grad-x);
-  filter: blur(6px);
+  inset: 0 0 -3px;
+  background: var(--color-primary);
+  filter: blur(5px);
   opacity: 0;
   transition: opacity 600ms ease;
 }
 .cs-progress.is-complete::before {
-  opacity: 0.9;
-}
-.cs-progress.is-complete .cs-progress-tip {
-  opacity: 0;
+  opacity: 0.85;
 }
 
-/* TOC rail: fills top to bottom in step with the reading position,
-   with the same glowing tip, and glows in full on the last section. */
+/* TOC subway line. The rail sits on the list's left border. */
 .cs-toc-rail {
   display: none;
 }
@@ -785,19 +767,19 @@ html.js .cs-toc-rail {
   position: absolute;
   top: 0;
   bottom: 0;
-  left: -1px;
+  left: -2px;
   width: 3px;
+  z-index: 1;
   pointer-events: none;
 }
 .cs-toc-rail-fill,
 .cs-toc-rail-glow {
   position: absolute;
   inset: 0;
-  border-radius: var(--radius-full);
-  background: var(--cs-grad-y);
+  background: var(--color-primary);
 }
 .cs-toc-rail-fill {
-  clip-path: inset(0 0 calc(100% - var(--cs-toc-fill, 0px)) 0 round 2px);
+  clip-path: inset(0 0 calc(100% - var(--cs-toc-fill, 0px)) 0);
 }
 .cs-toc-rail-glow {
   inset: 0 -3px;
@@ -805,25 +787,62 @@ html.js .cs-toc-rail {
   opacity: 0;
   transition: opacity 600ms ease;
 }
-.cs-toc-rail-tip {
+.cs-toc.is-complete .cs-toc-rail-glow {
+  opacity: 0.7;
+}
+/* The train: centered on the line, front (and headlights) facing down */
+.cs-train {
   position: absolute;
   top: 0;
   left: 50%;
-  width: 7px;
-  height: 24px;
-  margin-left: -3.5px;
+  width: 16px;
+  height: 39px;
+  margin-left: -8px;
+  transform: translateY(calc(var(--cs-toc-fill, 0px) - 50%));
+  z-index: 2;
+}
+.cs-train svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  filter: drop-shadow(0 2px 4px oklch(0 0 0 / 0.5));
+}
+.cs-train-body {
+  fill: #c9ced6; /* brushed steel */
+}
+.cs-train-stripe {
+  fill: var(--color-primary);
+}
+.cs-train-window {
+  fill: #15161a;
+}
+.cs-train-light {
+  fill: var(--color-warning);
+  filter: drop-shadow(0 2px 3px var(--color-warning));
+}
+.cs-toc.is-complete .cs-train-light {
+  opacity: 0.35;
+}
+
+/* Stations: one dot per link, filled once passed or reached */
+html.js .cs-toc a::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: -5px;
+  width: 9px;
+  height: 9px;
+  margin-top: -4.5px;
   border-radius: var(--radius-full);
-  background: radial-gradient(closest-side, #fff, var(--cs-toc-tip, var(--color-primary)) 45%, transparent);
-  box-shadow: 0 0 10px 2px var(--cs-toc-tip, var(--color-primary));
-  transform: translateY(calc(var(--cs-toc-fill, 0px) - 100%));
-  opacity: var(--cs-toc-tip-on, 0);
-  transition: opacity 300ms ease;
+  border: 2px solid var(--color-text-faint);
+  background: var(--color-bg);
+  z-index: 1;
+  transition: border-color var(--transition-interactive), background-color var(--transition-interactive);
 }
-.cs-toc.is-complete .cs-toc-rail-glow {
-  opacity: 0.85;
-}
-.cs-toc.is-complete .cs-toc-rail-tip {
-  opacity: 0;
+html.js .cs-toc a[data-passed]::after,
+html.js .cs-toc a[aria-current='true']::after {
+  border-color: var(--color-primary);
+  background: var(--color-text);
 }
 
 .cs-hero .wrap {
@@ -1497,7 +1516,8 @@ table.cs-table td:first-child {
     columns: 2;
     column-gap: var(--space-6);
   }
-  html.js .cs-toc-rail {
+  html.js .cs-toc-rail,
+  html.js .cs-toc a::after {
     display: none;
   }
   .cs-toc {
@@ -1601,10 +1621,10 @@ table.cs-table td:first-child {
 
 @media (prefers-reduced-motion: reduce) {
   .cs-toc a,
+  html.js .cs-toc a::after,
   .cs-progress::before,
   .cs-progress-tip,
-  .cs-toc-rail-glow,
-  .cs-toc-rail-tip {
+  .cs-toc-rail-glow {
     transition: none;
   }
 }
