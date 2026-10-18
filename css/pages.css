@@ -692,7 +692,8 @@
 /* ============================================================
    Case study: Sand Dollar (/work/sand-dollar/)
    Scoped to .cs-page. --project-accent is the restaurant's teal,
-   used for "After" chips, the TOC marker, and panel corners only.
+   used for "After" chips and panel corners only. The progress bar and
+   TOC marker use the site's amber-to-blue gradient.
    ============================================================ */
 
 .cs-page {
@@ -702,7 +703,7 @@
   --project-accent: #5eead4;
 }
 
-/* Reading progress: a 2px bar above the sticky header. Hidden
+/* Reading progress: a 3px bar above the sticky header. Hidden
    without JS, since only js/case-study.js can drive it. */
 .cs-progress {
   display: none;
@@ -711,16 +712,17 @@ html.js .cs-progress {
   display: block;
   position: fixed;
   inset: 0 0 auto;
-  height: 2px;
+  height: 3px;
   z-index: 60;
   pointer-events: none;
 }
+/* The site's amber-to-blue gradient spans the full width and is revealed
+   with clip-path, so the colors stay put instead of squashing as it grows. */
 .cs-progress-bar {
   display: block;
   height: 100%;
-  background: var(--project-accent);
-  transform: scaleX(var(--cs-progress, 0));
-  transform-origin: left;
+  background: linear-gradient(90deg, var(--color-warning), var(--color-primary));
+  clip-path: inset(0 calc(100% - var(--cs-progress, 0) * 100%) 0 0);
 }
 
 .cs-hero .wrap {
@@ -828,10 +830,9 @@ html.js .cs-progress {
   border-left: 1px solid var(--color-divider);
 }
 .cs-toc a {
+  position: relative;
   display: block;
   padding: var(--space-1) 0 var(--space-1) var(--space-4);
-  margin-left: -1px;
-  border-left: 2px solid transparent;
   font-size: var(--text-sm);
   color: var(--color-text-muted);
   text-decoration: none;
@@ -840,10 +841,22 @@ html.js .cs-progress {
 .cs-toc a:hover {
   color: var(--color-text);
 }
+.cs-toc a::before {
+  content: '';
+  position: absolute;
+  inset: 0 auto 0 -1px;
+  width: 3px;
+  border-radius: var(--radius-full);
+  background: linear-gradient(to bottom, var(--color-warning), var(--color-primary));
+  opacity: 0;
+  transition: opacity var(--transition-interactive);
+}
 .cs-toc a[aria-current='true'] {
   color: var(--color-text);
   font-weight: 500;
-  border-left-color: var(--project-accent);
+}
+.cs-toc a[aria-current='true']::before {
+  opacity: 1;
 }
 
 .cs-body {
@@ -1489,7 +1502,8 @@ table.cs-table td:first-child {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .cs-toc a {
+  .cs-toc a,
+  .cs-toc a::before {
     transition: none;
   }
 }
