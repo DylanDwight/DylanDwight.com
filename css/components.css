@@ -36,6 +36,29 @@
     transparent 20px
   );
   opacity: 0.55;
+  /* Stripes crawl sideways like caution tape and the amber pulses
+     slowly. One stripe period along x is 20px * sqrt(2). */
+  background-size: 28.2843px 100%;
+  border-radius: 3px;
+  animation:
+    hazard-crawl 2.4s linear infinite,
+    hazard-pulse 3.2s ease-in-out infinite alternate;
+}
+@keyframes hazard-crawl {
+  to { background-position-x: 28.2843px; }
+}
+@keyframes hazard-pulse {
+  from {
+    opacity: 0.45;
+    box-shadow: 0 0 0 transparent;
+  }
+  to {
+    opacity: 0.95;
+    box-shadow: 0 0 12px 1px color-mix(in srgb, var(--color-warning) 55%, transparent);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .divider-hazard { animation: none; }
 }
 
 /* ---------- Text primitives ---------- */
@@ -983,6 +1006,9 @@ html.js [data-reveal].is-visible {
   }
   .cta-actions .btn {
     width: 100%;
+  }
+  .cta-actions .text-link {
+    align-self: center;
   }
   .btn-lg {
     font-size: var(--text-sm);
