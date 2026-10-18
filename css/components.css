@@ -263,6 +263,18 @@ h3 {
   mask-composite: exclude;
   animation: cta-orbit 4.5s linear infinite;
 }
+/* Ring CTAs don't press in or underline. On hover they cast a drop
+   shadow and a thin inner border frames the label. */
+.btn-nav-cta:hover,
+.btn-nav-cta:active,
+.cta-panel .btn-primary:hover,
+.cta-panel .btn-primary:active {
+  transform: none;
+  text-decoration-color: transparent;
+  box-shadow: 0 8px 22px -6px rgb(0 0 0 / 0.75);
+  outline: 1px solid oklch(from var(--color-text-inverse) l c h / 0.55);
+  outline-offset: -5px;
+}
 @keyframes cta-orbit {
   to {
     --cta-angle: 360deg;
