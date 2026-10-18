@@ -27,7 +27,7 @@
   position: relative;
   z-index: 1;
   display: grid;
-  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  grid-template-columns: minmax(0, 1fr);
   gap: clamp(var(--space-10), 6vw, var(--space-20));
   align-items: center;
 }
@@ -69,13 +69,6 @@
   flex-wrap: wrap;
   margin-top: var(--space-2);
 }
-.hero-visual {
-  position: relative;
-}
-.hero-visual .corner-panel {
-  padding: var(--space-3);
-  box-shadow: var(--shadow-lg);
-}
 
 /* ---------- Home: work grid ---------- */
 
@@ -114,6 +107,43 @@
 .about-copy strong {
   color: var(--color-text);
   font-weight: 600;
+}
+.hero-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: var(--space-6);
+}
+.training-list li .label-chip {
+  margin-bottom: var(--space-3);
+}
+.hiring-panel {
+  padding: clamp(var(--space-8), 5vw, var(--space-12));
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+.hiring-panel .lede {
+  max-width: var(--measure-default);
+}
+.about-portrait {
+  padding: var(--space-3);
+  max-width: 400px;
+  justify-self: end;
+  width: 100%;
+}
+.about-portrait--home {
+  max-width: 340px;
+  transition: transform 250ms ease;
+}
+.about-portrait--home:hover {
+  transform: translateY(-2px);
+}
+.about-portrait img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-md);
 }
 .about-links {
   display: flex;
@@ -470,9 +500,6 @@
   .hero h1 {
     max-width: 20ch;
   }
-  .hero-visual {
-    max-width: 640px;
-  }
   .service-block {
     grid-template-columns: 1fr;
     gap: var(--space-6);
@@ -485,6 +512,11 @@
 @media (max-width: 860px) {
   .about-grid {
     grid-template-columns: 1fr;
+  }
+  .about-portrait {
+    order: -1;
+    justify-self: start;
+    max-width: 260px;
   }
   .schematic {
     aspect-ratio: 16 / 9;
@@ -537,10 +569,7 @@
   .hero-copy {
     gap: var(--space-5);
   }
-  .hero-visual .corner-panel {
-    padding: var(--space-2);
-  }
-  .about-grid {
+    .about-grid {
     gap: var(--space-8);
   }
   .schematic {
@@ -564,4 +593,82 @@
   .process-steps li {
     padding-left: var(--space-14, 3.5rem);
   }
+}
+
+/* ---------- Portrait hover hello (home only) ---------- */
+.portrait-media {
+  position: relative;
+  display: block;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+.about-portrait--home .portrait-media img {
+  transition: transform 600ms cubic-bezier(.2,.7,.2,1);
+  transform-origin: 50% 30%;
+}
+.about-portrait--home:hover .portrait-media img,
+.about-portrait--home:focus-visible .portrait-media img {
+  transform: scale(1.03);
+}
+/* Speech bubble near the head; sits outside .portrait-media so it isn't clipped */
+.about-portrait--home {
+  position: relative;
+}
+.portrait-bubble {
+  position: absolute;
+  top: 9%;
+  right: -6%;
+  z-index: 2;
+  padding: 10px 14px;
+  border-radius: 18px 18px 18px 4px;
+  font-family: var(--font-body, inherit);
+  font-size: 0.875rem;
+  font-weight: 600;
+  white-space: nowrap;
+  color: #04121f;
+  background: #e0f7ff;
+  box-shadow: 0 10px 24px -8px rgb(3 105 161 / 0.55), 0 0 0 1px rgb(103 212 255 / 0.6);
+  opacity: 0;
+  scale: 0.6;
+  transform-origin: 0% 100%;
+  transition: opacity 180ms ease, scale 380ms cubic-bezier(.34,1.56,.64,1);
+  pointer-events: none;
+}
+.portrait-bubble::after {
+  content: "";
+  position: absolute;
+  left: -7px;
+  bottom: 0;
+  width: 14px;
+  height: 14px;
+  background: inherit;
+  clip-path: polygon(100% 0, 100% 100%, 0 100%);
+}
+.portrait-bubble-wave {
+  display: inline-block;
+  transform-origin: 70% 80%;
+}
+.about-portrait--home:hover .portrait-bubble,
+.about-portrait--home:focus-visible .portrait-bubble {
+  opacity: 1;
+  scale: 1;
+}
+.about-portrait--home:hover .portrait-bubble-wave,
+.about-portrait--home:focus-visible .portrait-bubble-wave {
+  animation: portrait-wave 1s ease-in-out 0.2s 3;
+}
+@keyframes portrait-wave {
+  0%, 100% { rotate: 0deg; }
+  25% { rotate: 18deg; }
+  50% { rotate: -10deg; }
+  75% { rotate: 12deg; }
+}
+@media (max-width: 860px) {
+  .portrait-bubble { top: 3%; right: -12%; font-size: 0.8125rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .about-portrait--home .portrait-media img,
+  .portrait-bubble { transition: none; }
+  .about-portrait--home:hover .portrait-media img { transform: none; }
+  .about-portrait--home:hover .portrait-bubble-wave { animation: none; }
 }

@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Dylan Dwight Creative Technologies — Web Design & Front-End Development · Brooklyn, NY</title>
 <meta name="description" content="Web design and front-end development for restaurants, artists, musicians, and small businesses. Clear, fast, responsive websites, scoped and quoted per project. Brooklyn, NY and remote." />
-<meta name="theme-color" content="#f3f2ef" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#f1f3f6" media="(prefers-color-scheme: light)" />
 <meta name="theme-color" content="#0a0a0c" media="(prefers-color-scheme: dark)" />
 
 <link rel="canonical" href="https://dylandwight.com/" />
@@ -28,6 +28,8 @@
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
 <link rel="icon" href="/assets/favicon-32.png" sizes="32x32" type="image/png" />
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
+<link rel="icon" href="/favicon.ico" sizes="48x48" />
+<link rel="manifest" href="/site.webmanifest" />
 
 <!-- Theme before first paint: saved choice, else OS preference. Also marks JS as available. -->
 <script>
@@ -106,14 +108,13 @@
   <div class="wrap header-inner">
     <a href="/" class="logo-link" aria-label="Dylan Dwight — home">
       <svg class="logo-mark" viewBox="0 0 64 60" fill="none" aria-hidden="true"><path d="M10 14 H16 A16 16 0 0 1 16 46 H10 Z" fill="currentColor"/><path d="M54 14 H48 A16 16 0 0 0 48 46 H54 Z" fill="currentColor"/><circle class="logo-node" cx="32" cy="30" r="2.5"/></svg>
-      <span class="logo-word">Dylan Dwight</span>
     </a>
 
     <nav aria-label="Primary">
       <ul class="nav-links">
-        <li><span class="nav-pending">Work <span class="soon" aria-hidden="true">soon</span><span class="sr-only"> (coming in the next milestone)</span></span></li>
+        <li><a href="/work/">Work</a></li>
 <li><a href="/services/">Services</a></li>
-<li><span class="nav-pending">About <span class="soon" aria-hidden="true">soon</span><span class="sr-only"> (coming in the next milestone)</span></span></li>
+<li><a href="/about/">About</a></li>
 <li><a href="/contact/">Contact</a></li>
       </ul>
     </nav>
@@ -136,7 +137,6 @@
   <div class="mobile-nav-top">
     <a href="/" class="logo-link" aria-label="Dylan Dwight — home">
       <svg class="logo-mark" viewBox="0 0 64 60" fill="none" aria-hidden="true"><path d="M10 14 H16 A16 16 0 0 1 16 46 H10 Z" fill="currentColor"/><path d="M54 14 H48 A16 16 0 0 0 48 46 H54 Z" fill="currentColor"/><circle class="logo-node" cx="32" cy="30" r="2.5"/></svg>
-      <span class="logo-word">Dylan Dwight</span>
     </a>
     <button class="icon-btn" type="button" data-mobile-nav-close aria-label="Close menu">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
@@ -144,9 +144,9 @@
   </div>
   <nav aria-label="Mobile">
     <ul class="mobile-nav-links">
-      <li><span class="nav-pending">Work <span class="soon" aria-hidden="true">soon</span><span class="sr-only"> (coming in the next milestone)</span></span></li>
+      <li><a href="/work/">Work</a></li>
 <li><a href="/services/">Services</a></li>
-<li><span class="nav-pending">About <span class="soon" aria-hidden="true">soon</span><span class="sr-only"> (coming in the next milestone)</span></span></li>
+<li><a href="/about/">About</a></li>
 <li><a href="/contact/">Contact</a></li>
     </ul>
   </nav>
@@ -158,6 +158,7 @@
     <a href="tel:+13473793273">(347) 379-3273</a>
     <a href="https://www.linkedin.com/in/dylan-dwight/" target="_blank" rel="noopener noreferrer">LinkedIn<span class="sr-only"> (opens in a new tab)</span></a>
     <a href="https://github.com/DylanDwight" target="_blank" rel="noopener noreferrer">GitHub<span class="sr-only"> (opens in a new tab)</span></a>
+    <a href="/resume/dylan-dwight-resume.pdf" target="_blank" rel="noopener">Résumé (PDF)<span class="sr-only"> (opens in a new tab)</span></a>
   </div>
 </div>
 
@@ -176,15 +177,6 @@
         <div class="hero-actions">
           <a href="/contact/" class="btn btn-primary btn-lg">Start a project</a>
           <a href="#work" class="btn btn-secondary btn-lg">See selected work</a>
-        </div>
-      </div>
-      <div class="hero-visual" data-reveal>
-        <div class="corner-panel">
-          <div class="placeholder-frame placeholder-frame--wide" role="img" aria-label="Placeholder for an approved screenshot of the Sand Dollar Restaurant and Lounge website shown on a laptop and a phone. The image has not been added yet.">
-  <div class="ph-top"><span class="ph-title">Sand Dollar — hero composite</span><span class="ph-note">Screenshot pending approval</span></div>
-  <svg class="ph-mark" viewBox="0 0 64 60" fill="none" aria-hidden="true"><path d="M10 14 H16 A16 16 0 0 1 16 46 H10 Z" fill="currentColor" fill-opacity="0.5"/><path d="M54 14 H48 A16 16 0 0 0 48 46 H54 Z" fill="currentColor" fill-opacity="0.5"/><circle cx="32" cy="30" r="2.5" fill="currentColor"/></svg>
-  <div class="ph-bottom"><span>1600 × 1000</span><span>Placeholder — not final artwork</span></div>
-</div>
         </div>
       </div>
     </div>
@@ -216,25 +208,21 @@
               <span class="tag">Restaurant</span><span class="tag">Web design</span><span class="tag">Front-end</span><span class="tag">Content</span><span class="tag">Local search</span><span class="tag">Ordering integration</span>
             </div>
             <div class="work-card-links">
-              <span class="work-card-pending">Case study coming in the next milestone</span>
+              <a href="/work/sand-dollar-case-study.pdf" class="text-link" target="_blank" rel="noopener">Read the case study <span class="work-card-meta">PDF · 10 pages</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg><span class="sr-only"> (opens in a new tab)</span></a>
               <a href="https://sanddollarrestaurant.com" class="text-link" target="_blank" rel="noopener noreferrer">Visit site <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg><span class="sr-only"> (opens in a new tab)</span></a>
             </div>
           </div>
           <div class="corner-panel" style="padding: var(--space-3);">
-            <div class="placeholder-frame " role="img" aria-label="Placeholder for an approved screenshot of the Sand Dollar Restaurant and Lounge homepage on desktop and mobile. The image has not been added yet.">
-  <div class="ph-top"><span class="ph-title">Sand Dollar — desktop + mobile</span><span class="ph-note">Screenshot pending approval</span></div>
-  <svg class="ph-mark" viewBox="0 0 64 60" fill="none" aria-hidden="true"><path d="M10 14 H16 A16 16 0 0 1 16 46 H10 Z" fill="currentColor" fill-opacity="0.5"/><path d="M54 14 H48 A16 16 0 0 0 48 46 H54 Z" fill="currentColor" fill-opacity="0.5"/><circle cx="32" cy="30" r="2.5" fill="currentColor"/></svg>
-  <div class="ph-bottom"><span>1600 × 1000</span><span>Placeholder — not final artwork</span></div>
-</div>
+            <a class="work-shot-link" href="https://sanddollarrestaurant.com" target="_blank" rel="noopener noreferrer" aria-label="Visit the Sand Dollar Restaurant and Lounge website (opens in a new tab)">
+              <img class="work-shot" src="/assets/work/sand-dollar-home-desktop.jpg" srcset="/assets/work/sand-dollar-home-desktop-860.jpg 860w, /assets/work/sand-dollar-home-desktop.jpg 1720w" sizes="(max-width: 900px) 100vw, 640px" width="1720" height="1080" loading="lazy" decoding="async" alt="The redesigned Sand Dollar Restaurant and Lounge homepage on desktop: logo, Menu, Gift Cards, Reservations, and an Order Now button above a seafood hero photo with the headline Where Ocean Views Meet Coastal Flavor.">
+            </a>
           </div>
         </article>
 
         <article class="card work-card" data-reveal>
-          <div class="placeholder-frame " role="img" aria-label="Placeholder for a screenshot of the Studio 54X concept website homepage. The image has not been added yet.">
-  <div class="ph-top"><span class="ph-title">Studio 54X — homepage</span><span class="ph-note">Screenshot pending approval</span></div>
-  <svg class="ph-mark" viewBox="0 0 64 60" fill="none" aria-hidden="true"><path d="M10 14 H16 A16 16 0 0 1 16 46 H10 Z" fill="currentColor" fill-opacity="0.5"/><path d="M54 14 H48 A16 16 0 0 0 48 46 H54 Z" fill="currentColor" fill-opacity="0.5"/><circle cx="32" cy="30" r="2.5" fill="currentColor"/></svg>
-  <div class="ph-bottom"><span>1440 × 900</span><span>Placeholder — not final artwork</span></div>
-</div>
+          <a class="work-shot-link" href="https://studio54x.site" target="_blank" rel="noopener noreferrer" aria-label="Visit the Studio 54X website (opens in a new tab)">
+            <img class="work-shot" src="/assets/work/studio-54x-home-desktop.jpg" srcset="/assets/work/studio-54x-home-desktop-1440.jpg 1440w, /assets/work/studio-54x-home-desktop.jpg 2880w" sizes="(max-width: 900px) 100vw, 560px" width="2880" height="1800" loading="lazy" decoding="async" alt="The Studio 54X concept homepage on desktop: a wedding photo hero with the headline Let us capture your precious moments, a Book a consultation button, and navigation for services, weddings, portraits, and events.">
+          </a>
           <div class="work-card-top">
             <span class="work-card-index">02 / Creative studio concept</span>
             <span class="label-chip">Independent project</span>
@@ -252,11 +240,9 @@
         </article>
 
         <article class="card work-card" data-reveal>
-          <div class="placeholder-frame " role="img" aria-label="Placeholder for a screenshot of the Shoreline Electric website homepage. The image has not been added yet.">
-  <div class="ph-top"><span class="ph-title">Shoreline Electric — homepage</span><span class="ph-note">Screenshot pending approval</span></div>
-  <svg class="ph-mark" viewBox="0 0 64 60" fill="none" aria-hidden="true"><path d="M10 14 H16 A16 16 0 0 1 16 46 H10 Z" fill="currentColor" fill-opacity="0.5"/><path d="M54 14 H48 A16 16 0 0 0 48 46 H54 Z" fill="currentColor" fill-opacity="0.5"/><circle cx="32" cy="30" r="2.5" fill="currentColor"/></svg>
-  <div class="ph-bottom"><span>1440 × 900</span><span>Placeholder — not final artwork</span></div>
-</div>
+          <a class="work-shot-link" href="https://shoreline-electric.com" target="_blank" rel="noopener noreferrer" aria-label="Visit the Shoreline Electric website (opens in a new tab)">
+            <img class="work-shot" src="/assets/work/shoreline-electric-home-desktop.jpg" srcset="/assets/work/shoreline-electric-home-desktop-800.jpg 800w, /assets/work/shoreline-electric-home-desktop.jpg 1600w" sizes="(max-width: 900px) 100vw, 560px" width="1600" height="860" loading="lazy" decoding="async" alt="The Shoreline Electric homepage on desktop: an Oregon coast photo with the headline Local, Licensed, Insured Electrician serving Residential and Commercial clients, the company logo, and the list of towns served.">
+          </a>
           <div class="work-card-top">
             <span class="work-card-index">03 / Service business</span>
             <span class="label-chip">Client project · Live</span>
@@ -282,21 +268,33 @@
           <p class="work-card-summary">Google UX Design Certificate project · Current phase: Conduct UX Research and Test Early Concepts</p>
           <p>A Google UX Design Certificate project exploring a mobile app and responsive website for busy coffee customers who need to order ahead, customize drinks, and coordinate pickup with less stress. Current work includes competitive research, persona development, journey mapping, storyboards, and low-fidelity prototypes.</p>
           <div class="artifact-row">
-            <div class="placeholder-frame placeholder-frame--square placeholder-frame--mini" role="img" aria-label="Placeholder for the Priya Patel persona artifact. Not yet added.">
-  <div class="ph-top"><span class="ph-title">Persona</span><span class="ph-note"></span></div>
-  
-  <div class="ph-bottom"><span></span><span>Placeholder — not final artwork</span></div>
-</div>
-            <div class="placeholder-frame placeholder-frame--square placeholder-frame--mini" role="img" aria-label="Placeholder for one storyboard artifact. Not yet added.">
-  <div class="ph-top"><span class="ph-title">Storyboard</span><span class="ph-note"></span></div>
-  
-  <div class="ph-bottom"><span></span><span>Placeholder — not final artwork</span></div>
-</div>
-            <div class="placeholder-frame placeholder-frame--square placeholder-frame--mini" role="img" aria-label="Placeholder for one low-fidelity reorder and pickup flow. Not yet added.">
-  <div class="ph-top"><span class="ph-title">Lo-fi flow</span><span class="ph-note"></span></div>
-  
-  <div class="ph-bottom"><span></span><span>Placeholder — not final artwork</span></div>
-</div>
+            <figure>
+              <a class="artifact-link" href="/assets/img/ux-coffee/persona-full.jpg" target="_blank" rel="noopener" aria-label="Persona: open the full image in a new tab">
+                <picture>
+                  <source srcset="/assets/img/ux-coffee/persona-thumb.webp" type="image/webp">
+                  <img src="/assets/img/ux-coffee/persona-thumb.jpg" width="960" height="600" loading="lazy" decoding="async" alt="Persona for Priya Patel, a 39-year-old operations manager from Portland, Oregon, with her goals, frustrations, and a quote: she needs one place to order quickly and trust her coffee will be ready.">
+                </picture>
+              </a>
+              <figcaption class="artifact-caption">Persona</figcaption>
+            </figure>
+            <figure>
+              <a class="artifact-link" href="/assets/img/ux-coffee/storyboard-full.jpg" target="_blank" rel="noopener" aria-label="Storyboard: open the full image in a new tab">
+                <picture>
+                  <source srcset="/assets/img/ux-coffee/storyboard-thumb.webp" type="image/webp">
+                  <img src="/assets/img/ux-coffee/storyboard-thumb.jpg" width="960" height="600" loading="lazy" decoding="async" alt="Six-panel big-picture storyboard: Priya is short on time, waits in a long café line, orders ahead in the app, gets a ready-for-pickup alert, and grabs her coffee on time.">
+                </picture>
+              </a>
+              <figcaption class="artifact-caption">Storyboard</figcaption>
+            </figure>
+            <figure>
+              <a class="artifact-link" href="/assets/img/ux-coffee/lofi-flow-full.jpg" target="_blank" rel="noopener" aria-label="Lo-fi flow: open the full image in a new tab">
+                <picture>
+                  <source srcset="/assets/img/ux-coffee/lofi-flow-thumb.webp" type="image/webp">
+                  <img src="/assets/img/ux-coffee/lofi-flow-thumb.jpg" width="1600" height="480" loading="lazy" decoding="async" alt="Eight low-fidelity wireframe screens for the reorder and pickup flow, from the home screen and menu through review order and payment to order confirmed.">
+                </picture>
+              </a>
+              <figcaption class="artifact-caption">Lo-fi flow</figcaption>
+            </figure>
           </div>
           <div class="work-card-tags">
             <span class="tag">UX research</span><span class="tag">Persona</span><span class="tag">Journey map</span><span class="tag">Storyboards</span><span class="tag">Low-fidelity prototypes</span><span class="tag">Figma</span>
@@ -306,10 +304,27 @@
           </div>
         </article>
 
+        <article class="card work-card work-card--progress" data-reveal>
+          <div class="work-card-top">
+            <span class="work-card-index">05 / Development coursework</span>
+            <span class="label-chip">Coursework in progress</span>
+          </div>
+          <h3>JavaScript Programming with React, Node &amp; MongoDB</h3>
+          <p class="work-card-summary">IBM Specialization on Coursera · In progress alongside the Google UX Design Certificate</p>
+          <p>I'm extending my front-end work into full-stack JavaScript: component-based interfaces in React, server-side code in Node, and data in MongoDB. Paired with the UX course, the aim is to carry a project from research and design through to the working code behind it.</p>
+          <p><strong>Why it matters for your project:</strong> for teams hiring, it builds toward a designer who understands how interfaces are built and can work alongside developers in a modern JavaScript stack. For freelance clients, the goal is that features beyond a static page, like custom forms, menus, or small booking tools, can be designed and built by the same person.</p>
+          <div class="work-card-tags">
+            <span class="tag">JavaScript</span><span class="tag">React</span><span class="tag">Node.js</span><span class="tag">MongoDB</span><span class="tag">Full-stack</span>
+          </div>
+          <div class="work-card-links">
+            <a href="/contact/" class="text-link">Ask about this coursework <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          </div>
+        </article>
+
       </div>
 
       <div class="work-more">
-        <span class="work-card-pending">The full Work index, case studies, and project pages are being added in the next milestone.</span>
+        <a href="/work/" class="text-link">See all work <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
       </div>
     </div>
   </section>
@@ -369,36 +384,21 @@
           <p>I'm <strong>Dylan Dwight</strong>. I combine visual design, UX thinking, and front-end development to build clear, responsive websites for independent businesses and creative work.</p>
           <p>Years in restaurant operations taught me what guests actually need from a website, and producing electronic music keeps me close to the artists and culture I like working with.</p>
           <div class="about-links">
-            <span class="work-card-pending">Full About page coming in the next milestone</span>
+            <a href="/about/" class="text-link">More about me <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
             <a href="https://github.com/DylanDwight" class="text-link" target="_blank" rel="noopener noreferrer">GitHub <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg><span class="sr-only"> (opens in a new tab)</span></a>
             <a href="https://www.linkedin.com/in/dylan-dwight/" class="text-link" target="_blank" rel="noopener noreferrer">LinkedIn <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg><span class="sr-only"> (opens in a new tab)</span></a>
           </div>
         </div>
 
-        <div class="corner-panel schematic" data-reveal aria-hidden="true">
-          <div class="schematic-label">
-            <span>FIG. 01 — SIGNAL / INTERFACE</span>
-            <span>REV 2026</span>
-          </div>
-          <div class="schematic-visual">
-            <svg viewBox="0 0 240 220" fill="none">
-              <rect x="20" y="20" width="200" height="140" rx="4" stroke="currentColor" stroke-opacity="0.35" stroke-width="1.5"/>
-              <line x1="20" y1="46" x2="220" y2="46" stroke="currentColor" stroke-opacity="0.25" stroke-width="1"/>
-              <circle cx="34" cy="33" r="3" fill="currentColor" fill-opacity="0.4"/>
-              <circle cx="46" cy="33" r="3" fill="currentColor" fill-opacity="0.25"/>
-              <circle cx="58" cy="33" r="3" fill="currentColor" fill-opacity="0.25"/>
-              <polyline points="34,120 58,90 82,132 106,70 130,110 154,58 178,100 202,80" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-              <g stroke="currentColor" stroke-opacity="0.5" stroke-width="1.5">
-                <line x1="34" y1="145" x2="34" y2="150"/><line x1="58" y1="140" x2="58" y2="150"/><line x1="82" y1="148" x2="82" y2="150"/><line x1="106" y1="132" x2="106" y2="150"/><line x1="130" y1="144" x2="130" y2="150"/><line x1="154" y1="126" x2="154" y2="150"/><line x1="178" y1="138" x2="178" y2="150"/><line x1="202" y1="132" x2="202" y2="150"/>
-              </g>
-              <path d="M20 190 h200 M40 190 v14 M100 190 v14 M160 190 v14 M220 190 v14" stroke="currentColor" stroke-opacity="0.3" stroke-width="1"/>
-            </svg>
-          </div>
-          <div class="schematic-footer">
-            <span>DESIGN × FRONT-END × OPERATIONS</span>
-            <span>001—004</span>
-          </div>
-        </div>
+        <a class="corner-panel about-portrait about-portrait--home" href="/about/" data-reveal>
+          <span class="portrait-media">
+            <picture>
+              <source type="image/webp" srcset="/assets/img/about/portrait-480.webp 480w, /assets/img/about/portrait.webp 960w" sizes="(max-width: 860px) 260px, 400px">
+              <img src="/assets/img/about/portrait.jpg" srcset="/assets/img/about/portrait-480.jpg 480w, /assets/img/about/portrait.jpg 960w" sizes="(max-width: 860px) 260px, 400px" width="960" height="1200" alt="Dylan Dwight, portrait. Go to the About page." loading="lazy" decoding="async">
+            </picture>
+          </span>
+          <span class="portrait-bubble" aria-hidden="true">Hey, I'm Dylan <span class="portrait-bubble-wave">👋</span></span>
+        </a>
       </div>
     </div>
   </section>
@@ -435,9 +435,9 @@
       <nav aria-label="Footer">
         <h2 class="footer-heading">Site</h2>
         <ul class="footer-list">
-          <li><span class="nav-pending">Work <span class="soon" aria-hidden="true">soon</span><span class="sr-only"> (coming in the next milestone)</span></span></li>
+          <li><a href="/work/">Work</a></li>
           <li><a href="/services/">Services</a></li>
-          <li><span class="nav-pending">About <span class="soon" aria-hidden="true">soon</span><span class="sr-only"> (coming in the next milestone)</span></span></li>
+          <li><a href="/about/">About</a></li>
           <li><a href="/contact/">Contact</a></li>
         </ul>
       </nav>
@@ -448,6 +448,7 @@
           <li><a href="tel:+13473793273">(347) 379-3273</a></li>
           <li><a href="https://www.linkedin.com/in/dylan-dwight/" target="_blank" rel="noopener noreferrer">LinkedIn<span class="sr-only"> (opens in a new tab)</span></a></li>
           <li><a href="https://github.com/DylanDwight" target="_blank" rel="noopener noreferrer">GitHub<span class="sr-only"> (opens in a new tab)</span></a></li>
+          <li><a href="/resume/dylan-dwight-resume.pdf" target="_blank" rel="noopener">Résumé (PDF)<span class="sr-only"> (opens in a new tab)</span></a></li>
         </ul>
       </div>
     </div>

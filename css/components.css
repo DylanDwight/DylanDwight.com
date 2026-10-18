@@ -283,15 +283,6 @@ h3,
 .logo-mark .logo-node {
   fill: var(--color-primary);
 }
-.logo-word {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: var(--text-base);
-  letter-spacing: 0.01em;
-  line-height: 1;
-  white-space: nowrap;
-}
-
 .nav-links {
   display: flex;
   align-items: center;
@@ -549,12 +540,13 @@ h3,
   pointer-events: none;
   overflow: hidden;
   z-index: 0;
+  --grid-line: color-mix(in oklch, var(--color-primary) 18%, var(--color-divider));
   background-image:
-    linear-gradient(var(--color-divider) 1px, transparent 1px),
-    linear-gradient(90deg, var(--color-divider) 1px, transparent 1px);
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
   background-size: 56px 56px;
-  mask-image: linear-gradient(to bottom, rgb(0 0 0 / 0.9), transparent 90%);
-  -webkit-mask-image: linear-gradient(to bottom, rgb(0 0 0 / 0.9), transparent 90%);
+  mask-image: linear-gradient(to bottom, #000 30%, transparent 98%);
+  -webkit-mask-image: linear-gradient(to bottom, #000 30%, transparent 98%);
 }
 
 /* ---------- Cards ---------- */
@@ -599,10 +591,12 @@ h3,
   color: var(--color-text-subtle);
   letter-spacing: 0.08em;
 }
-.work-card h3 {
+.work-card h3,
+.work-card h2 {
   font-size: var(--text-lg);
 }
-.work-card--featured h3 {
+.work-card--featured h3,
+.work-card--featured h2 {
   font-size: var(--text-xl);
 }
 .work-card-summary {
@@ -642,13 +636,38 @@ h3,
   letter-spacing: 0.04em;
 }
 
+.work-card-meta {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 400;
+  color: var(--color-text-subtle);
+  letter-spacing: 0.04em;
+}
+
+/* Approved project screenshot (replaces a .placeholder-frame once delivered) */
+.work-shot {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+  background: var(--color-surface-offset);
+}
+/* Grid-card screenshots share one frame so paired cards line up */
+.work-card:not(.work-card--featured) > .work-shot,
+.work-card:not(.work-card--featured) > .work-shot-link > .work-shot {
+  aspect-ratio: 1440 / 774;
+  object-fit: cover;
+  object-position: top;
+}
+
 .work-card--progress {
   border-style: dashed;
   background: var(--color-surface-2);
 }
 .work-card--progress .artifact-row {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: var(--space-3);
 }
 
@@ -986,7 +1005,7 @@ html.js [data-reveal].is-visible {
     padding-inline: var(--space-5);
   }
   .work-card--progress .artifact-row {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: var(--space-2);
   }
 }
@@ -1045,4 +1064,107 @@ html.js [data-reveal].is-visible {
     align-items: flex-start;
     gap: var(--space-2);
   }
+}
+.artifact-link {
+  display: block;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  background: #fff;
+}
+.artifact-link img {
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: transform var(--transition-interactive, 180ms ease);
+}
+.artifact-link:hover img {
+  transform: scale(1.03);
+}
+.artifact-link:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+.artifact-caption {
+  display: block;
+  margin-top: var(--space-1);
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+}
+@media (prefers-reduced-motion: reduce) {
+  .artifact-link img { transition: none; }
+  .artifact-link:hover img { transform: none; }
+}
+.artifact-row figure {
+  margin: 0;
+  min-width: 0;
+}
+.artifact-row figure:last-child:nth-child(odd) {
+  grid-column: 1 / -1;
+}
+.work-shot-link {
+  display: block;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+.work-shot-link .work-shot {
+  transition: transform 300ms ease;
+}
+.work-shot-link:hover .work-shot {
+  transform: scale(1.02);
+}
+.work-shot-link:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 3px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .work-shot-link .work-shot { transition: none; }
+  .work-shot-link:hover .work-shot { transform: none; }
+}
+
+/* Nav logo tile */
+.logo-link .logo-mark {
+  width: 42px;
+  height: 42px;
+  padding: 6px;
+  border-radius: 12px;
+  color: #fff;
+  background:
+    radial-gradient(120% 90% at 85% 100%, rgb(103 212 255 / 0.85), transparent 60%),
+    linear-gradient(140deg, #082f49 0%, #0369a1 60%, #0ea5e9 100%);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.25),
+    inset 0 0 0 1px rgb(255 255 255 / 0.08),
+    0 6px 18px -6px rgb(3 105 161 / 0.6);
+  transition: transform 250ms ease, box-shadow 250ms ease;
+}
+.logo-link .logo-mark path {
+  transition: transform 250ms ease;
+  transform-box: fill-box;
+}
+.logo-link .logo-mark .logo-node {
+  fill: #e0f7ff;
+  r: 4.5px;
+  filter: drop-shadow(0 0 3px #67d4ff) drop-shadow(0 0 6px #38bdf8);
+  animation: logo-pulse 2.8s ease-in-out infinite;
+}
+.logo-link:hover .logo-mark,
+.logo-link:focus-visible .logo-mark {
+  transform: translateY(-1px);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.3),
+    inset 0 0 0 1px rgb(255 255 255 / 0.12),
+    0 10px 24px -6px rgb(56 189 248 / 0.7);
+}
+.logo-link:hover .logo-mark path:first-child { transform: translateX(-2px); }
+.logo-link:hover .logo-mark path:nth-child(2) { transform: translateX(2px); }
+@keyframes logo-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.55; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .logo-link .logo-mark,
+  .logo-link .logo-mark path { transition: none; }
+  .logo-link .logo-mark .logo-node { animation: none; }
+  .logo-link:hover .logo-mark path { transform: none; }
 }
