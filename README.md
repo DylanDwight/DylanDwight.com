@@ -18,7 +18,7 @@ A hand-built, dependency-free static site focused on clarity, accessibility, per
 ```
 index.html              Home
 services/index.html     Services
-work/index.html         Work index (project cards)
+work/index.html         Work index (finished projects only; in-progress coursework stays on Home)
 work/sand-dollar-case-study.pdf   Sand Dollar case study (10-page PDF)
 contact/index.html      Contact / project inquiry
 404.html                Not found (served automatically by Vercel)
