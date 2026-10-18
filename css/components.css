@@ -202,6 +202,23 @@ h3,
   background: var(--color-primary-hover);
   box-shadow: var(--shadow-glow);
 }
+/* "Start a project" glows once the first time it comes into view
+   (js/glow.js adds .is-glowing; reduced motion skips it). */
+@keyframes cta-glow {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 oklch(from var(--color-primary) l c h / 0);
+  }
+  45% {
+    box-shadow:
+      0 0 0 3px oklch(from var(--color-primary) l c h / 0.22),
+      0 0 26px 4px oklch(from var(--color-primary) l c h / 0.55);
+  }
+}
+.btn-primary.is-glowing {
+  animation: cta-glow 1.4s var(--ease-out) 2;
+}
+
 .btn-secondary {
   background: transparent;
   color: var(--color-text);

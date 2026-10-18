@@ -4,16 +4,12 @@
 // rAF-throttled scroll handler drives everything, so scrolling
 // does at most one round of layout reads per frame.
 //
-// The TOC is drawn as a subway line: sections are stations and a
-// small train rides between them as you read.
-// - Top bar: --cs-progress (0–1) lights the track up to the amber
-//   signal; .is-complete lights the whole bar at the end.
-// - TOC line: --cs-toc-fill (px) moves the train and lights the line
-//   behind it; passed stations get data-passed; .is-complete lights
-//   the whole line once the last stop (Reflection) is reached.
+// - Top bar: --cs-progress (0–1) scales a thin bar across the top.
+// - TOC line: --cs-toc-fill (px) fills the line beside the TOC down
+//   to the current reading position.
 // - Scroll-spy: aria-current="true" on the current section's link.
 //
-// Without JS the bar and rail are hidden and the TOC is still a
+// Without JS the bar and line are hidden and the TOC is still a
 // plain list of working anchor links.
 // ============================================================
 
@@ -31,7 +27,7 @@ export function initCaseStudy() {
     .map((link) => document.getElementById(link.hash.slice(1)))
     .filter(Boolean);
 
-  // Station positions (link midpoints) within the TOC list. Cached, and
+  // Link midpoints within the TOC list. Cached, and
   // refreshed on resize, since they only change when the layout does.
   let mids = [];
   function measureRail() {
@@ -47,8 +43,7 @@ export function initCaseStudy() {
     links.forEach((link, i) => {
       if (i === index) link.setAttribute('aria-current', 'true');
       else link.removeAttribute('aria-current');
-      // Purely visual (filled station dot); aria-current carries the meaning.
-      link.toggleAttribute('data-passed', i < index);
+
     });
   }
 
@@ -64,8 +59,6 @@ export function initCaseStudy() {
       const total = rect.height - vh;
       const p = atEnd ? 1 : total > 0 ? clamp(-rect.top / total) : 1;
       progress.style.setProperty('--cs-progress', p.toFixed(4));
-      progress.style.setProperty('--cs-tip-on', p > 0.002 && p < 0.999 ? '1' : '0');
-      progress.classList.toggle('is-complete', p >= 0.999);
     }
 
     if (!sections.length) return;
@@ -82,9 +75,9 @@ export function initCaseStudy() {
     if (atEnd) index = sections.length - 1;
     setActive(index);
 
-    // ---- TOC line: the train waits at the first station, then travels
-    // from the current station toward the next one in step with how far
-    // through the current section the reader is, and parks at the last.
+    // ---- TOC line: fills to the first link's midpoint, then moves from
+    // the current link toward the next in step with how far through the
+    // current section the reader is, and stops at the last link.
     if (mids.length) {
       const last = sections.length - 1;
       let fill;
@@ -98,8 +91,6 @@ export function initCaseStudy() {
         fill = mids[index] + (mids[index + 1] - mids[index]) * t;
       }
       toc.style.setProperty('--cs-toc-fill', `${fill.toFixed(1)}px`);
-      // Last stop: the whole line lights up.
-      toc.classList.toggle('is-complete', index === last);
     }
   }
 
