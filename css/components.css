@@ -175,16 +175,20 @@ h3 {
   padding: var(--space-3) var(--space-6);
   min-height: 44px;
   border-radius: var(--radius-md);
-  text-decoration: none;
   border: 1px solid transparent;
   text-align: center;
-  transition: transform var(--transition-interactive), box-shadow var(--transition-interactive);
+  transition: transform var(--transition-interactive), box-shadow var(--transition-interactive),
+    text-decoration-color var(--transition-interactive);
+  text-decoration: underline 1.5px transparent;
+  text-underline-offset: 0.3em;
 }
 /* Hover: the button presses in like a hardware key. No colour change and
    no glow: it sinks 1px and takes an inner shadow along the top edge.
-   Clicking presses it a little further. */
+   Clicking presses it a little further. The label gets an underline while
+   pressed. */
 .btn:hover {
   transform: translateY(1px);
+  text-decoration-color: currentColor;
   box-shadow:
     inset 0 2px 4px rgb(0 0 0 / 0.35),
     inset 0 0 0 1px rgb(0 0 0 / 0.12);
@@ -198,6 +202,10 @@ h3 {
 @media (prefers-reduced-motion: reduce) {
   .btn:hover,
   .btn:active { transform: none; }
+}
+/* inline-block keeps the button underline off small meta text like "10 pages" */
+.btn .work-card-meta {
+  display: inline-block;
 }
 .btn svg {
   width: 15px;
@@ -285,6 +293,7 @@ h3 {
    pressed face also sinks a shade darker. */
 .btn-secondary:hover {
   background: rgb(0 0 0 / 0.35);
+  text-decoration-color: var(--color-primary);
 }
 .btn-compact {
   padding: var(--space-2) var(--space-4);

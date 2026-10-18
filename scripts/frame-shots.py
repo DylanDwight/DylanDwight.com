@@ -1,13 +1,13 @@
 # Usage: python3 scripts/frame-shots.py browser|phone|mat SRC DISPLAY_WIDTH_PX OUT.webp [MAX_WIDTH]
 # DISPLAY_WIDTH_PX is roughly how wide the image shows on the page, so
 # frames come out the same thickness on screen whatever the source size.
-# Bakes a dark browser window, phone bezel, or photo mat around each case
+# Bakes a dark Windows-style browser window, phone bezel, or photo mat around each case
 # study image so they sit on the dark page as one consistent set.
 import sys
 from PIL import Image, ImageDraw
 SS = 4  # supersample for smooth corners
 FRAME = (22, 22, 26, 255); RIM = (44, 44, 51, 255); DOT = (64, 64, 72, 255)
-PILL = (14, 14, 17, 255); ISLAND = (6, 6, 8, 255)
+PILL = (14, 14, 17, 255); ISLAND = (6, 6, 8, 255); GLYPH = (120, 120, 130, 255)
 
 def rr(size, r):
     m = Image.new('L', (size[0]*SS, size[1]*SS), 0)
@@ -19,16 +19,21 @@ def shape(size, r, color):
 
 def browser(src, display_w):
     im = Image.open(src).convert('RGB'); w, h = im.size; k = w / display_w
-    bar = round(24*k); b = max(1, round(1*k)); r = round(10*k)
+    bar = round(26*k); b = max(1, round(1*k)); r = round(8*k)
     W, H = w + 2*b, h + bar + b
     out = shape((W, H), r, RIM)
     out.alpha_composite(shape((W-2*b, H-2*b), max(r-b, 1), FRAME), (b, b))
     d = ImageDraw.Draw(out)
-    cy = b + bar//2; dr = round(3.5*k)
-    for i in range(3):
-        cx = b + round((14 + i*12)*k); d.ellipse([cx-dr, cy-dr, cx+dr, cy+dr], fill=DOT)
-    pw = min(round(220*k), int(W*0.45)); ph = round(12*k)
-    d.rounded_rectangle([W//2-pw//2, cy-ph//2, W//2+pw//2, cy+ph//2], ph//2, fill=PILL, outline=RIM, width=b)
+    cy = b + bar//2; g = round(4*k); lw = max(1, round(1.2*k))
+    # Windows caption buttons on the right: minimise, maximise, close
+    xs = [W - b - round(x*k) for x in (78, 50, 22)]
+    d.line([xs[0]-g, cy, xs[0]+g, cy], fill=GLYPH, width=lw)
+    d.rectangle([xs[1]-g, cy-g, xs[1]+g, cy+g], outline=GLYPH, width=lw)
+    d.line([xs[2]-g, cy-g, xs[2]+g, cy+g], fill=GLYPH, width=lw)
+    d.line([xs[2]-g, cy+g, xs[2]+g, cy-g], fill=GLYPH, width=lw)
+    # address bar on the left, like Edge or Chrome on Windows
+    ax = b + round(10*k); pw = min(round(240*k), int(W*0.5)); ph = round(14*k)
+    d.rounded_rectangle([ax, cy-ph//2, ax+pw, cy+ph//2], ph//2, fill=PILL, outline=RIM, width=b)
     # screenshot: square top, rounded bottom to match the window
     shot = im.convert('RGBA')
     m = Image.new('L', (w, h), 255); bm = rr((w, h + r), max(r-b, 1)).crop((0, r, w, h + r))
@@ -47,8 +52,9 @@ def phone(src, display_w):
     m = Image.new('L', (w, h), 255); bm = rr((w, h + r), r-bz).crop((0, r, w, h + r))
     m.paste(bm, (0, 0)); shot.putalpha(m)
     out.alpha_composite(shot, (bz, bz + sb))
-    iw, ih = round(40*k), round(11*k); top = bz + round(5*k)
-    ImageDraw.Draw(out).rounded_rectangle([W//2-iw//2, top, W//2+iw//2, top+ih], ih//2, fill=ISLAND)
+    # punch-hole camera in the status bar
+    cr = round(4*k); cy = bz + sb//2
+    ImageDraw.Draw(out).ellipse([W//2-cr, cy-cr, W//2+cr, cy+cr], fill=(30, 30, 36, 255))
     return out
 
 def mat(src, display_w):
