@@ -115,18 +115,23 @@
   color: var(--color-text);
   font-weight: 600;
 }
-.about-section {
-  max-width: 68ch;
-}
-.about-section .section-heading {
-  margin-bottom: var(--space-4);
-}
-.about-list {
-  display: grid;
+.hero-chips {
+  display: flex;
+  flex-wrap: wrap;
   gap: var(--space-2);
-  padding-left: 1.2em;
-  list-style: disc;
-  color: var(--color-text-muted);
+  margin-top: var(--space-6);
+}
+.training-list li .label-chip {
+  margin-bottom: var(--space-3);
+}
+.hiring-panel {
+  padding: clamp(var(--space-8), 5vw, var(--space-12));
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+.hiring-panel .lede {
+  max-width: var(--measure-default);
 }
 .about-portrait {
   padding: var(--space-3);
