@@ -283,15 +283,6 @@ h3,
 .logo-mark .logo-node {
   fill: var(--color-primary);
 }
-.logo-word {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: var(--text-base);
-  letter-spacing: 0.01em;
-  line-height: 1;
-  white-space: nowrap;
-}
-
 .nav-links {
   display: flex;
   align-items: center;
@@ -1071,4 +1062,44 @@ html.js [data-reveal].is-visible {
     align-items: flex-start;
     gap: var(--space-2);
   }
+}
+.logo-link .logo-mark {
+  width: 36px;
+  height: 34px;
+}
+.artifact-link {
+  display: block;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  background: #fff;
+}
+.artifact-link img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+  object-fit: cover;
+  transition: transform var(--transition-interactive, 180ms ease);
+}
+.artifact-link:hover img {
+  transform: scale(1.03);
+}
+.artifact-link:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+.artifact-caption {
+  display: block;
+  margin-top: var(--space-1);
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+}
+@media (prefers-reduced-motion: reduce) {
+  .artifact-link img { transition: none; }
+  .artifact-link:hover img { transform: none; }
+}
+.artifact-row figure {
+  margin: 0;
+  min-width: 0;
 }
