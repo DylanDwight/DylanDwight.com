@@ -45,7 +45,8 @@ assets/
   favicon.svg, favicon-32.png, apple-touch-icon.png, icon-192.png, icon-512.png
   work/                 Approved project screenshots
   icons/                SVG sources for the inline icons (see icons/README.md)
-  og/og-default.png     Default 1200×630 share image
+  og/                   1200×630 share images: one per page (og-home.png, og-work.png, …)
+                        plus og-default.png for the 404. Regenerate with scripts/og/render.mjs
 ```
 
 Paths are root-relative (`/css/...`, `/js/...`) so nested pages resolve correctly.
@@ -55,6 +56,7 @@ Paths are root-relative (`/css/...`, `/js/...`) so nested pages resolve correctl
 - An inline script in `<head>` adds `html.js` before first paint; progressive-enhancement styles key off it.
 - Text colors: `--color-text-subtle` is the quietest color allowed for words (WCAG AA). `--color-text-faint` is for decorative rules only.
 - Icons are inlined SVGs; edit the source in `assets/icons/` and update the inline copies.
+- Share images: edit copy and layout in `scripts/og/template.html`, then run `node scripts/og/render.mjs` (needs Playwright + Chromium). A new page gets a new key in both files and its own `og:image` / `twitter:image` tags.
 - Sand Dollar case study images have their frame baked in by `scripts/frame-shots.py` (needs Pillow). Frame new screenshots with it so they match.
 
 ## Running locally
