@@ -1,0 +1,124 @@
+<!doctype html>
+<!-- Share-image template. scripts/og/render.mjs loads this with ?p=<key> and screenshots it at 1200×630. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0c; --surface: #111114; --border: #2c2c33; --rim: #2c2c33; --frame: #16161a; --pill: #0e0e11; --glyph: #78787f;
+    --text: #ecedee; --muted: #96979d; --primary: #67d4ff;
+    --display: 'Cabinet Grotesk', 'General Sans', 'Inter Display', 'Inter', sans-serif;
+    --body: 'General Sans', 'Inter', sans-serif;
+    --mono: 'JetBrains Mono', monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 1200px; height: 630px; overflow: hidden; background: var(--bg); color: var(--text); font-family: var(--body); }
+  .card { position: relative; width: 1200px; height: 630px; padding: 64px 72px; overflow: hidden;
+    background:
+      radial-gradient(600px 400px at 100% 0%, color-mix(in oklch, var(--primary) 9%, transparent), transparent 70%),
+      linear-gradient(color-mix(in oklch, var(--primary) 7%, transparent) 1px, transparent 1px) 0 0 / 56px 56px,
+      linear-gradient(90deg, color-mix(in oklch, var(--primary) 7%, transparent) 1px, transparent 1px) 0 0 / 56px 56px,
+      var(--bg); }
+  .corner { position: absolute; width: 28px; height: 28px; border-color: var(--primary); border-style: solid; }
+  .corner.tl { top: 28px; left: 28px; border-width: 2px 0 0 2px; }
+  .corner.br { bottom: 28px; right: 28px; border-width: 0 2px 2px 0; }
+  .brand { display: flex; align-items: center; gap: 14px; font: 500 20px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+  .brand svg { width: 34px; height: 32px; }
+  .eyebrow { margin-top: 44px; font: 500 20px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--primary); }
+  h1 { margin-top: 18px; font: 700 66px/1.04 var(--display); letter-spacing: -0.02em; text-wrap: balance; }
+  h1 .accent { color: var(--primary); }
+  h1 .sub { display: block; color: var(--muted); }
+  .lede { margin-top: 24px; font-size: 25px; line-height: 1.4; color: var(--muted); max-width: 30ch; }
+  .foot { position: absolute; left: 72px; right: 72px; bottom: 56px; display: flex; justify-content: space-between; font: 400 21px/1 var(--mono); color: var(--muted); letter-spacing: .04em; }
+  .foot b { color: var(--text); font-weight: 500; }
+  .chips { margin-top: 28px; display: flex; flex-wrap: wrap; gap: 10px; max-width: 760px; }
+  .chip { font: 500 17px/1 var(--mono); padding: 11px 14px; border: 1px solid var(--border); border-radius: 999px; color: var(--text); background: var(--surface); }
+  .chip.accent { border-color: color-mix(in oklch, var(--primary) 55%, transparent); color: var(--primary); }
+  .result { margin-top: 26px; font-size: 22px; color: var(--muted); }
+  .result strong { color: var(--primary); font: 700 30px/1 var(--display); margin-right: 6px; }
+
+  /* Dark Windows-style browser window, matching scripts/frame-shots.py */
+  .win { position: absolute; border: 1px solid var(--rim); border-radius: 10px; background: var(--frame); overflow: hidden; box-shadow: 0 24px 60px rgba(0,0,0,.55); }
+  .win .bar { position: relative; height: 30px; }
+  .win .bar::before { content: ""; position: absolute; left: 12px; top: 8px; width: 42%; height: 14px; border-radius: 7px; background: var(--pill); border: 1px solid var(--rim); }
+  .win .bar i { position: absolute; top: 10px; width: 10px; height: 10px; }
+  .win .bar i.min { right: 78px; border-top: 1.5px solid var(--glyph); top: 15px; }
+  .win .bar i.max { right: 50px; border: 1.5px solid var(--glyph); }
+  .win .bar i.cls { right: 22px; background:
+      linear-gradient(45deg, transparent 45%, var(--glyph) 45% 57%, transparent 57%),
+      linear-gradient(-45deg, transparent 45%, var(--glyph) 45% 57%, transparent 57%); }
+  .win img { display: block; width: 100%; }
+
+  .portrait { position: absolute; right: 72px; top: 64px; width: 330px; height: 412px; border-radius: 16px; overflow: hidden; border: 1px solid var(--border); }
+  .portrait img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .portrait::after { content: ""; position: absolute; inset: 0; box-shadow: inset 0 0 0 1px color-mix(in oklch, var(--primary) 35%, transparent); border-radius: 16px; }
+  .narrow h1, .narrow .lede { max-width: 640px; }
+</style>
+</head>
+<body>
+<div class="card" id="card">
+  <span class="corner tl"></span><span class="corner br"></span>
+  <div class="brand">
+    <svg viewBox="0 0 64 60" aria-hidden="true"><path d="M10 14 H16 A16 16 0 0 1 16 46 H10 Z" fill="#ecedee"/><path d="M54 14 H48 A16 16 0 0 0 48 46 H54 Z" fill="#ecedee"/><circle cx="32" cy="30" r="3" fill="#67d4ff"/></svg>
+    Dylan Dwight Creative Technologies
+  </div>
+  <div id="content"></div>
+</div>
+<script>
+  const A = '../../assets/';
+  const win = (src, style) => `<div class="win" style="${style}"><div class="bar"><i class="min"></i><i class="max"></i><i class="cls"></i></div><img src="${src}"></div>`;
+  const pages = {
+    default: `
+      <h1 style="max-width:900px">Web design and front-end development for <span class="accent">independent businesses.</span></h1>
+      <p class="lede" style="max-width:none">Clear, fast, responsive websites for independent businesses and creative work.</p>
+      <div class="foot"><b>dylandwight.com</b><span>Brooklyn, NY · Remote</span></div>`,
+    home: `
+      <div class="narrow">
+        <h1 style="margin-top:52px;font-size:56px;max-width:700px">Web design and front-end development for <span class="accent">independent businesses.</span></h1>
+        <p class="lede" style="font-size:23px;max-width:none">Freelance projects and junior front-end / UX/UI roles.</p>
+      </div>
+      <div class="portrait" style="top:118px;height:340px;width:272px"><img src="${A}img/about/portrait.jpg"></div>
+      <div class="foot"><b>dylandwight.com</b><span>Brooklyn, NY · Remote</span></div>`,
+    about: `
+      <div class="narrow">
+        <p class="eyebrow">About</p>
+        <h1>Design, UX, and front-end development in <span class="accent">one pair of hands.</span></h1>
+        <div class="chips"><span class="chip accent">Open to junior roles</span><span class="chip">Freelance projects</span></div>
+      </div>
+      <div class="portrait" style="top:118px;height:340px;width:272px"><img src="${A}img/about/portrait.jpg"></div>
+      <div class="foot"><b>dylandwight.com/about</b><span>Brooklyn, NY · Remote</span></div>`,
+    services: `
+      <p class="eyebrow">Services</p>
+      <h1 style="max-width:960px">Websites for independent businesses, <span class="accent">scoped and quoted per project.</span></h1>
+      <div class="chips" style="max-width:1000px">
+        <span class="chip">Landing pages</span><span class="chip">Small-business websites</span><span class="chip">Website redesigns</span>
+        <span class="chip">Responsive front-end builds</span><span class="chip">Brand direction</span><span class="chip">SEO &amp; accessibility</span><span class="chip">Maintenance &amp; support</span>
+      </div>
+      <div class="foot"><b>dylandwight.com/services</b><span>Brooklyn, NY · Remote</span></div>`,
+    work: `
+      <p class="eyebrow">Work</p>
+      <h1>Selected <span class="accent">projects.</span></h1>
+      <p class="lede" style="max-width:15ch">Hospitality, trades, and creative work.</p>
+      ${win(A + 'work/shoreline-electric-home-desktop-800.jpg', 'left:760px;top:112px;width:390px;transform:rotate(2deg)')}
+      ${win(A + 'work/studio-54x-home-desktop-1440.jpg', 'left:640px;top:206px;width:390px;transform:rotate(-2deg)')}
+      ${win(A + 'work/sand-dollar-home-desktop-860.jpg', 'left:740px;top:300px;width:420px')}
+      <div class="foot" style="right:auto"><b>dylandwight.com/work</b></div>`,
+    'sand-dollar': `
+      <p class="eyebrow">Case study · Restaurant website</p>
+      <h1 style="max-width:560px;font-size:50px">Sand Dollar Restaurant &amp;&nbsp;Lounge<span class="sub">Website Redesign</span></h1>
+      <p class="lede" style="font-size:20px;max-width:none;margin-top:18px">Rockaway Beach, Oregon · Shift4 / SkyTab</p>
+      <p class="result" style="max-width:520px;font-size:19px"><strong>100,000</strong> Google Business Profile views,<br>April–September 2026</p>
+      <img src="${A}work/sand-dollar/new-home-hero.webp" style="position:absolute;left:640px;top:126px;width:540px;filter:drop-shadow(0 24px 50px rgba(0,0,0,.6))">
+      <div class="foot" style="right:auto"><b>dylandwight.com/work/sand-dollar</b></div>`,
+    contact: `
+      <p class="eyebrow">Contact</p>
+      <h1 style="font-size:96px">Start a <span class="accent">project.</span></h1>
+      <p class="lede" style="max-width:34ch">Tell me about your business or project. I aim to reply within two business days.</p>
+      <div class="foot"><b>dylandwight.com/contact</b><span>Brooklyn, NY · Remote</span></div>`,
+  };
+  const key = new URLSearchParams(location.search).get('p') || 'default';
+  document.getElementById('content').innerHTML = pages[key];
+</script>
+</body>
+</html>
