@@ -128,8 +128,17 @@
   list-style: disc;
   color: var(--color-text-muted);
 }
-.page-hero .about-grid .schematic {
-  max-height: 380px;
+.about-portrait {
+  padding: var(--space-3);
+  max-width: 400px;
+  justify-self: end;
+  width: 100%;
+}
+.about-portrait img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-md);
 }
 .about-links {
   display: flex;
@@ -501,6 +510,11 @@
 @media (max-width: 860px) {
   .about-grid {
     grid-template-columns: 1fr;
+  }
+  .about-portrait {
+    order: -1;
+    justify-self: start;
+    max-width: 260px;
   }
   .schematic {
     aspect-ratio: 16 / 9;
