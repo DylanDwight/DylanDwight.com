@@ -756,7 +756,6 @@ html.js .cs-toc-rail {
 }
 .cs-hero-shot img {
   width: 100%;
-  border-radius: var(--radius-md);
 }
 .cs-hero-shot .cs-cap {
   margin-top: var(--space-3);
@@ -874,11 +873,10 @@ html.js .cs-toc-rail {
 
 /* ---------- Figures ---------- */
 
+/* Case study images have their frame (browser window, phone, or photo
+   mat) baked into the file, so the img itself is unstyled. */
 .cs-figure img {
   width: 100%;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
-  background: #fff;
 }
 .cs-figure--narrow {
   max-width: 280px;
@@ -895,9 +893,6 @@ html.js .cs-toc-rail {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: var(--space-4);
-}
-.cs-figure--phone img {
-  border-radius: var(--radius-lg);
 }
 .cs-split {
   display: grid;
