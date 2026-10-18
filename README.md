@@ -40,7 +40,6 @@ js/
   nav.js                Mobile drawer: hidden when closed, aria-expanded, focus trap, Escape
   theme.js              Light/dark toggle with persisted preference
   case-study.js         Case study reading progress bar and table-of-contents scroll-spy
-  glow.js               Glowing ring on "Start a project" buttons once they are in view
   reveal.js             Scroll reveal (disabled under reduced motion; no-JS safe)
 
 assets/

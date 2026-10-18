@@ -10,9 +10,7 @@ import { initNav } from './nav.js';
 // the [data-theme-toggle] buttons, and restore the pre-paint script.
 import { initReveal } from './reveal.js';
 import { initCaseStudy } from './case-study.js';
-import { initGlow } from './glow.js';
 
 initNav();
 initReveal();
 initCaseStudy();
-initGlow();

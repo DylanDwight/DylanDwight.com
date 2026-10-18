@@ -202,70 +202,63 @@ h3,
   background: var(--color-primary-hover);
   box-shadow: var(--shadow-glow);
 }
-/* "Start a project" CTA ring: once the button is in view, js/glow.js adds
-   .cta-ring, a glowing ring with a small gap around the button. The first
-   time it appears it pulses twice (.is-pulsing), then holds steady.
-   Reduced motion gets the steady ring with no pulse. */
-.btn-primary.cta-ring {
-  box-shadow:
-    0 0 0 3px var(--color-bg),
-    0 0 0 5px oklch(from var(--color-primary) l c h / 0.6),
-    0 0 18px 4px oklch(from var(--color-primary) l c h / 0.3);
+/* CTA ring: the header "Start a project" button and the primary button in
+   the bottom-of-page contact panel. A hairline ring sits 4px outside the
+   button with a soft steady halo, and a brighter arc travels slowly around
+   it. Reduced motion keeps the ring and halo, without the moving arc. */
+@property --cta-angle {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
 }
-.btn-primary.cta-ring.is-pulsing {
-  animation: cta-ring 1.3s var(--ease-out) 2;
-}
-@keyframes cta-ring {
-  0% {
-    box-shadow:
-      0 0 0 3px var(--color-bg),
-      0 0 0 3px oklch(from var(--color-primary) l c h / 0),
-      0 0 0 0 oklch(from var(--color-primary) l c h / 0);
-  }
-  50% {
-    box-shadow:
-      0 0 0 3px var(--color-bg),
-      0 0 0 6px oklch(from var(--color-primary) l c h / 0.95),
-      0 0 28px 8px oklch(from var(--color-primary) l c h / 0.5);
-  }
-}
-.cta-panel .btn-primary.cta-ring {
-  /* The panel sits on the surface color, so the gap matches it */
-  --color-bg: var(--color-surface);
-}
-
-/* Header "Start a project": a live signal dot, an arrow that nudges on
-   hover, and a light sweep across the button on hover. */
-.btn-nav-cta {
+.btn-nav-cta,
+.cta-panel .btn-primary {
   position: relative;
-  overflow: hidden;
-  isolation: isolate;
 }
-.btn-nav-cta .btn-signal {
-  position: relative;
-  width: 7px;
-  height: 7px;
-  border-radius: var(--radius-full);
-  background: currentColor;
-  flex-shrink: 0;
-}
-.btn-nav-cta .btn-signal::after {
+.btn-nav-cta::before,
+.btn-nav-cta::after,
+.cta-panel .btn-primary::before,
+.cta-panel .btn-primary::after {
   content: '';
   position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background: currentColor;
-  animation: btn-signal 2s ease-out infinite;
+  inset: -4px;
+  border-radius: calc(var(--radius-md) + 4px);
+  pointer-events: none;
 }
-@keyframes btn-signal {
-  0% {
-    transform: scale(1);
-    opacity: 0.6;
-  }
-  80%,
-  100% {
-    transform: scale(2.8);
-    opacity: 0;
+/* Halo: hairline ring + soft glow */
+.btn-nav-cta::after,
+.cta-panel .btn-primary::after {
+  border: 1px solid oklch(from var(--color-primary) l c h / 0.28);
+  box-shadow: 0 0 16px 1px oklch(from var(--color-primary) l c h / 0.28);
+  transition: box-shadow var(--transition-interactive), border-color var(--transition-interactive);
+}
+/* Travelling arc, masked to a 1.5px ring */
+.btn-nav-cta::before,
+.cta-panel .btn-primary::before {
+  padding: 1.5px;
+  background: conic-gradient(
+    from var(--cta-angle),
+    transparent 0deg,
+    var(--color-primary) 50deg,
+    transparent 110deg,
+    transparent 360deg
+  );
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  animation: cta-orbit 4.5s linear infinite;
+}
+.btn-nav-cta:hover::after,
+.btn-nav-cta:focus-visible::after,
+.cta-panel .btn-primary:hover::after,
+.cta-panel .btn-primary:focus-visible::after {
+  border-color: oklch(from var(--color-primary) l c h / 0.5);
+  box-shadow: 0 0 22px 3px oklch(from var(--color-primary) l c h / 0.4);
+}
+@keyframes cta-orbit {
+  to {
+    --cta-angle: 360deg;
   }
 }
 .btn-nav-cta svg {
@@ -277,27 +270,10 @@ h3,
 .btn-nav-cta:focus-visible svg {
   transform: translateX(3px);
 }
-.btn-nav-cta::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  background: linear-gradient(105deg, transparent 35%, rgb(255 255 255 / 0.45) 50%, transparent 65%);
-  transform: translateX(-120%);
-}
-.btn-nav-cta:hover::after,
-.btn-nav-cta:focus-visible::after {
-  transform: translateX(120%);
-  transition: transform 700ms var(--ease-out);
-}
 @media (prefers-reduced-motion: reduce) {
-  .btn-nav-cta .btn-signal::after {
+  .btn-nav-cta::before,
+  .cta-panel .btn-primary::before {
     animation: none;
-  }
-  .btn-nav-cta:hover::after,
-  .btn-nav-cta:focus-visible::after {
-    transform: translateX(-120%);
-    transition: none;
   }
 }
 
