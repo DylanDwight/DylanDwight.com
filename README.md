@@ -18,6 +18,7 @@ A hand-built, dependency-free static site focused on clarity, accessibility, per
 ```
 index.html              Home
 services/index.html     Services
+about/index.html        About (copy from the Phase 1 spec, section 7)
 work/index.html         Work index (finished projects only; in-progress coursework stays on Home)
 work/sand-dollar-case-study.pdf   Sand Dollar case study (10-page PDF)
 resume/dylan-dwight-foottit-resume.pdf   Résumé (linked from the footer, drawer, and Work page)
