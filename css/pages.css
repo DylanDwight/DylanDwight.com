@@ -703,8 +703,26 @@
   --project-accent: #5eead4;
 }
 
-/* Reading progress: a 3px bar above the sticky header. Hidden
-   without JS, since only js/case-study.js can drive it. */
+/* ---------- Reading progress (top bar + TOC rail) ----------
+   Both use the same sunset-to-ocean gradient: the site's amber and blue,
+   interpolated through warm pinks and violets in OKLCH so the middle stays
+   bright instead of going muddy. Browsers without OKLCH interpolation keep
+   the plain two-stop gradient declared first. js/case-study.js sets
+   --cs-progress (0-1) and --cs-toc-fill (px), and toggles .is-complete. */
+
+.cs-page {
+  --cs-grad-x: linear-gradient(90deg, var(--color-warning), var(--color-primary));
+  --cs-grad-y: linear-gradient(180deg, var(--color-warning), var(--color-primary));
+  --cs-tip: var(--color-primary);
+}
+@supports (background: linear-gradient(in oklch decreasing hue, red, blue)) {
+  .cs-page {
+    --cs-grad-x: linear-gradient(90deg in oklch decreasing hue, var(--color-warning), var(--color-primary));
+    --cs-grad-y: linear-gradient(180deg in oklch decreasing hue, var(--color-warning), var(--color-primary));
+  }
+}
+
+/* Top bar: hidden without JS, since only the script can drive it. */
 .cs-progress {
   display: none;
 }
@@ -716,13 +734,96 @@ html.js .cs-progress {
   z-index: 60;
   pointer-events: none;
 }
-/* The site's amber-to-blue gradient spans the full width and is revealed
-   with clip-path, so the colors stay put instead of squashing as it grows. */
+/* The full-width gradient is revealed with clip-path, so the colors stay
+   put instead of squashing as it grows. */
 .cs-progress-bar {
-  display: block;
-  height: 100%;
-  background: linear-gradient(90deg, var(--color-warning), var(--color-primary));
+  position: absolute;
+  inset: 0;
+  background: var(--cs-grad-x);
   clip-path: inset(0 calc(100% - var(--cs-progress, 0) * 100%) 0 0);
+}
+/* Glowing tip at the leading edge; its color is the gradient's color at
+   that point. */
+.cs-progress-tip {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 28px;
+  height: 7px;
+  margin-top: -3.5px;
+  border-radius: var(--radius-full);
+  background: radial-gradient(closest-side, #fff, var(--cs-tip) 45%, transparent);
+  box-shadow: 0 0 10px 2px var(--cs-tip);
+  transform: translateX(calc(var(--cs-progress, 0) * 100vw - 100%));
+  opacity: var(--cs-tip-on, 0);
+  transition: opacity 300ms ease;
+}
+/* Finished: the whole bar glows. A blurred copy fades in underneath. */
+.cs-progress::before {
+  content: '';
+  position: absolute;
+  inset: -2px 0 -4px;
+  background: var(--cs-grad-x);
+  filter: blur(6px);
+  opacity: 0;
+  transition: opacity 600ms ease;
+}
+.cs-progress.is-complete::before {
+  opacity: 0.9;
+}
+.cs-progress.is-complete .cs-progress-tip {
+  opacity: 0;
+}
+
+/* TOC rail: fills top to bottom in step with the reading position,
+   with the same glowing tip, and glows in full on the last section. */
+.cs-toc-rail {
+  display: none;
+}
+html.js .cs-toc-rail {
+  display: block;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -1px;
+  width: 3px;
+  pointer-events: none;
+}
+.cs-toc-rail-fill,
+.cs-toc-rail-glow {
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-full);
+  background: var(--cs-grad-y);
+}
+.cs-toc-rail-fill {
+  clip-path: inset(0 0 calc(100% - var(--cs-toc-fill, 0px)) 0 round 2px);
+}
+.cs-toc-rail-glow {
+  inset: 0 -3px;
+  filter: blur(5px);
+  opacity: 0;
+  transition: opacity 600ms ease;
+}
+.cs-toc-rail-tip {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 7px;
+  height: 24px;
+  margin-left: -3.5px;
+  border-radius: var(--radius-full);
+  background: radial-gradient(closest-side, #fff, var(--cs-toc-tip, var(--color-primary)) 45%, transparent);
+  box-shadow: 0 0 10px 2px var(--cs-toc-tip, var(--color-primary));
+  transform: translateY(calc(var(--cs-toc-fill, 0px) - 100%));
+  opacity: var(--cs-toc-tip-on, 0);
+  transition: opacity 300ms ease;
+}
+.cs-toc.is-complete .cs-toc-rail-glow {
+  opacity: 0.85;
+}
+.cs-toc.is-complete .cs-toc-rail-tip {
+  opacity: 0;
 }
 
 .cs-hero .wrap {
@@ -819,6 +920,9 @@ html.js .cs-progress {
   top: calc(var(--space-20) + var(--space-4));
   max-height: calc(100dvh - var(--space-32));
   overflow-y: auto;
+  /* Room for the rail's glow, which overflow would otherwise clip */
+  padding: var(--space-3) 0 var(--space-3) var(--space-3);
+  margin: calc(var(--space-3) * -1) 0 0 calc(var(--space-3) * -1);
 }
 .cs-toc-title {
   text-transform: uppercase;
@@ -826,6 +930,7 @@ html.js .cs-progress {
   margin-bottom: var(--space-3);
 }
 .cs-toc ol {
+  position: relative;
   list-style: none;
   border-left: 1px solid var(--color-divider);
 }
@@ -836,27 +941,14 @@ html.js .cs-progress {
   font-size: var(--text-sm);
   color: var(--color-text-muted);
   text-decoration: none;
-  transition: color var(--transition-interactive), border-color var(--transition-interactive);
+  transition: color var(--transition-interactive);
 }
 .cs-toc a:hover {
   color: var(--color-text);
 }
-.cs-toc a::before {
-  content: '';
-  position: absolute;
-  inset: 0 auto 0 -1px;
-  width: 3px;
-  border-radius: var(--radius-full);
-  background: linear-gradient(to bottom, var(--color-warning), var(--color-primary));
-  opacity: 0;
-  transition: opacity var(--transition-interactive);
-}
 .cs-toc a[aria-current='true'] {
   color: var(--color-text);
   font-weight: 500;
-}
-.cs-toc a[aria-current='true']::before {
-  opacity: 1;
 }
 
 .cs-body {
@@ -1405,6 +1497,12 @@ table.cs-table td:first-child {
     columns: 2;
     column-gap: var(--space-6);
   }
+  html.js .cs-toc-rail {
+    display: none;
+  }
+  .cs-toc {
+    margin: 0;
+  }
   .cs-body {
     max-width: none;
   }
@@ -1503,7 +1601,10 @@ table.cs-table td:first-child {
 
 @media (prefers-reduced-motion: reduce) {
   .cs-toc a,
-  .cs-toc a::before {
+  .cs-progress::before,
+  .cs-progress-tip,
+  .cs-toc-rail-glow,
+  .cs-toc-rail-tip {
     transition: none;
   }
 }

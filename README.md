@@ -8,7 +8,7 @@ A hand-built, dependency-free static site focused on clarity, accessibility, per
 
 - No build step, no framework, no bundler, no runtime third-party scripts
 - Semantic HTML, one `h1` per page, landmark regions, visible skip link
-- Design-token-driven CSS with light and dark themes (single dark token block)
+- Design-token-driven CSS with light and dark themes (single dark token block). The site is dark-only for now: the pre-paint script forces dark and the toggle is hidden; see the note in `js/app.js` to bring light mode back
 - Native ES modules for the small amount of JavaScript (nav drawer, theme, reveal)
 - Works without JavaScript; respects `prefers-reduced-motion`
 - Per-page metadata, Open Graph / Twitter cards, JSON-LD (`ProfessionalService`, `Person`, `WebSite`), `robots.txt`, `sitemap.xml`, branded 404

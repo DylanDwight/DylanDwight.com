@@ -358,6 +358,10 @@ h3,
 .nav-toggle {
   display: none;
 }
+/* Dark mode only for now: the toggle is hidden in the markup */
+.theme-toggle[hidden] {
+  display: none;
+}
 .theme-toggle .icon-moon {
   display: none;
 }

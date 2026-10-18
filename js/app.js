@@ -5,11 +5,12 @@
 // ============================================================
 
 import { initNav } from './nav.js';
-import { initTheme } from './theme.js';
+// Dark mode only for now: theme.js (the light/dark toggle) is not loaded.
+// To bring light mode back, restore this import and initTheme(), unhide
+// the [data-theme-toggle] buttons, and restore the pre-paint script.
 import { initReveal } from './reveal.js';
 import { initCaseStudy } from './case-study.js';
 
 initNav();
-initTheme();
 initReveal();
 initCaseStudy();

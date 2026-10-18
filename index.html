@@ -1,12 +1,11 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Dylan Dwight Creative Technologies — Web Design & Front-End Development · Brooklyn, NY</title>
 <meta name="description" content="Web design and front-end development for restaurants, artists, musicians, and small businesses. Clear, fast, responsive websites, scoped and quoted per project. Brooklyn, NY and remote." />
-<meta name="theme-color" content="#f1f3f6" media="(prefers-color-scheme: light)" />
-<meta name="theme-color" content="#0a0a0c" media="(prefers-color-scheme: dark)" />
+<meta name="theme-color" content="#0a0a0c" />
 
 <link rel="canonical" href="https://dylandwight.com/" />
 
@@ -31,15 +30,10 @@
 <link rel="icon" href="/favicon.ico" sizes="48x48" />
 <link rel="manifest" href="/site.webmanifest" />
 
-<!-- Theme before first paint: saved choice, else OS preference. Also marks JS as available. -->
+<!-- Dark mode only for now (light tokens stay in tokens.css). Also marks JS as available. -->
 <script>
 (function () {
-  var t = null;
-  try { t = localStorage.getItem('ddct-theme'); } catch (e) {}
-  if (t !== 'dark' && t !== 'light') {
-    t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-  }
-  document.documentElement.setAttribute('data-theme', t);
+  document.documentElement.setAttribute('data-theme', 'dark');
   document.documentElement.classList.add('js');
 })();
 </script>
@@ -121,7 +115,7 @@
 
     <div class="header-actions">
       <a class="btn btn-primary btn-compact" href="/contact/">Start a project</a>
-      <button class="icon-btn theme-toggle" type="button" data-theme-toggle aria-label="Switch to dark mode" aria-pressed="false">
+      <button class="icon-btn theme-toggle" type="button" hidden data-theme-toggle aria-label="Switch to dark mode" aria-pressed="false">
         <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
         <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
       </button>
