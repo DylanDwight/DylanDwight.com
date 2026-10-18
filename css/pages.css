@@ -679,15 +679,6 @@
   transform: translateZ(26px);
   animation: logo3d-pulse 3s ease-in-out infinite;
 }
-.logo3d-shadow {
-  position: absolute;
-  left: 15%;
-  right: 15%;
-  bottom: -22%;
-  height: 10%;
-  border-radius: 50%;
-  background: radial-gradient(closest-side, rgb(56 189 248 / 0.35), transparent);
-}
 .hero-3d-label {
   position: absolute;
   z-index: 1;
@@ -713,7 +704,7 @@
 }
 @media (prefers-reduced-motion: reduce) {
   .logo3d-stage,
-  .logo3d-node,
+  .logo3d-node { animation: none; }
   .logo3d-stage { rotate: y -8deg; }
 }
 
