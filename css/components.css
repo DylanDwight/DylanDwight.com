@@ -202,21 +202,103 @@ h3,
   background: var(--color-primary-hover);
   box-shadow: var(--shadow-glow);
 }
-/* "Start a project" glows once the first time it comes into view
-   (js/glow.js adds .is-glowing; reduced motion skips it). */
-@keyframes cta-glow {
-  0%,
-  100% {
-    box-shadow: 0 0 0 0 oklch(from var(--color-primary) l c h / 0);
-  }
-  45% {
+/* "Start a project" CTA ring: once the button is in view, js/glow.js adds
+   .cta-ring, a glowing ring with a small gap around the button. The first
+   time it appears it pulses twice (.is-pulsing), then holds steady.
+   Reduced motion gets the steady ring with no pulse. */
+.btn-primary.cta-ring {
+  box-shadow:
+    0 0 0 3px var(--color-bg),
+    0 0 0 5px oklch(from var(--color-primary) l c h / 0.6),
+    0 0 18px 4px oklch(from var(--color-primary) l c h / 0.3);
+}
+.btn-primary.cta-ring.is-pulsing {
+  animation: cta-ring 1.3s var(--ease-out) 2;
+}
+@keyframes cta-ring {
+  0% {
     box-shadow:
-      0 0 0 3px oklch(from var(--color-primary) l c h / 0.22),
-      0 0 26px 4px oklch(from var(--color-primary) l c h / 0.55);
+      0 0 0 3px var(--color-bg),
+      0 0 0 3px oklch(from var(--color-primary) l c h / 0),
+      0 0 0 0 oklch(from var(--color-primary) l c h / 0);
+  }
+  50% {
+    box-shadow:
+      0 0 0 3px var(--color-bg),
+      0 0 0 6px oklch(from var(--color-primary) l c h / 0.95),
+      0 0 28px 8px oklch(from var(--color-primary) l c h / 0.5);
   }
 }
-.btn-primary.is-glowing {
-  animation: cta-glow 1.4s var(--ease-out) 2;
+.cta-panel .btn-primary.cta-ring {
+  /* The panel sits on the surface color, so the gap matches it */
+  --color-bg: var(--color-surface);
+}
+
+/* Header "Start a project": a live signal dot, an arrow that nudges on
+   hover, and a light sweep across the button on hover. */
+.btn-nav-cta {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+.btn-nav-cta .btn-signal {
+  position: relative;
+  width: 7px;
+  height: 7px;
+  border-radius: var(--radius-full);
+  background: currentColor;
+  flex-shrink: 0;
+}
+.btn-nav-cta .btn-signal::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: currentColor;
+  animation: btn-signal 2s ease-out infinite;
+}
+@keyframes btn-signal {
+  0% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  80%,
+  100% {
+    transform: scale(2.8);
+    opacity: 0;
+  }
+}
+.btn-nav-cta svg {
+  width: 13px;
+  height: 13px;
+  transition: transform var(--transition-interactive);
+}
+.btn-nav-cta:hover svg,
+.btn-nav-cta:focus-visible svg {
+  transform: translateX(3px);
+}
+.btn-nav-cta::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(105deg, transparent 35%, rgb(255 255 255 / 0.45) 50%, transparent 65%);
+  transform: translateX(-120%);
+}
+.btn-nav-cta:hover::after,
+.btn-nav-cta:focus-visible::after {
+  transform: translateX(120%);
+  transition: transform 700ms var(--ease-out);
+}
+@media (prefers-reduced-motion: reduce) {
+  .btn-nav-cta .btn-signal::after {
+    animation: none;
+  }
+  .btn-nav-cta:hover::after,
+  .btn-nav-cta:focus-visible::after {
+    transform: translateX(-120%);
+    transition: none;
+  }
 }
 
 .btn-secondary {
