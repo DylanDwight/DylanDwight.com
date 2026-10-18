@@ -180,19 +180,24 @@ h3 {
   text-align: center;
   transition: transform var(--transition-interactive), box-shadow var(--transition-interactive);
 }
-/* Hover: no colour change. The button lifts slightly and gets a thin
-   shadow ring plus a soft drop shadow, so it pops off the page. */
+/* Hover: the button presses in like a hardware key. No colour change and
+   no glow: it sinks 1px and takes an inner shadow along the top edge.
+   Clicking presses it a little further. */
 .btn:hover {
-  transform: translateY(-2px);
+  transform: translateY(1px);
   box-shadow:
-    0 0 0 3px oklch(from var(--color-primary) l c h / 0.18),
-    0 10px 24px -8px rgb(0 0 0 / 0.7);
+    inset 0 2px 4px rgb(0 0 0 / 0.35),
+    inset 0 0 0 1px rgb(0 0 0 / 0.12);
 }
 .btn:active {
-  transform: translateY(0);
+  transform: translateY(2px);
+  box-shadow:
+    inset 0 3px 6px rgb(0 0 0 / 0.45),
+    inset 0 0 0 1px rgb(0 0 0 / 0.18);
 }
 @media (prefers-reduced-motion: reduce) {
-  .btn:hover { transform: none; }
+  .btn:hover,
+  .btn:active { transform: none; }
 }
 .btn svg {
   width: 15px;
@@ -250,12 +255,6 @@ h3 {
   mask-composite: exclude;
   animation: cta-orbit 4.5s linear infinite;
 }
-/* These already wear a ring, so on hover they only lift and take the
-   drop shadow, not a second ring. */
-.btn-nav-cta:hover,
-.cta-panel .btn-primary:hover {
-  box-shadow: 0 10px 24px -8px rgb(0 0 0 / 0.7);
-}
 @keyframes cta-orbit {
   to {
     --cta-angle: 360deg;
@@ -281,6 +280,11 @@ h3 {
   background: transparent;
   color: var(--color-text);
   border-color: var(--color-border);
+}
+/* On the dark outlined button an inner shadow alone is invisible, so the
+   pressed face also sinks a shade darker. */
+.btn-secondary:hover {
+  background: rgb(0 0 0 / 0.35);
 }
 .btn-compact {
   padding: var(--space-2) var(--space-4);
