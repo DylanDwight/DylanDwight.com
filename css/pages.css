@@ -622,81 +622,6 @@
   box-shadow: 0 30px 70px -30px rgb(3 105 161 / 0.55), inset 0 0 0 1px rgb(103 212 255 / 0.12);
   isolation: isolate;
 }
-/* Circuit traces with travelling pulses */
-.hero-3d-circuits {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-  pointer-events: none;
-}
-.circ-traces path,
-.circ-pulses path {
-  fill: none;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-.circ-traces path {
-  stroke: rgb(103 212 255 / 0.22);
-  stroke-width: 0.8;
-}
-.circ-nodes circle {
-  fill: #0a2238;
-  stroke: rgb(103 212 255 / 0.55);
-  stroke-width: 0.8;
-}
-.circ-pulses path {
-  stroke: #b9ecff;
-  stroke-width: 1.2;
-  stroke-dasharray: 8 108;
-  stroke-dashoffset: 8;
-  filter: drop-shadow(0 0 2px #38bdf8);
-  animation: circ-pulse var(--t, 5s) linear infinite;
-  animation-delay: var(--d, 0s);
-}
-
-/* Live traces spawned by js/hero-circuits.js */
-.circ path {
-  fill: none;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-.circ-trace {
-  stroke: rgb(103 212 255 / 0.3);
-  stroke-width: 0.8;
-  stroke-dasharray: 100;
-  stroke-dashoffset: 100;
-  animation: circ-draw 0.8s ease-out forwards;
-}
-.circ-node {
-  fill: #0a2238;
-  stroke: rgb(103 212 255 / 0.7);
-  stroke-width: 0.8;
-  opacity: 0;
-  animation: circ-fade-in 0.3s ease-out 0.7s forwards;
-}
-.circ-pulse {
-  stroke: #b9ecff;
-  stroke-width: 1.2;
-  stroke-dasharray: 8 108;
-  stroke-dashoffset: 8;
-  filter: drop-shadow(0 0 2px #38bdf8);
-  animation: circ-pulse 1.4s linear 0.5s infinite;
-}
-.circ {
-  transition: opacity 0.6s ease;
-}
-.circ.is-out {
-  opacity: 0;
-}
-@keyframes circ-draw {
-  to { stroke-dashoffset: 0; }
-}
-@keyframes circ-fade-in {
-  to { opacity: 1; }
-}
-
 /* Blue light running around the frame edge */
 @property --edge-angle {
   syntax: "<angle>";
@@ -735,7 +660,7 @@
   position: absolute;
   inset: 0;
   transform-style: preserve-3d;
-  animation: logo3d-swing 12s ease-in-out infinite alternate, logo3d-float 8s ease-in-out infinite;
+  animation: logo3d-swing 14s ease-in-out infinite alternate, logo3d-float 8s ease-in-out infinite;
 }
 .logo3d-layer {
   position: absolute;
@@ -783,19 +708,16 @@
 }
 
 @keyframes logo3d-swing {
-  from { rotate: y -16deg; }
-  to { rotate: y 16deg; }
+  from { rotate: y -9deg; }
+  to { rotate: y 9deg; }
 }
 @keyframes logo3d-float {
-  0%, 100% { translate: 0 -1.5%; }
-  50% { translate: 0 1.5%; }
+  0%, 100% { translate: 0 -0.8%; }
+  50% { translate: 0 0.8%; }
 }
 @keyframes logo3d-pulse {
   0%, 100% { opacity: 1; }
   50% { opacity: 0.7; }
-}
-@keyframes circ-pulse {
-  to { stroke-dashoffset: -100; }
 }
 @keyframes edge-spin {
   to { --edge-angle: 360deg; }
@@ -803,9 +725,28 @@
 @media (prefers-reduced-motion: reduce) {
   .logo3d-stage,
   .logo3d-node,
-  .circ-pulses path,
   .hero-3d::before,
   .hero-3d::after { animation: none; }
-  .circ-pulses { display: none; }
-  .logo3d-stage { rotate: y -14deg; }
+  .logo3d-stage { rotate: y -8deg; }
+}
+
+/* ---------- Portrait hover wave (js/portrait-wave.js) ---------- */
+.portrait-media {
+  position: relative;
+  display: block;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+.portrait-wave {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 400ms ease;
+  pointer-events: none;
+}
+.about-portrait.is-waving .portrait-wave {
+  opacity: 1;
 }
