@@ -607,3 +607,152 @@
     padding-left: var(--space-14, 3.5rem);
   }
 }
+
+/* ---------- Home: 3D logo hero ---------- */
+.hero-3d {
+  position: relative;
+  aspect-ratio: 16 / 11;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  background:
+    radial-gradient(60% 55% at 50% 50%, oklch(from var(--color-primary) l c h / 0.18), transparent 70%),
+    linear-gradient(160deg, #0b1626 0%, #0a2238 55%, #06263b 100%);
+  isolation: isolate;
+}
+.hero-3d .grid-texture {
+  --color-divider: rgb(103 212 255 / 0.1);
+  z-index: -1;
+}
+.logo3d {
+  position: relative;
+  width: min(52%, 300px);
+  aspect-ratio: 64 / 60;
+  perspective: 900px;
+}
+.logo3d-stage {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  animation: logo3d-swing 9s ease-in-out infinite alternate, logo3d-float 6s ease-in-out infinite;
+}
+.logo3d-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  fill: oklch(0.42 0.12 235);
+  transform: translateZ(calc(var(--i) * -2.2px));
+  overflow: visible;
+}
+.logo3d-layer:not(.logo3d-face) {
+  fill: color-mix(in oklch, #0369a1, #021526 calc(var(--i) * 5%));
+}
+.logo3d-face {
+  fill: url(#logo3d-face);
+  filter: drop-shadow(0 0 10px rgb(103 212 255 / 0.45));
+}
+.logo3d-node {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 9%;
+  aspect-ratio: 1;
+  margin: -4.5% 0 0 -4.5%;
+  border-radius: 50%;
+  background: radial-gradient(circle, #ffffff 0%, #b9ecff 35%, #38bdf8 70%);
+  box-shadow: 0 0 18px 6px rgb(56 189 248 / 0.65), 0 0 50px 14px rgb(56 189 248 / 0.25);
+  transform: translateZ(26px);
+  animation: logo3d-pulse 2.6s ease-in-out infinite;
+}
+.logo3d-ring {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  border-radius: 50%;
+  border: 1px solid rgb(103 212 255 / 0.45);
+  transform-style: preserve-3d;
+}
+.logo3d-ring--a {
+  width: 150%;
+  height: 150%;
+  margin: -75% 0 0 -75%;
+  animation: logo3d-orbit-a 14s linear infinite;
+}
+.logo3d-ring--b {
+  width: 118%;
+  height: 118%;
+  margin: -59% 0 0 -59%;
+  border-style: dashed;
+  border-color: rgb(103 212 255 / 0.3);
+  animation: logo3d-orbit-b 20s linear infinite;
+}
+.logo3d-ring::after {
+  content: "";
+  position: absolute;
+  top: -4px;
+  left: 50%;
+  width: 7px;
+  height: 7px;
+  margin-left: -3.5px;
+  border-radius: 50%;
+  background: #67d4ff;
+  box-shadow: 0 0 10px 2px rgb(103 212 255 / 0.8);
+}
+.logo3d-shadow {
+  position: absolute;
+  left: 15%;
+  right: 15%;
+  bottom: -22%;
+  height: 10%;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgb(56 189 248 / 0.35), transparent);
+  animation: logo3d-shadow 6s ease-in-out infinite;
+}
+.hero-3d-label {
+  position: absolute;
+  inset: auto var(--space-4) var(--space-3);
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.08em;
+  color: rgb(186 230 253 / 0.7);
+}
+@keyframes logo3d-swing {
+  from { rotate: y -38deg; }
+  to { rotate: y 38deg; }
+}
+@keyframes logo3d-float {
+  0%, 100% { translate: 0 -3%; }
+  50% { translate: 0 3%; }
+}
+@keyframes logo3d-pulse {
+  0%, 100% { opacity: 1; scale: 1; }
+  50% { opacity: 0.75; scale: 0.85; }
+}
+@keyframes logo3d-orbit-a {
+  from { transform: rotateX(72deg) rotateZ(0deg); }
+  to { transform: rotateX(72deg) rotateZ(360deg); }
+}
+@keyframes logo3d-orbit-b {
+  from { transform: rotateY(68deg) rotateZ(360deg); }
+  to { transform: rotateY(68deg) rotateZ(0deg); }
+}
+@keyframes logo3d-shadow {
+  0%, 100% { opacity: 0.6; scale: 1.05 1; }
+  50% { opacity: 1; scale: 0.9 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .logo3d-stage,
+  .logo3d-node,
+  .logo3d-ring,
+  .logo3d-shadow { animation: none; }
+  .logo3d-stage { rotate: y -24deg; }
+  .logo3d-ring--a { transform: rotateX(72deg); }
+  .logo3d-ring--b { transform: rotateY(68deg); }
+}
+@media (max-width: 560px) {
+  .hero-3d-label { font-size: 0.625rem; }
+}
