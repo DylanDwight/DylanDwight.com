@@ -7,7 +7,9 @@
 import { initNav } from './nav.js';
 import { initTheme } from './theme.js';
 import { initReveal } from './reveal.js';
+import { initHeroCircuits } from './hero-circuits.js';
 
 initNav();
 initTheme();
 initReveal();
+initHeroCircuits();

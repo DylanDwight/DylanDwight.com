@@ -656,6 +656,47 @@
   animation-delay: var(--d, 0s);
 }
 
+/* Live traces spawned by js/hero-circuits.js */
+.circ path {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.circ-trace {
+  stroke: rgb(103 212 255 / 0.3);
+  stroke-width: 0.8;
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+  animation: circ-draw 0.8s ease-out forwards;
+}
+.circ-node {
+  fill: #0a2238;
+  stroke: rgb(103 212 255 / 0.7);
+  stroke-width: 0.8;
+  opacity: 0;
+  animation: circ-fade-in 0.3s ease-out 0.7s forwards;
+}
+.circ-pulse {
+  stroke: #b9ecff;
+  stroke-width: 1.2;
+  stroke-dasharray: 8 108;
+  stroke-dashoffset: 8;
+  filter: drop-shadow(0 0 2px #38bdf8);
+  animation: circ-pulse 1.4s linear 0.5s infinite;
+}
+.circ {
+  transition: opacity 0.6s ease;
+}
+.circ.is-out {
+  opacity: 0;
+}
+@keyframes circ-draw {
+  to { stroke-dashoffset: 0; }
+}
+@keyframes circ-fade-in {
+  to { opacity: 1; }
+}
+
 /* Blue light running around the frame edge */
 @property --edge-angle {
   syntax: "<angle>";
