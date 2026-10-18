@@ -188,9 +188,9 @@ h3 {
   background: var(--color-primary);
   color: var(--color-text-inverse);
 }
+/* Hover keeps the fill colour and only adds a soft glow. */
 .btn-primary:hover {
-  background: var(--color-primary-hover);
-  box-shadow: 0 0 18px oklch(from var(--color-primary) l c h / 0.12);
+  box-shadow: 0 0 14px oklch(from var(--color-primary) l c h / 0.1);
 }
 /* CTA ring: the header "Start a project" button and the primary button in
    the bottom-of-page contact panel. A hairline ring sits 4px outside the
@@ -243,8 +243,8 @@ h3 {
 .btn-nav-cta:focus-visible::after,
 .cta-panel .btn-primary:hover::after,
 .cta-panel .btn-primary:focus-visible::after {
-  border-color: oklch(from var(--color-primary) l c h / 0.4);
-  box-shadow: 0 0 18px 1px oklch(from var(--color-primary) l c h / 0.3);
+  border-color: oklch(from var(--color-primary) l c h / 0.36);
+  box-shadow: 0 0 16px 1px oklch(from var(--color-primary) l c h / 0.2);
 }
 /* The ring already glows, so the button itself adds no hover shadow. */
 .btn-nav-cta:hover,

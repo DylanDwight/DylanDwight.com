@@ -32,7 +32,6 @@
 
   /* Primary accent — signal blue (11.7:1 on bg) */
   --color-primary: #67d4ff;
-  --color-primary-hover: #94e2ff;
 
   /* Secondary accent — hazard amber (structural divider only) */
   --color-warning: #ff9d3d;
