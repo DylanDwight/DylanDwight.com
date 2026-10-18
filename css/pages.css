@@ -615,21 +615,171 @@
   display: grid;
   place-items: center;
   overflow: hidden;
-  border-radius: var(--radius-md);
-  background:
-    radial-gradient(60% 55% at 50% 50%, oklch(from var(--color-primary) l c h / 0.18), transparent 70%),
-    linear-gradient(160deg, #0b1626 0%, #0a2238 55%, #06263b 100%);
+  border-radius: 20px;
+  container-type: size;
+  background: radial-gradient(120% 90% at 50% 0%, #0b2540 0%, #050b16 70%);
+  box-shadow: 0 30px 80px -30px rgb(3 105 161 / 0.55), inset 0 0 0 1px rgb(103 212 255 / 0.12);
   isolation: isolate;
 }
-.hero-3d .grid-texture {
-  --color-divider: rgb(103 212 255 / 0.1);
+.hero-3d > div:not(.logo3d) {
+  position: absolute;
+  pointer-events: none;
+}
+
+/* Drifting color fields */
+.hero-3d-aurora {
+  inset: -30%;
+  z-index: -3;
+  background:
+    radial-gradient(30% 30% at 30% 40%, rgb(56 189 248 / 0.45), transparent 70%),
+    radial-gradient(28% 32% at 70% 60%, rgb(124 58 237 / 0.35), transparent 70%),
+    radial-gradient(25% 25% at 55% 30%, rgb(34 211 238 / 0.3), transparent 70%);
+  filter: blur(30px);
+  animation: hero3d-aurora 16s ease-in-out infinite alternate;
+}
+
+/* Perspective floor grid rushing toward the viewer */
+.hero-3d-floor {
+  left: -50%;
+  right: -50%;
+  bottom: 0;
+  height: 48%;
+  z-index: -2;
+  background-image:
+    linear-gradient(rgb(103 212 255 / 0.7) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(103 212 255 / 0.55) 1px, transparent 1px);
+  background-size: 48px 48px;
+  transform: perspective(260px) rotateX(55deg);
+  transform-origin: 50% 100%;
+  mask-image: linear-gradient(to top, #000 0%, rgb(0 0 0 / 0.6) 40%, transparent 100%);
+  animation: hero3d-floor 2.4s linear infinite;
+}
+
+/* Two star layers drifting upward at different speeds */
+.hero-3d-stars {
+  inset: 0;
   z-index: -1;
 }
+.hero-3d-stars::before,
+.hero-3d-stars::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: 1px;
+  border-radius: 50%;
+}
+.hero-3d-stars::after {
+  top: 100cqh;
+}
+.hero-3d-stars--near::before,
+.hero-3d-stars--near::after {
+  box-shadow:
+    33.1cqw 97.0cqh 0 1px rgb(186 230 253 / 0.85),
+    40.4cqw 66.6cqh 0 1px rgb(186 230 253 / 0.85),
+    7.4cqw 84.0cqh 0 2px rgb(186 230 253 / 0.85),
+    9.6cqw 37.4cqh 0 2px rgb(186 230 253 / 0.85),
+    5.9cqw 93.1cqh 0 2px rgb(186 230 253 / 0.85),
+    21.9cqw 3.8cqh 0 1px rgb(186 230 253 / 0.85),
+    44.4cqw 42.8cqh 0 1px rgb(186 230 253 / 0.85),
+    24.6cqw 9.2cqh 0 2px rgb(186 230 253 / 0.85),
+    43.4cqw 6.0cqh 0 2px rgb(186 230 253 / 0.85),
+    12.6cqw 97.0cqh 0 1px rgb(186 230 253 / 0.85),
+    64.5cqw 64.2cqh 0 2px rgb(186 230 253 / 0.85),
+    97.0cqw 6.3cqh 0 2px rgb(186 230 253 / 0.85),
+    59.9cqw 40.6cqh 0 1px rgb(186 230 253 / 0.85),
+    99.9cqw 22.6cqh 0 1px rgb(186 230 253 / 0.85),
+    57.0cqw 87.9cqh 0 1px rgb(186 230 253 / 0.85),
+    29.6cqw 42.9cqh 0 1px rgb(186 230 253 / 0.85),
+    55.3cqw 12.0cqh 0 2px rgb(186 230 253 / 0.85),
+    31.5cqw 57.3cqh 0 2px rgb(186 230 253 / 0.85),
+    18.5cqw 10.5cqh 0 2px rgb(186 230 253 / 0.85),
+    58.4cqw 65.4cqh 0 1px rgb(186 230 253 / 0.85),
+    38.1cqw 9.9cqh 0 2px rgb(186 230 253 / 0.85),
+    72.9cqw 6.4cqh 0 2px rgb(186 230 253 / 0.85),
+    6.1cqw 63.3cqh 0 1px rgb(186 230 253 / 0.85),
+    50.8cqw 69.6cqh 0 2px rgb(186 230 253 / 0.85),
+    43.7cqw 79.5cqh 0 1px rgb(186 230 253 / 0.85),
+    47.6cqw 59.9cqh 0 1px rgb(186 230 253 / 0.85);
+}
+.hero-3d-stars--far::before,
+.hero-3d-stars--far::after {
+  box-shadow:
+    37.0cqw 30.6cqh 0 0px rgb(186 230 253 / 0.5),
+    81.3cqw 18.4cqh 0 0px rgb(186 230 253 / 0.5),
+    8.3cqw 58.8cqh 0 1px rgb(186 230 253 / 0.5),
+    53.7cqw 50.6cqh 0 1px rgb(186 230 253 / 0.5),
+    74.6cqw 45.9cqh 0 1px rgb(186 230 253 / 0.5),
+    62.3cqw 7.4cqh 0 0px rgb(186 230 253 / 0.5),
+    52.4cqw 42.8cqh 0 0px rgb(186 230 253 / 0.5),
+    77.5cqw 35.0cqh 0 0px rgb(186 230 253 / 0.5),
+    95.5cqw 50.0cqh 0 1px rgb(186 230 253 / 0.5),
+    4.0cqw 98.5cqh 0 0px rgb(186 230 253 / 0.5),
+    78.2cqw 57.1cqh 0 1px rgb(186 230 253 / 0.5),
+    34.8cqw 71.1cqh 0 1px rgb(186 230 253 / 0.5),
+    60.8cqw 50.8cqh 0 1px rgb(186 230 253 / 0.5),
+    7.0cqw 86.0cqh 0 0px rgb(186 230 253 / 0.5),
+    96.7cqw 27.6cqh 0 1px rgb(186 230 253 / 0.5),
+    71.3cqw 68.0cqh 0 0px rgb(186 230 253 / 0.5),
+    6.2cqw 74.8cqh 0 1px rgb(186 230 253 / 0.5),
+    66.2cqw 59.1cqh 0 1px rgb(186 230 253 / 0.5),
+    29.1cqw 73.3cqh 0 1px rgb(186 230 253 / 0.5),
+    90.8cqw 68.4cqh 0 1px rgb(186 230 253 / 0.5),
+    2.3cqw 96.3cqh 0 1px rgb(186 230 253 / 0.5),
+    36.3cqw 17.2cqh 0 0px rgb(186 230 253 / 0.5),
+    50.5cqw 6.0cqh 0 0px rgb(186 230 253 / 0.5),
+    78.6cqw 29.4cqh 0 0px rgb(186 230 253 / 0.5),
+    75.6cqw 25.3cqh 0 1px rgb(186 230 253 / 0.5),
+    40.0cqw 93.8cqh 0 1px rgb(186 230 253 / 0.5),
+    8.2cqw 17.0cqh 0 1px rgb(186 230 253 / 0.5),
+    41.1cqw 56.2cqh 0 1px rgb(186 230 253 / 0.5),
+    90.4cqw 14.0cqh 0 1px rgb(186 230 253 / 0.5),
+    88.4cqw 56.3cqh 0 1px rgb(186 230 253 / 0.5),
+    72.3cqw 42.5cqh 0 1px rgb(186 230 253 / 0.5),
+    69.9cqw 90.5cqh 0 1px rgb(186 230 253 / 0.5),
+    98.0cqw 23.6cqh 0 0px rgb(186 230 253 / 0.5),
+    8.4cqw 18.0cqh 0 0px rgb(186 230 253 / 0.5),
+    23.7cqw 67.4cqh 0 0px rgb(186 230 253 / 0.5),
+    1.2cqw 49.6cqh 0 0px rgb(186 230 253 / 0.5),
+    26.9cqw 28.8cqh 0 0px rgb(186 230 253 / 0.5),
+    14.9cqw 42.9cqh 0 1px rgb(186 230 253 / 0.5),
+    62.4cqw 57.9cqh 0 1px rgb(186 230 253 / 0.5),
+    97.5cqw 12.8cqh 0 0px rgb(186 230 253 / 0.5);
+}
+.hero-3d-stars--near { animation: hero3d-rise 18s linear infinite; }
+.hero-3d-stars--far { animation: hero3d-rise 34s linear infinite; }
+
+/* Light sweep */
+.hero-3d-scan {
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 22%;
+  z-index: 2;
+  background: linear-gradient(to bottom, transparent, rgb(103 212 255 / 0.05) 90%, rgb(186 230 253 / 0.16) 100%);
+  border-bottom: 1px solid rgb(186 230 253 / 0.18);
+  mix-blend-mode: screen;
+  animation: hero3d-scan 5.5s cubic-bezier(.6,0,.4,1) infinite;
+}
+
+.hero-3d-label {
+  right: var(--space-5);
+  bottom: var(--space-4);
+  z-index: 3;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.12em;
+  color: rgb(186 230 253 / 0.75);
+}
+
+/* The mark */
 .logo3d {
   position: relative;
-  width: min(52%, 300px);
+  width: min(50%, 300px);
   aspect-ratio: 64 / 60;
   perspective: 900px;
+  translate: 0 -6%;
 }
 .logo3d-stage {
   position: absolute;
@@ -642,16 +792,13 @@
   inset: 0;
   width: 100%;
   height: 100%;
-  fill: oklch(0.42 0.12 235);
-  transform: translateZ(calc(var(--i) * -2.2px));
   overflow: visible;
-}
-.logo3d-layer:not(.logo3d-face) {
-  fill: color-mix(in oklch, #0369a1, #021526 calc(var(--i) * 5%));
+  transform: translateZ(calc(var(--i) * -2.2px));
+  fill: color-mix(in oklch, #0ea5e9, #020617 calc(20% + var(--i) * 4.5%));
 }
 .logo3d-face {
   fill: url(#logo3d-face);
-  filter: drop-shadow(0 0 10px rgb(103 212 255 / 0.45));
+  filter: drop-shadow(0 0 14px rgb(103 212 255 / 0.55)) drop-shadow(0 0 2px rgb(224 247 255 / 0.9));
 }
 .logo3d-node {
   position: absolute;
@@ -662,63 +809,40 @@
   margin: -4.5% 0 0 -4.5%;
   border-radius: 50%;
   background: radial-gradient(circle, #ffffff 0%, #b9ecff 35%, #38bdf8 70%);
-  box-shadow: 0 0 18px 6px rgb(56 189 248 / 0.65), 0 0 50px 14px rgb(56 189 248 / 0.25);
+  box-shadow: 0 0 18px 6px rgb(56 189 248 / 0.7), 0 0 60px 18px rgb(56 189 248 / 0.3);
   transform: translateZ(26px);
   animation: logo3d-pulse 2.6s ease-in-out infinite;
 }
-.logo3d-ring {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  border-radius: 50%;
-  border: 1px solid rgb(103 212 255 / 0.45);
-  transform-style: preserve-3d;
-}
-.logo3d-ring--a {
-  width: 150%;
-  height: 150%;
-  margin: -75% 0 0 -75%;
-  animation: logo3d-orbit-a 14s linear infinite;
-}
-.logo3d-ring--b {
-  width: 118%;
-  height: 118%;
-  margin: -59% 0 0 -59%;
-  border-style: dashed;
-  border-color: rgb(103 212 255 / 0.3);
-  animation: logo3d-orbit-b 20s linear infinite;
-}
-.logo3d-ring::after {
-  content: "";
-  position: absolute;
-  top: -4px;
-  left: 50%;
-  width: 7px;
-  height: 7px;
-  margin-left: -3.5px;
-  border-radius: 50%;
-  background: #67d4ff;
-  box-shadow: 0 0 10px 2px rgb(103 212 255 / 0.8);
-}
 .logo3d-shadow {
   position: absolute;
-  left: 15%;
-  right: 15%;
-  bottom: -22%;
-  height: 10%;
+  left: 10%;
+  right: 10%;
+  bottom: -26%;
+  height: 12%;
   border-radius: 50%;
-  background: radial-gradient(closest-side, rgb(56 189 248 / 0.35), transparent);
+  background: radial-gradient(closest-side, rgb(56 189 248 / 0.55), transparent);
+  filter: blur(4px);
   animation: logo3d-shadow 6s ease-in-out infinite;
 }
-.hero-3d-label {
-  position: absolute;
-  inset: auto var(--space-4) var(--space-3);
-  display: flex;
-  justify-content: space-between;
-  font-family: var(--font-mono);
-  font-size: 0.6875rem;
-  letter-spacing: 0.08em;
-  color: rgb(186 230 253 / 0.7);
+
+@keyframes hero3d-aurora {
+  0% { transform: translate(-6%, -4%) rotate(0deg); }
+  50% { transform: translate(5%, 3%) rotate(20deg); }
+  100% { transform: translate(-3%, 6%) rotate(-12deg); }
+}
+@keyframes hero3d-floor {
+  from { background-position: 0 0, 0 0; }
+  to { background-position: 0 48px, 0 0; }
+}
+@keyframes hero3d-rise {
+  from { transform: translateY(0); }
+  to { transform: translateY(-100cqh); }
+}
+@keyframes hero3d-scan {
+  0% { transform: translateY(-110%); opacity: 0; }
+  15% { opacity: 1; }
+  70% { opacity: 1; }
+  100% { transform: translateY(380%); opacity: 0; }
 }
 @keyframes logo3d-swing {
   from { rotate: y -38deg; }
@@ -732,27 +856,18 @@
   0%, 100% { opacity: 1; scale: 1; }
   50% { opacity: 0.75; scale: 0.85; }
 }
-@keyframes logo3d-orbit-a {
-  from { transform: rotateX(72deg) rotateZ(0deg); }
-  to { transform: rotateX(72deg) rotateZ(360deg); }
-}
-@keyframes logo3d-orbit-b {
-  from { transform: rotateY(68deg) rotateZ(360deg); }
-  to { transform: rotateY(68deg) rotateZ(0deg); }
-}
 @keyframes logo3d-shadow {
   0%, 100% { opacity: 0.6; scale: 1.05 1; }
   50% { opacity: 1; scale: 0.9 1; }
 }
 @media (prefers-reduced-motion: reduce) {
+  .hero-3d-aurora,
+  .hero-3d-floor,
+  .hero-3d-stars,
+  .hero-3d-scan,
   .logo3d-stage,
   .logo3d-node,
-  .logo3d-ring,
   .logo3d-shadow { animation: none; }
+  .hero-3d-scan { display: none; }
   .logo3d-stage { rotate: y -24deg; }
-  .logo3d-ring--a { transform: rotateX(72deg); }
-  .logo3d-ring--b { transform: rotateY(68deg); }
-}
-@media (max-width: 560px) {
-  .hero-3d-label { font-size: 0.625rem; }
 }
