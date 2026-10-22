@@ -249,13 +249,13 @@ h3 {
   initial-value: 0deg;
 }
 .btn-nav-cta,
-.cta-panel .btn-primary {
+.cta-panel .btn-primary:not(.btn-submit) {
   position: relative;
 }
 .btn-nav-cta::before,
 .btn-nav-cta::after,
-.cta-panel .btn-primary::before,
-.cta-panel .btn-primary::after {
+.cta-panel .btn-primary:not(.btn-submit)::before,
+.cta-panel .btn-primary:not(.btn-submit)::after {
   content: '';
   position: absolute;
   inset: -4px;
@@ -264,14 +264,14 @@ h3 {
 }
 /* Halo: hairline ring + soft glow */
 .btn-nav-cta::after,
-.cta-panel .btn-primary::after {
+.cta-panel .btn-primary:not(.btn-submit)::after {
   border: 1px solid oklch(from var(--color-primary) l c h / 0.28);
   box-shadow: 0 0 16px 1px oklch(from var(--color-primary) l c h / 0.28);
   transition: box-shadow var(--transition-interactive), border-color var(--transition-interactive);
 }
 /* Travelling arc, masked to a 1.5px ring */
 .btn-nav-cta::before,
-.cta-panel .btn-primary::before {
+.cta-panel .btn-primary:not(.btn-submit)::before {
   padding: 1.5px;
   background: conic-gradient(
     from var(--cta-angle),
@@ -290,8 +290,8 @@ h3 {
    shadow and the label turns bold (monospace, so the width doesn't shift). */
 .btn-nav-cta:hover,
 .btn-nav-cta:active,
-.cta-panel .btn-primary:hover,
-.cta-panel .btn-primary:active {
+.cta-panel .btn-primary:not(.btn-submit):hover,
+.cta-panel .btn-primary:not(.btn-submit):active {
   transform: none;
   text-decoration-color: transparent;
   box-shadow: 0 8px 22px -6px rgb(0 0 0 / 0.75);
@@ -313,7 +313,7 @@ h3 {
 }
 @media (prefers-reduced-motion: reduce) {
   .btn-nav-cta::before,
-  .cta-panel .btn-primary::before {
+  .cta-panel .btn-primary:not(.btn-submit)::before {
     animation: none;
   }
 }

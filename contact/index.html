@@ -162,37 +162,175 @@
   <section class="section section--tight" aria-label="Project inquiry">
     <div class="wrap contact-layout">
 
-      <div class="cta-panel inquiry-panel corner-panel" data-reveal>
+      <div class="cta-panel inquiry-panel corner-panel" id="inquiry" data-reveal>
         <div class="grid-texture" aria-hidden="true"></div>
         <span class="eyebrow eyebrow--accent">Project inquiry</span>
-        <h2>Project inquiry</h2>
-        <p class="lede">The inquiry takes about five minutes. It asks what you need, your ideal timeline, and an optional budget range so I can come back with useful questions instead of generic ones.</p>
+        <h2 id="inquiry-heading">Project inquiry</h2>
+        <p class="lede">Share a few details about your project idea and I'll let you know how I can help.</p>
 
-        <div class="inquiry-action">
-          <a class="btn btn-primary btn-lg" href="https://forms.gle/hFTC4HY3k2H74ta9A" target="_blank" rel="noopener noreferrer">
-            Start a project inquiry <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg><span class="sr-only"> (opens in a new tab)</span>
-          </a>
-          <p class="inquiry-meta"><span>Opens in a new tab</span><span>About 5 minutes</span><span>I'll only use this information to reply to your inquiry.</span></p>
+        <!--
+          Native form that submits to the existing Google Form
+          ("Start a Project — Dylan Dwight Creative Technologies") via its formResponse endpoint.
+          js/contact-form.js sends it in the background and shows the result inline;
+          without JS the browser posts straight to Google and shows Google's confirmation page.
+
+          Field names are the Google Form's entry IDs (read from the form on 2026-10-22).
+          Option values must match the form's options exactly, including en dashes and curly
+          apostrophes, or Google drops the answer. If a question changes in the form, update it here.
+        -->
+        <form class="inquiry-form" id="inquiry-form" data-inquiry-form
+              action="https://docs.google.com/forms/d/e/1FAIpQLSfy6JCUTIqP7bulMAeGPj1vjVBC8ilprU8yDcCSrFCz_Hzclg/formResponse"
+              method="POST" accept-charset="UTF-8" aria-labelledby="inquiry-heading">
+
+          <div class="form-errors" data-form-errors tabindex="-1" hidden>
+            <h3>Please check <span data-error-count>these fields</span></h3>
+            <ul data-error-list></ul>
+          </div>
+
+          <p class="form-required-note"><span aria-hidden="true">*</span> Required</p>
+
+          <p class="form-draft-note" data-draft-note hidden>
+            Welcome back. I kept the answers you hadn't sent yet; they stay saved on this device for 24 hours.
+            <button type="button" class="text-button" data-draft-clear>Clear the form</button>
+          </p>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="f-name">Full name <span class="req" aria-hidden="true">*</span></label>
+              <input id="f-name" name="entry.1774164789" type="text" autocomplete="name" required aria-describedby="f-name-error" />
+              <p class="field-error" id="f-name-error" data-error-for="f-name" hidden></p>
+            </div>
+            <div class="field">
+              <label for="f-email">Email address <span class="req" aria-hidden="true">*</span></label>
+              <input id="f-email" name="entry.23795767" type="email" autocomplete="email" inputmode="email" spellcheck="false" required aria-describedby="f-email-error" />
+              <p class="field-error" id="f-email-error" data-error-for="f-email" hidden></p>
+            </div>
+          </div>
+
+          <div class="field-row">
+            <!-- Phone isn't a question on the Google Form: js/contact-form.js adds it, with the
+                 preferred contact method, to the top of the project details. -->
+            <div class="field">
+              <label for="f-phone">Phone number <span class="field-optional">(recommended)</span></label>
+              <input id="f-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" aria-describedby="f-phone-error" />
+              <p class="field-error" id="f-phone-error" data-error-for="f-phone" hidden></p>
+            </div>
+            <div class="field">
+              <label for="f-business">Business or organization <span class="req" aria-hidden="true">*</span></label>
+              <input id="f-business" name="entry.80599601" type="text" autocomplete="organization" required aria-describedby="f-business-error" />
+              <p class="field-error" id="f-business-error" data-error-for="f-business" hidden></p>
+            </div>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="f-service">Service needed <span class="req" aria-hidden="true">*</span></label>
+              <select id="f-service" name="entry.1441315021" required aria-describedby="f-service-error">
+              <option value="">Select a service</option>
+              <option value="Landing page">Landing page</option>
+              <option value="Small-business website">Small-business website</option>
+              <option value="Website redesign">Website redesign</option>
+              <option value="Responsive front-end build">Responsive front-end build</option>
+              <option value="Basic brand direction or design assets">Basic brand direction or design assets</option>
+              <option value="SEO foundations">SEO foundations</option>
+              <option value="Accessibility cleanup">Accessibility cleanup</option>
+              <option value="Website maintenance or technical support">Website maintenance or technical support</option>
+              <option value="Other">Other</option>
+              </select>
+              <p class="field-error" id="f-service-error" data-error-for="f-service" hidden></p>
+            </div>
+            <div class="field">
+              <label for="f-launch">Timeline <span class="req" aria-hidden="true">*</span></label>
+              <select id="f-launch" name="entry.1191555483" required aria-describedby="f-launch-error">
+              <option value="">Select a timeline</option>
+              <option value="As soon as possible">As soon as possible</option>
+              <option value="Within 1 month">Within 1 month</option>
+              <option value="Within 1–3 months">Within 1–3 months</option>
+              <option value="More than 3 months from now">More than 3 months from now</option>
+              <option value="I’m still figuring it out">I’m still figuring it out</option>
+              </select>
+              <p class="field-error" id="f-launch-error" data-error-for="f-launch" hidden></p>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="f-budget">Budget <span class="field-optional">(optional)</span></label>
+            <select id="f-budget" name="entry.1398800556">
+              <option value="">Select a range</option>
+              <option value="Under $1,000">Under $1,000</option>
+              <option value="$1,000–$2,500">$1,000–$2,500</option>
+              <option value="$2,500–$5,000">$2,500–$5,000</option>
+              <option value="$5,000+">$5,000+</option>
+              <option value="I’m not sure yet">I’m not sure yet</option>
+              <option value="Prefer not to say">Prefer not to say</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="f-details">Project details <span class="req" aria-hidden="true">*</span></label>
+            <p class="field-hint" id="f-details-hint">Briefly describe your goals, your current website (if any), and anything that isn't working today.</p>
+            <textarea id="f-details" name="entry.726235173" rows="5" required aria-describedby="f-details-hint f-details-error"></textarea>
+            <p class="field-error" id="f-details-error" data-error-for="f-details" hidden></p>
+          </div>
+
+          <fieldset class="field" id="f-contact" data-required-group aria-describedby="f-contact-error">
+            <legend>Preferred contact method <span class="req" aria-hidden="true">*</span></legend>
+            <div class="choices choices--inline">
+              <label class="choice"><input type="radio" name="contact" value="Email" required checked /> <span>Email</span></label>
+              <label class="choice"><input type="radio" name="contact" value="Phone call" data-needs-phone /> <span>Phone call</span></label>
+              <label class="choice"><input type="radio" name="contact" value="Text message" data-needs-phone /> <span>Text message</span></label>
+            </div>
+            <p class="field-error" id="f-contact-error" data-error-for="f-contact" hidden></p>
+          </fieldset>
+
+          <!-- The Google Form still requires these, so the form sends fixed answers for them. -->
+          <input type="hidden" name="entry.1762546386" value="Other" />
+          <input type="hidden" name="entry.568267844" value="I understand Dylan Dwight Creative Technologies will use this information only to respond to my inquiry." />
+
+          <!-- Spam trap: hidden from people and screen readers, never sent to Google. -->
+          <div class="hp-field" aria-hidden="true">
+            <label for="f-website">Leave this empty</label>
+            <input id="f-website" type="text" tabindex="-1" autocomplete="off" data-honeypot />
+          </div>
+
+          <div class="form-actions">
+            <button class="btn btn-primary btn-lg btn-submit" type="submit" data-submit>
+              <span data-submit-label>Send inquiry</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </button>
+            <p class="inquiry-meta"><span>By sending, you agree I'll use this information only to reply to your inquiry.</span></p>
+          </div>
+
+          <div class="form-status" data-form-status role="status" aria-live="polite"></div>
+        </form>
+
+        <div class="form-success" data-form-success tabindex="-1" hidden>
+          <span class="eyebrow eyebrow--accent">Inquiry sent</span>
+          <h3>Thank you. Your inquiry has been received.</h3>
+          <p>Here's what happens next:</p>
+          <ol class="next-steps">
+            <li><strong>Within two business days, you'll receive <span data-success-followup>an email</span> to set up a phone or video call.</strong></li>
+            <li><strong>On the call, we'll review your project details together.</strong></li>
+            <li><strong>I'll then prepare a custom scope and quote so you can decide whether to move forward.</strong></li>
+          </ol>
         </div>
-
-        <h3 style="margin-top: var(--space-10); font-size: var(--text-base);">What happens next</h3>
-        <ol class="next-steps">
-          <li><strong>Send your inquiry.</strong></li>
-          <li><strong>I review the project details and follow up with questions or next steps.</strong></li>
-          <li><strong>If we are a fit, I prepare a custom scope and quote.</strong></li>
-        </ol>
-        <p class="payment-note">After approval, a deposit reserves your start date. The remaining balance is invoiced before launch or final handoff.</p>
       </div>
 
       <div class="contact-side" data-reveal>
+        <div class="phone-card">
+          <h2>Call or text</h2>
+          <p>Prefer to discuss your project directly? Call or send a text and I'll get back to you as soon as I can.</p>
+          <a class="phone-card-number" href="tel:+13473793273">(347) 379-3273</a>
+          <div class="phone-card-actions">
+            <a class="btn btn-primary" href="tel:+13473793273"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg> Call</a>
+            <a class="btn btn-secondary" href="sms:+13473793273"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><path d="M8 9h8M8 13h5"/></svg> Text</a>
+          </div>
+        </div>
         <div>
-          <h2>Prefer email?</h2>
+          <h2>Email or LinkedIn</h2>
           <p>I aim to reply within two business days.</p>
           <div class="contact-links">
             <a href="mailto:dylan@dylandwight.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg> dylan@dylandwight.com</a>
-            <a href="tel:+13473793273"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg> (347) 379-3273</a>
             <a href="https://www.linkedin.com/in/dylan-dwight/" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg> LinkedIn<span class="sr-only"> (opens in a new tab)</span></a>
-            <a href="https://github.com/DylanDwight" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg> GitHub<span class="sr-only"> (opens in a new tab)</span></a>
           </div>
         </div>
         <div>

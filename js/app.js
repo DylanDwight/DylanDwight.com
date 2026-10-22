@@ -7,7 +7,9 @@
 import { initNav } from './nav.js';
 import { initReveal } from './reveal.js';
 import { initCaseStudy } from './case-study.js';
+import { initContactForm } from './contact-form.js';
 
 initNav();
 initReveal();
 initCaseStudy();
+initContactForm();
