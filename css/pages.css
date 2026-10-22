@@ -1661,3 +1661,20 @@ table.cs-table td:first-child {
     width: 100%;
   }
 }
+
+.form-draft-note {
+  padding: var(--space-3) var(--space-4);
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+.text-button {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--color-primary);
+  text-decoration: underline 1px;
+  text-underline-offset: 0.25em;
+  min-height: 44px;
+  padding: 0 var(--space-1);
+}

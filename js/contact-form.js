@@ -9,6 +9,10 @@
 
 const EMAIL = 'dylan@dylandwight.com';
 const DETAILS_ENTRY = 'entry.726235173';
+// Unsent answers are kept in this browser so a refresh doesn't lose them,
+// and are dropped after a week or once the inquiry is sent.
+const DRAFT_KEY = 'dd-inquiry-draft';
+const DRAFT_MAX_AGE = 7 * 24 * 60 * 60 * 1000;
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 function labelFor(field) {
@@ -99,6 +103,55 @@ function buildPayload(form) {
   return new URLSearchParams(data);
 }
 
+function saveDraft(form) {
+  // Consent is asked fresh each visit, so it isn't kept.
+  const consent = form.querySelector('#f-consent').name;
+  const fields = [...new FormData(form)].filter(([name, value]) => value !== '' && name !== consent);
+  try {
+    if (fields.length) {
+      localStorage.setItem(DRAFT_KEY, JSON.stringify({ savedAt: Date.now(), fields }));
+    } else {
+      localStorage.removeItem(DRAFT_KEY);
+    }
+  } catch {
+    // Storage blocked (private mode, site data off): the form still works.
+  }
+}
+
+function clearDraft() {
+  try {
+    localStorage.removeItem(DRAFT_KEY);
+  } catch {
+    // Nothing to clear.
+  }
+}
+
+// Returns true when saved answers were put back into the form.
+function restoreDraft(form) {
+  let draft;
+  try {
+    draft = JSON.parse(localStorage.getItem(DRAFT_KEY));
+  } catch {
+    return false;
+  }
+  if (!draft || !Array.isArray(draft.fields)) return false;
+  if (Date.now() - draft.savedAt > DRAFT_MAX_AGE) {
+    clearDraft();
+    return false;
+  }
+
+  draft.fields.forEach(([name, value]) => {
+    form.querySelectorAll(`[name="${CSS.escape(name)}"]`).forEach((input) => {
+      if (input.type === 'radio' || input.type === 'checkbox') {
+        if (input.value === value) input.checked = true;
+      } else {
+        input.value = value;
+      }
+    });
+  });
+  return draft.fields.length > 0;
+}
+
 function setStatus(form, html) {
   form.querySelector('[data-form-status]').innerHTML = html;
 }
@@ -124,6 +177,21 @@ export function initContactForm() {
   // The phone field only appears once someone asks for a call.
   form.addEventListener('change', (event) => {
     if (event.target.name === 'followup') phoneField.hidden = !callChoice.checked;
+  });
+
+  const draftNote = form.querySelector('[data-draft-note]');
+  if (restoreDraft(form)) {
+    phoneField.hidden = !callChoice.checked;
+    draftNote.hidden = false;
+  }
+  form.addEventListener('input', () => saveDraft(form));
+  form.addEventListener('change', () => saveDraft(form));
+  form.querySelector('[data-draft-clear]').addEventListener('click', () => {
+    clearDraft();
+    form.reset();
+    phoneField.hidden = true;
+    draftNote.hidden = true;
+    form.querySelector('input:not([type="hidden"])').focus();
   });
 
   // Clear a field's error as soon as it's fixed. Text fields clear while
@@ -174,6 +242,7 @@ export function initContactForm() {
       success.querySelector('[data-success-followup]').textContent = callChoice.checked
         ? "I'll email you a few times for a call"
         : "I'll reply by email";
+      clearDraft();
       form.hidden = true;
       success.hidden = false;
       success.focus();
