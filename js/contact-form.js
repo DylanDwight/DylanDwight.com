@@ -20,7 +20,6 @@ function labelFor(field) {
     return field.querySelector('legend').firstChild.textContent.trim();
   }
   const input = field.querySelector('input, textarea');
-  if (input.type === 'checkbox') return 'Consent';
   return field.querySelector(`label[for="${input.id}"]`).firstChild.textContent.trim();
 }
 
@@ -34,10 +33,8 @@ function validate(form) {
   });
 
   form.querySelectorAll('input[required]:not([type="radio"]), textarea[required]').forEach((input) => {
-    const value = input.type === 'checkbox' ? input.checked : input.value.trim();
-    if (!value) {
-      const message = input.type === 'checkbox' ? 'Please tick the box to continue.' : 'This field is required.';
-      problems.push({ id: input.id, focus: input, message });
+    if (!input.value.trim()) {
+      problems.push({ id: input.id, focus: input, message: 'This field is required.' });
     } else if (input.type === 'email' && !EMAIL_PATTERN.test(input.value.trim())) {
       problems.push({ id: input.id, focus: input, message: 'Enter an email address like name@example.com.' });
     }
@@ -104,9 +101,9 @@ function buildPayload(form) {
 }
 
 function saveDraft(form) {
-  // Consent is asked fresh each visit, so it isn't kept.
-  const consent = form.querySelector('#f-consent').name;
-  const fields = [...new FormData(form)].filter(([name, value]) => value !== '' && name !== consent);
+  // Only what the visitor typed or picked; the hidden answers are fixed.
+  const fixed = [...form.querySelectorAll('input[type="hidden"]')].map((input) => input.name);
+  const fields = [...new FormData(form)].filter(([name, value]) => value !== '' && !fixed.includes(name));
   try {
     if (fields.length) {
       localStorage.setItem(DRAFT_KEY, JSON.stringify({ savedAt: Date.now(), fields }));

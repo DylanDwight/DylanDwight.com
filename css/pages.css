@@ -1493,6 +1493,7 @@ table.cs-table td:first-child {
 }
 .inquiry-form input[type='text'],
 .inquiry-form input[type='email'],
+.inquiry-form input[type='tel'],
 .inquiry-form textarea {
   width: 100%;
   min-height: 48px;
@@ -1514,11 +1515,13 @@ table.cs-table td:first-child {
 }
 .inquiry-form input[type='text']:hover,
 .inquiry-form input[type='email']:hover,
+.inquiry-form input[type='tel']:hover,
 .inquiry-form textarea:hover {
   border-color: var(--color-text-faint);
 }
 .inquiry-form input[type='text']:focus-visible,
 .inquiry-form input[type='email']:focus-visible,
+.inquiry-form input[type='tel']:focus-visible,
 .inquiry-form textarea:focus-visible {
   outline: 2px solid var(--color-primary);
   outline-offset: 1px;
@@ -1638,26 +1641,11 @@ table.cs-table td:first-child {
   overflow: hidden;
 }
 
-/* Book a call */
-.book-call {
-  padding: var(--space-6);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
-  background: var(--color-surface);
-}
-.book-call-btn {
-  margin-top: var(--space-5);
-}
-.contact-side .book-call-phone {
-  margin-top: var(--space-4);
-}
-
 @media (max-width: 720px) {
   .choices--2col {
     grid-template-columns: 1fr;
   }
-  .form-actions .btn,
-  .book-call-btn {
+  .form-actions .btn {
     width: 100%;
   }
 }
