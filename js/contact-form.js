@@ -10,9 +10,9 @@
 const EMAIL = 'dylan@dylandwight.com';
 const DETAILS_ENTRY = 'entry.726235173';
 // Unsent answers are kept in this browser so a refresh doesn't lose them,
-// and are dropped after a week or once the inquiry is sent.
+// and are dropped after a day or once the inquiry is sent.
 const DRAFT_KEY = 'dd-inquiry-draft';
-const DRAFT_MAX_AGE = 7 * 24 * 60 * 60 * 1000;
+const DRAFT_MAX_AGE = 24 * 60 * 60 * 1000;
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 function labelFor(field) {

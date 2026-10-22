@@ -40,7 +40,7 @@ js/
   nav.js                Mobile drawer: hidden when closed, aria-expanded, focus trap, Escape
   case-study.js         Case study reading progress bar and table-of-contents scroll-spy
   contact-form.js       Contact page inquiry form: inline validation, background submit to the Google Form,
-                        unsent answers saved in localStorage for 7 days
+                        unsent answers saved in localStorage for 24 hours
   reveal.js             Scroll reveal (disabled under reduced motion; no-JS safe)
 
 assets/
