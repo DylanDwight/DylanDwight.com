@@ -1449,3 +1449,212 @@ table.cs-table td:first-child {
     transition: none;
   }
 }
+
+/* ---------- Contact: inquiry form ---------- */
+
+.inquiry-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  margin-top: var(--space-8);
+}
+.form-required-note {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.06em;
+  color: var(--color-text-subtle);
+}
+.req {
+  color: var(--color-primary);
+}
+.inquiry-form .field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+.inquiry-form label,
+.inquiry-form legend {
+  font-weight: 600;
+  font-size: var(--text-sm);
+  color: var(--color-text);
+  padding: 0;
+}
+.inquiry-form legend {
+  margin-bottom: var(--space-2);
+}
+.field-hint {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  margin-top: calc(var(--space-1) * -1);
+}
+.inquiry-form input[type='text'],
+.inquiry-form input[type='email'],
+.inquiry-form textarea {
+  width: 100%;
+  min-height: 48px;
+  padding: var(--space-3) var(--space-4);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  color: var(--color-text);
+  font-size: var(--text-base);
+}
+.inquiry-form textarea {
+  resize: vertical;
+  min-height: 9rem;
+  line-height: 1.5;
+}
+.inquiry-form input::placeholder,
+.inquiry-form textarea::placeholder {
+  color: var(--color-text-subtle);
+}
+.inquiry-form input[type='text']:hover,
+.inquiry-form input[type='email']:hover,
+.inquiry-form textarea:hover {
+  border-color: var(--color-text-faint);
+}
+.inquiry-form input[type='text']:focus-visible,
+.inquiry-form input[type='email']:focus-visible,
+.inquiry-form textarea:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 1px;
+  border-color: var(--color-primary);
+}
+
+/* Radio and checkbox rows: the whole row is the hit area (min 44px). */
+.choices {
+  display: grid;
+  gap: var(--space-1) var(--space-4);
+}
+.choices--2col {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.inquiry-form .choice {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  min-height: 44px;
+  padding: var(--space-2) 0;
+  font-weight: 400;
+  color: var(--color-text-muted);
+  cursor: pointer;
+}
+.inquiry-form .choice:hover,
+.inquiry-form .choice:has(input:checked) {
+  color: var(--color-text);
+}
+.inquiry-form .choice input {
+  flex-shrink: 0;
+  width: 1.125rem;
+  height: 1.125rem;
+  margin-top: 0.15em;
+  accent-color: var(--color-primary);
+  cursor: pointer;
+}
+.field--consent .choice {
+  color: var(--color-text);
+}
+
+/* Errors: blue stays the only accent, so invalid fields are marked with
+   the amber hazard colour plus text, never colour alone. */
+.field-error {
+  font-size: var(--text-sm);
+  color: var(--color-warning);
+}
+.field-error::before {
+  content: '! ';
+  font-family: var(--font-mono);
+  font-weight: 700;
+}
+.inquiry-form [aria-invalid='true'] {
+  border-color: var(--color-warning) !important;
+}
+.form-errors {
+  padding: var(--space-4) var(--space-5);
+  border: 1px solid var(--color-warning);
+  border-radius: var(--radius-md);
+  background: oklch(from var(--color-warning) l c h / 0.06);
+}
+.form-errors h3 {
+  font-size: var(--text-base);
+  color: var(--color-text);
+}
+.form-errors ul {
+  margin-top: var(--space-2);
+  padding-left: var(--space-5);
+}
+.form-errors a {
+  color: var(--color-warning);
+}
+
+.form-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-4);
+  margin-top: var(--space-2);
+}
+.btn-submit[aria-busy='true'] {
+  cursor: progress;
+  opacity: 0.8;
+}
+.form-status:empty {
+  display: none;
+}
+.form-status {
+  padding: var(--space-4) var(--space-5);
+  border: 1px solid var(--color-warning);
+  border-radius: var(--radius-md);
+  color: var(--color-text);
+  font-size: var(--text-sm);
+}
+
+.form-success {
+  margin-top: var(--space-8);
+  padding: var(--space-6);
+  border: 1px solid var(--color-primary);
+  border-radius: var(--radius-md);
+  background: oklch(from var(--color-primary) l c h / 0.06);
+}
+.form-success h3 {
+  font-size: var(--text-xl);
+  margin-top: var(--space-2);
+}
+.form-success p {
+  margin-top: var(--space-3);
+  color: var(--color-text-muted);
+}
+
+/* Honeypot: off-screen, not display:none (some bots skip hidden fields). */
+.hp-field {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+/* Book a call */
+.book-call {
+  padding: var(--space-6);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+}
+.book-call-btn {
+  margin-top: var(--space-5);
+}
+
+@media (max-width: 720px) {
+  .choices--2col {
+    grid-template-columns: 1fr;
+  }
+  .form-actions .btn,
+  .book-call-btn {
+    width: 100%;
+  }
+}

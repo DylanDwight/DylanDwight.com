@@ -162,22 +162,164 @@
   <section class="section section--tight" aria-label="Project inquiry">
     <div class="wrap contact-layout">
 
-      <div class="cta-panel inquiry-panel corner-panel" data-reveal>
+      <div class="cta-panel inquiry-panel corner-panel" id="inquiry" data-reveal>
         <div class="grid-texture" aria-hidden="true"></div>
         <span class="eyebrow eyebrow--accent">Project inquiry</span>
-        <h2>Project inquiry</h2>
-        <p class="lede">The inquiry takes about five minutes. It asks what you need, your ideal timeline, and an optional budget range so I can come back with useful questions instead of generic ones.</p>
+        <h2 id="inquiry-heading">Project inquiry</h2>
+        <p class="lede">It takes about five minutes. It asks what you need, your ideal timeline, and an optional budget range so I can come back with useful questions instead of generic ones.</p>
 
-        <div class="inquiry-action">
-          <a class="btn btn-primary btn-lg" href="https://forms.gle/hFTC4HY3k2H74ta9A" target="_blank" rel="noopener noreferrer">
-            Start a project inquiry <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg><span class="sr-only"> (opens in a new tab)</span>
-          </a>
-          <p class="inquiry-meta"><span>Opens in a new tab</span><span>About 5 minutes</span><span>I'll only use this information to reply to your inquiry.</span></p>
+        <!--
+          Native form that submits to the existing Google Form
+          ("Start a Project — Dylan Dwight Creative Technologies") via its formResponse endpoint.
+          js/contact-form.js sends it in the background and shows the result inline;
+          without JS the browser posts straight to Google and shows Google's confirmation page.
+
+          PLACEHOLDER: every name="entry.REPLACE_…" below must be swapped for the real
+          entry ID from the Google Form's pre-filled link (Form editor → ⋮ → Get pre-filled link).
+          Until then the script refuses to send and tells the visitor to email instead.
+        -->
+        <form class="inquiry-form" id="inquiry-form" data-inquiry-form
+              action="https://docs.google.com/forms/d/e/1FAIpQLSfy6JCUTIqP7bulMAeGPj1vjVBC8ilprU8yDcCSrFCz_Hzclg/formResponse"
+              method="POST" accept-charset="UTF-8" novalidate aria-labelledby="inquiry-heading">
+
+          <div class="form-errors" data-form-errors tabindex="-1" hidden>
+            <h3>Please check <span data-error-count>these fields</span></h3>
+            <ul data-error-list></ul>
+          </div>
+
+          <p class="form-required-note"><span aria-hidden="true">*</span> Required</p>
+
+          <div class="field">
+            <label for="f-name">Your name <span class="req" aria-hidden="true">*</span></label>
+            <input id="f-name" name="entry.REPLACE_NAME" type="text" autocomplete="name" required aria-describedby="f-name-error" />
+            <p class="field-error" id="f-name-error" data-error-for="f-name" hidden></p>
+          </div>
+
+          <div class="field">
+            <label for="f-email">Email address <span class="req" aria-hidden="true">*</span></label>
+            <input id="f-email" name="entry.REPLACE_EMAIL" type="email" autocomplete="email" inputmode="email" spellcheck="false" required aria-describedby="f-email-error" />
+            <p class="field-error" id="f-email-error" data-error-for="f-email" hidden></p>
+          </div>
+
+          <div class="field">
+            <label for="f-business">Business or project name <span class="req" aria-hidden="true">*</span></label>
+            <input id="f-business" name="entry.REPLACE_BUSINESS" type="text" autocomplete="organization" required aria-describedby="f-business-error" />
+            <p class="field-error" id="f-business-error" data-error-for="f-business" hidden></p>
+          </div>
+
+          <fieldset class="field" id="f-type" data-required-group aria-describedby="f-type-error">
+            <legend>What type of business or project is this? <span class="req" aria-hidden="true">*</span></legend>
+            <div class="choices">
+              <label class="choice"><input type="radio" name="entry.REPLACE_TYPE" value="Restaurant, café, bar, or food business" required /> <span>Restaurant, café, bar, or food business</span></label>
+              <label class="choice"><input type="radio" name="entry.REPLACE_TYPE" value="Music, artist, event, label, or creative project" required /> <span>Music, artist, event, label, or creative project</span></label>
+              <label class="choice"><input type="radio" name="entry.REPLACE_TYPE" value="Photography, creative studio, or design business" required /> <span>Photography, creative studio, or design business</span></label>
+              <label class="choice"><input type="radio" name="entry.REPLACE_TYPE" value="Fashion, retail, or product-based business" required /> <span>Fashion, retail, or product-based business</span></label>
+              <label class="choice"><input type="radio" name="entry.REPLACE_TYPE" value="Local service business" required /> <span>Local service business</span></label>
+              <label class="choice"><input type="radio" name="entry.REPLACE_TYPE" value="Other" required /> <span>Other</span></label>
+            </div>
+            <p class="field-error" id="f-type-error" data-error-for="f-type" hidden></p>
+          </fieldset>
+
+          <fieldset class="field" id="f-needs" data-required-group aria-describedby="f-needs-hint f-needs-error">
+            <legend>What do you need help with? <span class="req" aria-hidden="true">*</span></legend>
+            <p class="field-hint" id="f-needs-hint">Choose all that apply.</p>
+            <div class="choices choices--2col">
+              <label class="choice"><input type="checkbox" name="entry.REPLACE_NEEDS" value="Landing page" /> <span>Landing page</span></label>
+              <label class="choice"><input type="checkbox" name="entry.REPLACE_NEEDS" value="Small-business website" /> <span>Small-business website</span></label>
+              <label class="choice"><input type="checkbox" name="entry.REPLACE_NEEDS" value="Website redesign" /> <span>Website redesign</span></label>
+              <label class="choice"><input type="checkbox" name="entry.REPLACE_NEEDS" value="Responsive front-end build" /> <span>Responsive front-end build</span></label>
+              <label class="choice"><input type="checkbox" name="entry.REPLACE_NEEDS" value="Basic brand direction or design assets" /> <span>Basic brand direction or design assets</span></label>
+              <label class="choice"><input type="checkbox" name="entry.REPLACE_NEEDS" value="SEO foundations" /> <span>SEO foundations</span></label>
+              <label class="choice"><input type="checkbox" name="entry.REPLACE_NEEDS" value="Accessibility cleanup" /> <span>Accessibility cleanup</span></label>
+              <label class="choice"><input type="checkbox" name="entry.REPLACE_NEEDS" value="Website maintenance or technical support" /> <span>Website maintenance or technical support</span></label>
+              <label class="choice"><input type="checkbox" name="entry.REPLACE_NEEDS" value="Other" /> <span>Other</span></label>
+            </div>
+            <p class="field-error" id="f-needs-error" data-error-for="f-needs" hidden></p>
+          </fieldset>
+
+          <div class="field">
+            <label for="f-url">Current website URL, if you have one</label>
+            <p class="field-hint" id="f-url-hint">If you already have a website, share the link here.</p>
+            <input id="f-url" name="entry.REPLACE_URL" type="text" inputmode="url" autocomplete="url" spellcheck="false" placeholder="example.com" aria-describedby="f-url-hint" />
+          </div>
+
+          <fieldset class="field" id="f-launch" data-required-group aria-describedby="f-launch-error">
+            <legend>When would you ideally like to launch? <span class="req" aria-hidden="true">*</span></legend>
+            <div class="choices">
+              <label class="choice"><input type="radio" name="entry.REPLACE_LAUNCH" value="As soon as possible" required /> <span>As soon as possible</span></label>
+              <label class="choice"><input type="radio" name="entry.REPLACE_LAUNCH" value="Within 1 month" required /> <span>Within 1 month</span></label>
+              <label class="choice"><input type="radio" name="entry.REPLACE_LAUNCH" value="Within 1–3 months" required /> <span>Within 1–3 months</span></label>
+              <label class="choice"><input type="radio" name="entry.REPLACE_LAUNCH" value="More than 3 months from now" required /> <span>More than 3 months from now</span></label>
+              <label class="choice"><input type="radio" name="entry.REPLACE_LAUNCH" value="I'm still figuring it out" required /> <span>I'm still figuring it out</span></label>
+            </div>
+            <p class="field-error" id="f-launch-error" data-error-for="f-launch" hidden></p>
+          </fieldset>
+
+          <fieldset class="field" id="f-budget" aria-describedby="f-budget-hint">
+            <legend>Approximate project budget</legend>
+            <p class="field-hint" id="f-budget-hint">Optional. It helps me scope the project; you'll get a custom quote before any work begins.</p>
+            <div class="choices choices--2col">
+              <label class="choice"><input type="radio" name="entry.REPLACE_BUDGET" value="Under $1,000" /> <span>Under $1,000</span></label>
+              <label class="choice"><input type="radio" name="entry.REPLACE_BUDGET" value="$1,000–$2,500" /> <span>$1,000–$2,500</span></label>
+              <label class="choice"><input type="radio" name="entry.REPLACE_BUDGET" value="$2,500–$5,000" /> <span>$2,500–$5,000</span></label>
+              <label class="choice"><input type="radio" name="entry.REPLACE_BUDGET" value="$5,000+" /> <span>$5,000+</span></label>
+              <label class="choice"><input type="radio" name="entry.REPLACE_BUDGET" value="I'm not sure yet" /> <span>I'm not sure yet</span></label>
+              <label class="choice"><input type="radio" name="entry.REPLACE_BUDGET" value="Prefer not to say" /> <span>Prefer not to say</span></label>
+            </div>
+          </fieldset>
+
+          <div class="field">
+            <label for="f-details">Tell me about the project <span class="req" aria-hidden="true">*</span></label>
+            <p class="field-hint" id="f-details-hint">What are you trying to accomplish, what isn't working now, and what should the site help people do?</p>
+            <textarea id="f-details" name="entry.REPLACE_DETAILS" rows="6" required aria-describedby="f-details-hint f-details-error"></textarea>
+            <p class="field-error" id="f-details-error" data-error-for="f-details" hidden></p>
+          </div>
+
+          <fieldset class="field" id="f-found">
+            <legend>How did you find me?</legend>
+            <div class="choices choices--2col">
+              <label class="choice"><input type="radio" name="entry.REPLACE_FOUND" value="Google search" /> <span>Google search</span></label>
+              <label class="choice"><input type="radio" name="entry.REPLACE_FOUND" value="LinkedIn" /> <span>LinkedIn</span></label>
+              <label class="choice"><input type="radio" name="entry.REPLACE_FOUND" value="Instagram or social media" /> <span>Instagram or social media</span></label>
+              <label class="choice"><input type="radio" name="entry.REPLACE_FOUND" value="Referral" /> <span>Referral</span></label>
+              <label class="choice"><input type="radio" name="entry.REPLACE_FOUND" value="Saw my work" /> <span>Saw my work</span></label>
+              <label class="choice"><input type="radio" name="entry.REPLACE_FOUND" value="Other" /> <span>Other</span></label>
+            </div>
+          </fieldset>
+
+          <div class="field field--consent">
+            <label class="choice" for="f-consent">
+              <input id="f-consent" name="entry.REPLACE_CONSENT" type="checkbox" value="I understand Dylan Dwight Creative Technologies will use this information only to respond to my inquiry." required aria-describedby="f-consent-error" />
+              <span>I understand Dylan Dwight Creative Technologies will use this information only to respond to my inquiry. <span class="req" aria-hidden="true">*</span></span>
+            </label>
+            <p class="field-error" id="f-consent-error" data-error-for="f-consent" hidden></p>
+          </div>
+
+          <!-- Spam trap: hidden from people and screen readers, never sent to Google. -->
+          <div class="hp-field" aria-hidden="true">
+            <label for="f-website">Leave this empty</label>
+            <input id="f-website" type="text" tabindex="-1" autocomplete="off" data-honeypot />
+          </div>
+
+          <div class="form-actions">
+            <button class="btn btn-primary btn-lg btn-submit" type="submit" data-submit>
+              <span data-submit-label>Send inquiry</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </button>
+            <p class="inquiry-meta"><span>About 5 minutes</span><span>I'll only use this information to reply to your inquiry.</span></p>
+          </div>
+
+          <div class="form-status" data-form-status role="status" aria-live="polite"></div>
+        </form>
+
+        <div class="form-success" data-form-success tabindex="-1" hidden>
+          <span class="eyebrow eyebrow--accent">Inquiry sent</span>
+          <h3>Thanks, I've got it.</h3>
+          <p>I aim to reply within two business days. If it's urgent, email <a href="mailto:dylan@dylandwight.com">dylan@dylandwight.com</a>.</p>
         </div>
 
         <h3 style="margin-top: var(--space-10); font-size: var(--text-base);">What happens next</h3>
         <ol class="next-steps">
-          <li><strong>Send your inquiry.</strong></li>
+          <li><strong>Send your inquiry or book a call.</strong></li>
           <li><strong>I review the project details and follow up with questions or next steps.</strong></li>
           <li><strong>If we are a fit, I prepare a custom scope and quote.</strong></li>
         </ol>
@@ -185,6 +327,20 @@
       </div>
 
       <div class="contact-side" data-reveal>
+        <div class="book-call">
+          <h2>Prefer to talk it through?</h2>
+          <p>Book a time that works for you and we'll talk through your project together.</p>
+          <!--
+            PLACEHOLDER: swap this href for the Google Calendar appointment schedule's
+            booking page link (calendar.app.google/…), and change the label/meta below
+            to match. Until then it falls back to an email asking for a call.
+          -->
+          <a class="btn btn-secondary book-call-btn" data-booking-link
+             href="mailto:dylan@dylandwight.com?subject=Book%20a%20call">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4"/></svg>
+            Book a call
+          </a>
+        </div>
         <div>
           <h2>Prefer email?</h2>
           <p>I aim to reply within two business days.</p>
