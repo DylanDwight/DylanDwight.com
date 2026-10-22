@@ -8,6 +8,7 @@
 // ============================================================
 
 const EMAIL = 'dylan@dylandwight.com';
+const DETAILS_ENTRY = 'entry.726235173';
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 function labelFor(field) {
@@ -82,6 +83,22 @@ function showErrors(form, problems) {
   summary.focus();
 }
 
+// The Google Form has no follow-up question, so the preference (and phone
+// number, if given) goes at the top of the project details answer. The
+// on-page-only fields are dropped from what's sent.
+function buildPayload(form) {
+  const data = new FormData(form);
+  const followup = data.get('followup');
+  const phone = (data.get('phone') || '').trim();
+  data.delete('followup');
+  data.delete('phone');
+
+  const lines = [`Preferred follow-up: ${followup}`];
+  if (followup !== 'Email is fine' && phone) lines.push(`Phone: ${phone}`);
+  data.set(DETAILS_ENTRY, `${lines.join('\n')}\n\n${data.get(DETAILS_ENTRY)}`);
+  return new URLSearchParams(data);
+}
+
 function setStatus(form, html) {
   form.querySelector('[data-form-status]').innerHTML = html;
 }
@@ -101,6 +118,13 @@ export function initContactForm() {
   const honeypot = form.querySelector('[data-honeypot]');
   const connected = ![...form.elements].some((el) => el.name && el.name.includes('REPLACE'));
   const fallback = `<a href="mailto:${EMAIL}">${EMAIL}</a>`;
+  const phoneField = form.querySelector('[data-followup-phone]');
+  const callChoice = form.querySelector('[data-followup-call]');
+
+  // The phone field only appears once someone asks for a call.
+  form.addEventListener('change', (event) => {
+    if (event.target.name === 'followup') phoneField.hidden = !callChoice.checked;
+  });
 
   // Clear a field's error as soon as it's fixed. Text fields clear while
   // typing ('input'), not on blur ('change'): clearing on blur would shift the
@@ -145,8 +169,11 @@ export function initContactForm() {
       await fetch(form.action, {
         method: 'POST',
         mode: 'no-cors',
-        body: new URLSearchParams(new FormData(form)),
+        body: buildPayload(form),
       });
+      success.querySelector('[data-success-followup]').textContent = callChoice.checked
+        ? "I'll email you a few times for a call"
+        : "I'll reply by email";
       form.hidden = true;
       success.hidden = false;
       success.focus();
