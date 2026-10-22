@@ -1194,6 +1194,7 @@ table.cs-table td:first-child {
   grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr));
 }
 .cs-stats strong {
+  font-family: var(--font-display);
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
 }
@@ -1452,6 +1453,10 @@ table.cs-table td:first-child {
 
 /* ---------- Contact: inquiry form ---------- */
 
+/* display:flex would override the hidden attribute once the inquiry is sent. */
+.inquiry-form[hidden] {
+  display: none;
+}
 .inquiry-form {
   display: flex;
   flex-direction: column;
@@ -1634,6 +1639,9 @@ table.cs-table td:first-child {
   margin-top: var(--space-3);
   color: var(--color-text-muted);
 }
+.form-success .next-steps {
+  margin-top: var(--space-4);
+}
 
 /* Honeypot: off-screen, not display:none (some bots skip hidden fields). */
 .hp-field {
@@ -1701,18 +1709,6 @@ table.cs-table td:first-child {
   flex-wrap: wrap;
   gap: var(--space-1) var(--space-6);
 }
-.inquiry-direct {
-  margin-top: var(--space-3);
-  font-size: var(--text-sm);
-  color: var(--color-text-muted);
-}
-.inquiry-direct a {
-  color: var(--color-primary);
-  text-decoration: underline 1px;
-  text-underline-offset: 0.25em;
-  white-space: nowrap;
-}
-
 /* Contact sidebar: phone number card */
 .phone-card {
   padding: var(--space-6);
@@ -1723,11 +1719,14 @@ table.cs-table td:first-child {
 .phone-card-number {
   display: inline-block;
   margin-top: var(--space-4);
-  font-family: var(--font-mono);
   font-size: var(--text-xl);
   font-weight: 600;
+  font-family: var(--font-display);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
   color: var(--color-text);
   text-decoration: none;
+  white-space: nowrap;
 }
 .phone-card-actions {
   display: grid;

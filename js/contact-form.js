@@ -236,10 +236,8 @@ export function initContactForm() {
         body: buildPayload(form),
       });
       const contact = form.querySelector('[name="contact"]:checked').value;
-      success.querySelector('[data-success-followup]').textContent = {
-        'Phone call': "I'll call you",
-        'Text message': "I'll text you",
-      }[contact] || "I'll reply by email";
+      success.querySelector('[data-success-followup]').textContent =
+        contact === 'Email' ? 'an email' : 'a text';
       clearDraft();
       form.hidden = true;
       success.hidden = false;
