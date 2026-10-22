@@ -13,7 +13,42 @@ const DETAILS_ENTRY = 'entry.726235173';
 // and are dropped after a day or once the inquiry is sent.
 const DRAFT_KEY = 'dd-inquiry-draft';
 const DRAFT_MAX_AGE = 24 * 60 * 60 * 1000;
-const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+// name@domain.tld: no spaces, no doubled or edge dots, a letters-only TLD.
+const EMAIL_PATTERN = /^(?!\.)(?!.*\.\.)[A-Za-z0-9._%+'-]+(?<!\.)@(?:[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?\.)+[A-Za-z]{2,}$/;
+
+// Content checks that catch keyboard-mash answers. Each returns an error
+// message, or nothing when the answer looks real.
+const words = (value) => value.split(/\s+/).filter(Boolean);
+// A run of 6+ consonants ("sdfghjk") rarely appears in real words.
+const looksMashed = (value) => /[bcdfghjklmnpqrstvwxz]{6,}/i.test(value) || /(.)\1{4,}/.test(value);
+
+const CHECKS = {
+  'f-name': (value) => {
+    if (!/^[\p{L}][\p{L}\p{M}' .-]*$/u.test(value)) return 'Use letters only for your name.';
+    if (value.replace(/[^\p{L}]/gu, '').length < 2 || looksMashed(value)) return 'Please enter your real name.';
+  },
+  'f-email': (value) => {
+    if (!EMAIL_PATTERN.test(value)) return 'Enter an email address like name@example.com.';
+  },
+  'f-phone': (value) => {
+    if (/[^\d\s().+-]/.test(value)) return 'Use numbers only, like (347) 555-0100.';
+    const digits = value.replace(/\D/g, '');
+    const us = digits.length === 10 || (digits.length === 11 && digits.startsWith('1'));
+    const intl = value.trim().startsWith('+') && digits.length >= 8 && digits.length <= 15;
+    if (!us && !intl) return 'Enter a 10-digit phone number, like (347) 555-0100.';
+    if (/^(\d)\1+$/.test(digits.slice(-10)) || /^0123456789$|^1234567890$/.test(digits.slice(-10))) {
+      return 'Please enter a real phone number.';
+    }
+  },
+  'f-business': (value) => {
+    if (!/\p{L}/u.test(value) || value.length < 2 || looksMashed(value)) return 'Please enter your business or project name.';
+  },
+  'f-details': (value) => {
+    if (words(value).length < 4 || value.length < 20 || looksMashed(value)) {
+      return 'Please add a sentence or two about your project.';
+    }
+  },
+};
 
 function labelFor(field) {
   if (field.matches('fieldset')) {
@@ -36,9 +71,15 @@ function validate(form) {
     if (!input.value.trim()) {
       const message = input.matches('select') ? 'Please choose an option.' : 'This field is required.';
       problems.push({ id: input.id, focus: input, message });
-    } else if (input.type === 'email' && !EMAIL_PATTERN.test(input.value.trim())) {
-      problems.push({ id: input.id, focus: input, message: 'Enter an email address like name@example.com.' });
     }
+  });
+
+  // Filled-in answers (required or optional) must also look real.
+  Object.entries(CHECKS).forEach(([id, check]) => {
+    const input = form.querySelector(`#${id}`);
+    const value = input.value.trim();
+    const message = value && check(value);
+    if (message) problems.push({ id, focus: input, message });
   });
 
   // A call or text needs a number to reach.
@@ -175,6 +216,9 @@ export function initContactForm() {
   const form = document.querySelector('[data-inquiry-form]');
   if (!form) return;
 
+  // Without JS the browser's own required-field checks stop an empty send;
+  // with JS the checks above take over and show inline messages instead.
+  form.noValidate = true;
   const success = document.querySelector('[data-form-success]');
   const honeypot = form.querySelector('[data-honeypot]');
   const connected = ![...form.elements].some((el) => el.name && el.name.includes('REPLACE'));
