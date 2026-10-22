@@ -19,7 +19,7 @@ function labelFor(field) {
   if (field.matches('fieldset')) {
     return field.querySelector('legend').firstChild.textContent.trim();
   }
-  const input = field.querySelector('input, textarea');
+  const input = field.querySelector('input, select, textarea');
   return field.querySelector(`label[for="${input.id}"]`).firstChild.textContent.trim();
 }
 
@@ -32,13 +32,20 @@ function validate(form) {
     }
   });
 
-  form.querySelectorAll('input[required]:not([type="radio"]), textarea[required]').forEach((input) => {
+  form.querySelectorAll('input[required]:not([type="radio"]), select[required], textarea[required]').forEach((input) => {
     if (!input.value.trim()) {
-      problems.push({ id: input.id, focus: input, message: 'This field is required.' });
+      const message = input.matches('select') ? 'Please choose an option.' : 'This field is required.';
+      problems.push({ id: input.id, focus: input, message });
     } else if (input.type === 'email' && !EMAIL_PATTERN.test(input.value.trim())) {
       problems.push({ id: input.id, focus: input, message: 'Enter an email address like name@example.com.' });
     }
   });
+
+  // A call or text needs a number to reach.
+  const phone = form.querySelector('#f-phone');
+  if (form.querySelector('[data-needs-phone]:checked') && !phone.value.trim()) {
+    problems.push({ id: phone.id, focus: phone, message: 'Add a phone number so I can call or text you.' });
+  }
 
   // Keep the summary in the same order as the form.
   const order = [...form.querySelectorAll('[data-error-for]')].map((el) => el.dataset.errorFor);
@@ -84,19 +91,23 @@ function showErrors(form, problems) {
   summary.focus();
 }
 
-// The Google Form has no follow-up question, so the preference (and phone
-// number, if given) goes at the top of the project details answer. The
-// on-page-only fields are dropped from what's sent.
+// The Google Form has no contact-method or phone question, so both go at
+// the top of the project details answer. The on-page-only fields are
+// dropped from what's sent.
 function buildPayload(form) {
   const data = new FormData(form);
-  const followup = data.get('followup');
+  const contact = data.get('contact');
   const phone = (data.get('phone') || '').trim();
-  data.delete('followup');
+  data.delete('contact');
   data.delete('phone');
 
-  const lines = [`Preferred follow-up: ${followup}`];
-  if (followup !== 'Email is fine' && phone) lines.push(`Phone: ${phone}`);
+  const lines = [`Preferred contact: ${contact}`];
+  if (phone) lines.push(`Phone: ${phone}`);
   data.set(DETAILS_ENTRY, `${lines.join('\n')}\n\n${data.get(DETAILS_ENTRY)}`);
+  // Skipped optional questions (budget) are left out rather than sent blank.
+  [...data.keys()].forEach((key) => {
+    if (data.getAll(key).every((value) => value === '')) data.delete(key);
+  });
   return new URLSearchParams(data);
 }
 
@@ -168,25 +179,13 @@ export function initContactForm() {
   const honeypot = form.querySelector('[data-honeypot]');
   const connected = ![...form.elements].some((el) => el.name && el.name.includes('REPLACE'));
   const fallback = `<a href="mailto:${EMAIL}">${EMAIL}</a>`;
-  const phoneField = form.querySelector('[data-followup-phone]');
-  const callChoice = form.querySelector('[data-followup-call]');
-
-  // The phone field only appears once someone asks for a call.
-  form.addEventListener('change', (event) => {
-    if (event.target.name === 'followup') phoneField.hidden = !callChoice.checked;
-  });
-
   const draftNote = form.querySelector('[data-draft-note]');
-  if (restoreDraft(form)) {
-    phoneField.hidden = !callChoice.checked;
-    draftNote.hidden = false;
-  }
+  if (restoreDraft(form)) draftNote.hidden = false;
   form.addEventListener('input', () => saveDraft(form));
   form.addEventListener('change', () => saveDraft(form));
   form.querySelector('[data-draft-clear]').addEventListener('click', () => {
     clearDraft();
     form.reset();
-    phoneField.hidden = true;
     draftNote.hidden = true;
     form.querySelector('input:not([type="hidden"])').focus();
   });
@@ -236,9 +235,11 @@ export function initContactForm() {
         mode: 'no-cors',
         body: buildPayload(form),
       });
-      success.querySelector('[data-success-followup]').textContent = callChoice.checked
-        ? "I'll email you a few times for a call"
-        : "I'll reply by email";
+      const contact = form.querySelector('[name="contact"]:checked').value;
+      success.querySelector('[data-success-followup]').textContent = {
+        'Phone call': "I'll call you",
+        'Text message': "I'll text you",
+      }[contact] || "I'll reply by email";
       clearDraft();
       form.hidden = true;
       success.hidden = false;

@@ -1494,6 +1494,7 @@ table.cs-table td:first-child {
 .inquiry-form input[type='text'],
 .inquiry-form input[type='email'],
 .inquiry-form input[type='tel'],
+.inquiry-form select,
 .inquiry-form textarea {
   width: 100%;
   min-height: 48px;
@@ -1516,12 +1517,14 @@ table.cs-table td:first-child {
 .inquiry-form input[type='text']:hover,
 .inquiry-form input[type='email']:hover,
 .inquiry-form input[type='tel']:hover,
+.inquiry-form select:hover,
 .inquiry-form textarea:hover {
   border-color: var(--color-text-faint);
 }
 .inquiry-form input[type='text']:focus-visible,
 .inquiry-form input[type='email']:focus-visible,
 .inquiry-form input[type='tel']:focus-visible,
+.inquiry-form select:focus-visible,
 .inquiry-form textarea:focus-visible {
   outline: 2px solid var(--color-primary);
   outline-offset: 1px;
@@ -1665,4 +1668,76 @@ table.cs-table td:first-child {
   text-underline-offset: 0.25em;
   min-height: 44px;
   padding: 0 var(--space-1);
+}
+
+/* Short-form layout: paired fields side by side on wider screens. */
+.field-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-6) var(--space-4);
+}
+.field-optional {
+  font-weight: 400;
+  color: var(--color-text-subtle);
+}
+.inquiry-form select {
+  appearance: none;
+  padding-right: var(--space-10);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239aa4b2' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right var(--space-4) center;
+  background-size: 16px;
+  cursor: pointer;
+}
+.inquiry-form select:invalid {
+  color: var(--color-text-subtle);
+}
+.inquiry-form select option {
+  color: var(--color-text);
+  background: var(--color-bg);
+}
+.choices--inline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1) var(--space-6);
+}
+.inquiry-direct {
+  margin-top: var(--space-3);
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+.inquiry-direct a {
+  color: var(--color-primary);
+  text-decoration: underline 1px;
+  text-underline-offset: 0.25em;
+  white-space: nowrap;
+}
+
+/* Contact sidebar: phone number card */
+.phone-card {
+  padding: var(--space-6);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+}
+.phone-card-number {
+  display: inline-block;
+  margin-top: var(--space-4);
+  font-family: var(--font-mono);
+  font-size: var(--text-xl);
+  font-weight: 600;
+  color: var(--color-text);
+  text-decoration: none;
+}
+.phone-card-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3);
+  margin-top: var(--space-4);
+}
+
+@media (max-width: 720px) {
+  .field-row {
+    grid-template-columns: 1fr;
+  }
 }
