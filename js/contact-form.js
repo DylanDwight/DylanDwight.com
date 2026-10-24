@@ -153,9 +153,7 @@ function buildPayload(form) {
 }
 
 function saveDraft(form) {
-  // Only what the visitor typed or picked; the hidden answers are fixed.
-  const fixed = [...form.querySelectorAll('input[type="hidden"]')].map((input) => input.name);
-  const fields = [...new FormData(form)].filter(([name, value]) => value !== '' && !fixed.includes(name));
+  const fields = [...new FormData(form)].filter(([, value]) => value !== '');
   try {
     if (fields.length) {
       localStorage.setItem(DRAFT_KEY, JSON.stringify({ savedAt: Date.now(), fields }));
