@@ -169,17 +169,15 @@
         <p class="lede">Share a few details about your project idea and I'll let you know how I can help.</p>
 
         <!--
-          Native form that submits to the existing Google Form
-          ("Start a Project — Dylan Dwight Creative Technologies") via its formResponse endpoint.
-          js/contact-form.js sends it in the background and shows the result inline;
-          without JS the browser posts straight to Google and shows Google's confirmation page.
+          Native form that saves each inquiry as a row in a Google Sheet, through the
+          Apps Script web app in scripts/google-sheets/Code.gs (setup steps are in that file).
+          js/contact-form.js sends it in the background and shows the result inline.
 
-          Field names are the Google Form's entry IDs (read from the form on 2026-10-22).
-          Option values must match the form's options exactly, including en dashes and curly
-          apostrophes, or Google drops the answer. If a question changes in the form, update it here.
+          Field names are the Sheet's column keys. To add a question, add the field here
+          and its column to COLUMNS in Code.gs.
         -->
         <form class="inquiry-form" id="inquiry-form" data-inquiry-form
-              action="https://docs.google.com/forms/d/e/1FAIpQLSfy6JCUTIqP7bulMAeGPj1vjVBC8ilprU8yDcCSrFCz_Hzclg/formResponse"
+              action="https://script.google.com/macros/s/AKfycbzHoZ6DbZ7JyeobgpOTeDjmrX-QWsi_uFkY5Jn0dM3hfUleihL2_ukRjDkvMgmwPZOS/exec"
               method="POST" accept-charset="UTF-8" aria-labelledby="inquiry-heading">
 
           <div class="form-errors" data-form-errors tabindex="-1" hidden>
@@ -197,19 +195,17 @@
           <div class="field-row">
             <div class="field">
               <label for="f-name">Full name <span class="req" aria-hidden="true">*</span></label>
-              <input id="f-name" name="entry.1774164789" type="text" autocomplete="name" required aria-describedby="f-name-error" />
+              <input id="f-name" name="name" type="text" autocomplete="name" required aria-describedby="f-name-error" />
               <p class="field-error" id="f-name-error" data-error-for="f-name" hidden></p>
             </div>
             <div class="field">
               <label for="f-email">Email address <span class="req" aria-hidden="true">*</span></label>
-              <input id="f-email" name="entry.23795767" type="email" autocomplete="email" inputmode="email" spellcheck="false" required aria-describedby="f-email-error" />
+              <input id="f-email" name="email" type="email" autocomplete="email" inputmode="email" spellcheck="false" required aria-describedby="f-email-error" />
               <p class="field-error" id="f-email-error" data-error-for="f-email" hidden></p>
             </div>
           </div>
 
           <div class="field-row">
-            <!-- Phone isn't a question on the Google Form: js/contact-form.js adds it, with the
-                 preferred contact method, to the top of the project details. -->
             <div class="field">
               <label for="f-phone">Phone number <span class="field-optional">(recommended)</span></label>
               <input id="f-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" aria-describedby="f-phone-error" />
@@ -217,7 +213,7 @@
             </div>
             <div class="field">
               <label for="f-business">Business or organization <span class="req" aria-hidden="true">*</span></label>
-              <input id="f-business" name="entry.80599601" type="text" autocomplete="organization" required aria-describedby="f-business-error" />
+              <input id="f-business" name="business" type="text" autocomplete="organization" required aria-describedby="f-business-error" />
               <p class="field-error" id="f-business-error" data-error-for="f-business" hidden></p>
             </div>
           </div>
@@ -225,7 +221,7 @@
           <div class="field-row">
             <div class="field">
               <label for="f-service">Service needed <span class="req" aria-hidden="true">*</span></label>
-              <select id="f-service" name="entry.1441315021" required aria-describedby="f-service-error">
+              <select id="f-service" name="service" required aria-describedby="f-service-error">
               <option value="">Select a service</option>
               <option value="Landing page">Landing page</option>
               <option value="Small-business website">Small-business website</option>
@@ -241,7 +237,7 @@
             </div>
             <div class="field">
               <label for="f-launch">Timeline <span class="req" aria-hidden="true">*</span></label>
-              <select id="f-launch" name="entry.1191555483" required aria-describedby="f-launch-error">
+              <select id="f-launch" name="timeline" required aria-describedby="f-launch-error">
               <option value="">Select a timeline</option>
               <option value="As soon as possible">As soon as possible</option>
               <option value="Within 1 month">Within 1 month</option>
@@ -255,7 +251,7 @@
 
           <div class="field">
             <label for="f-budget">Budget <span class="field-optional">(optional)</span></label>
-            <select id="f-budget" name="entry.1398800556">
+            <select id="f-budget" name="budget">
               <option value="">Select a range</option>
               <option value="Under $1,000">Under $1,000</option>
               <option value="$1,000–$2,500">$1,000–$2,500</option>
@@ -269,7 +265,7 @@
           <div class="field">
             <label for="f-details">Project details <span class="req" aria-hidden="true">*</span></label>
             <p class="field-hint" id="f-details-hint">Briefly describe your goals, your current website (if any), and anything that isn't working today.</p>
-            <textarea id="f-details" name="entry.726235173" rows="5" required aria-describedby="f-details-hint f-details-error"></textarea>
+            <textarea id="f-details" name="details" rows="5" required aria-describedby="f-details-hint f-details-error"></textarea>
             <p class="field-error" id="f-details-error" data-error-for="f-details" hidden></p>
           </div>
 
@@ -283,11 +279,7 @@
             <p class="field-error" id="f-contact-error" data-error-for="f-contact" hidden></p>
           </fieldset>
 
-          <!-- The Google Form still requires these, so the form sends fixed answers for them. -->
-          <input type="hidden" name="entry.1762546386" value="Other" />
-          <input type="hidden" name="entry.568267844" value="I understand Dylan Dwight Creative Technologies will use this information only to respond to my inquiry." />
-
-          <!-- Spam trap: hidden from people and screen readers, never sent to Google. -->
+          <!-- Spam trap: hidden from people and screen readers, never sent. -->
           <div class="hp-field" aria-hidden="true">
             <label for="f-website">Leave this empty</label>
             <input id="f-website" type="text" tabindex="-1" autocomplete="off" data-honeypot />
