@@ -1,14 +1,11 @@
 // ============================================================
-// contact-form.js — project inquiry form → Google Form
-// Validates in the page, then posts the fields to the Google Form's
-// formResponse endpoint in the background and shows the result inline.
-// Google doesn't send CORS headers, so the request is "no-cors": the
-// browser can tell a network failure from a sent request, but can't read
-// Google's reply. Without JS the form posts to Google directly.
+// contact-form.js — project inquiry form → Google Sheet
+// Validates in the page, then posts the fields to the Apps Script web app
+// (scripts/google-sheets/Code.gs), which adds them as a row in the Sheet
+// and answers {"ok": true}. Without JS the form posts there directly.
 // ============================================================
 
 const EMAIL = 'dylan@dylandwight.com';
-const DETAILS_ENTRY = 'entry.726235173';
 // Unsent answers are kept in this browser so a refresh doesn't lose them,
 // and are dropped after a day or once the inquiry is sent.
 const DRAFT_KEY = 'dd-inquiry-draft';
@@ -132,23 +129,9 @@ function showErrors(form, problems) {
   summary.focus();
 }
 
-// The Google Form has no contact-method or phone question, so both go at
-// the top of the project details answer. The on-page-only fields are
-// dropped from what's sent.
 function buildPayload(form) {
   const data = new FormData(form);
-  const contact = data.get('contact');
-  const phone = (data.get('phone') || '').trim();
-  data.delete('contact');
-  data.delete('phone');
-
-  const lines = [`Preferred contact: ${contact}`];
-  if (phone) lines.push(`Phone: ${phone}`);
-  data.set(DETAILS_ENTRY, `${lines.join('\n')}\n\n${data.get(DETAILS_ENTRY)}`);
-  // Skipped optional questions (budget) are left out rather than sent blank.
-  [...data.keys()].forEach((key) => {
-    if (data.getAll(key).every((value) => value === '')) data.delete(key);
-  });
+  data.forEach((value, key) => data.set(key, value.trim()));
   return new URLSearchParams(data);
 }
 
@@ -219,7 +202,7 @@ export function initContactForm() {
   form.noValidate = true;
   const success = document.querySelector('[data-form-success]');
   const honeypot = form.querySelector('[data-honeypot]');
-  const connected = ![...form.elements].some((el) => el.name && el.name.includes('REPLACE'));
+  const connected = !form.getAttribute('action').includes('REPLACE');
   const fallback = `<a href="mailto:${EMAIL}">${EMAIL}</a>`;
   const draftNote = form.querySelector('[data-draft-note]');
   if (restoreDraft(form)) draftNote.hidden = false;
@@ -272,11 +255,9 @@ export function initContactForm() {
 
     setBusy(form, true);
     try {
-      await fetch(form.action, {
-        method: 'POST',
-        mode: 'no-cors',
-        body: buildPayload(form),
-      });
+      const response = await fetch(form.action, { method: 'POST', body: buildPayload(form) });
+      const result = await response.json();
+      if (!result.ok) throw new Error(result.error || 'Not saved');
       const contact = form.querySelector('[name="contact"]:checked').value;
       success.querySelector('[data-success-followup]').textContent =
         contact === 'Email' ? 'an email' : 'a text';
