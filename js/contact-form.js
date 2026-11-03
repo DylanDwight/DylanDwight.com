@@ -27,6 +27,16 @@ const CHECKS = {
   'f-email': (value) => {
     if (!EMAIL_PATTERN.test(value)) return 'Enter an email address like name@example.com.';
   },
+  'f-phone': (value) => {
+    if (/[^\d\s().+-]/.test(value)) return 'Use numbers only, like (347) 555-0100.';
+    const digits = value.replace(/\D/g, '');
+    const us = digits.length === 10 || (digits.length === 11 && digits.startsWith('1'));
+    const intl = value.trim().startsWith('+') && digits.length >= 8 && digits.length <= 15;
+    if (!us && !intl) return 'Enter a 10-digit phone number, like (347) 555-0100.';
+    if (/^(\d)\1+$/.test(digits.slice(-10)) || /^0123456789$|^1234567890$/.test(digits.slice(-10))) {
+      return 'Please enter a real phone number.';
+    }
+  },
   'f-business': (value) => {
     if (!/\p{L}/u.test(value) || value.length < 2 || looksMashed(value)) return 'Please enter your business or project name.';
   },
@@ -68,6 +78,12 @@ function validate(form) {
     const message = value && check(value);
     if (message) problems.push({ id, focus: input, message });
   });
+
+  // A call or text needs a number to reach.
+  const phone = form.querySelector('#f-phone');
+  if (form.querySelector('[data-needs-phone]:checked') && !phone.value.trim()) {
+    problems.push({ id: phone.id, focus: phone, message: 'Add a phone number so I can call or text you.' });
+  }
 
   // Keep the summary in the same order as the form.
   const order = [...form.querySelectorAll('[data-error-for]')].map((el) => el.dataset.errorFor);
@@ -259,7 +275,7 @@ export function initContactForm() {
       if (!result.ok) throw new Error(result.error || 'Not saved');
       const contact = form.querySelector('[name="contact"]:checked').value;
       success.querySelector('[data-success-followup]').textContent =
-        contact === 'Email' ? 'with next steps' : 'to set up a Google Meet video call';
+        ({ Email: 'email', 'Phone call': 'phone', 'Text message': 'text' })[contact] || 'email with a Google Meet invite';
       clearDraft();
       form.hidden = true;
       success.hidden = false;
