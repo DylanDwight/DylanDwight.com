@@ -8,7 +8,7 @@ import path from 'node:path';
 const here = path.dirname(fileURLToPath(import.meta.url));
 const template = pathToFileURL(path.join(here, 'template.html')).href;
 const outDir = path.join(here, '../../assets/og');
-const keys = ['default', 'home', 'about', 'services', 'work', 'sand-dollar', 'contact'];
+const keys = ['default', 'home', 'about', 'services', 'work', 'sand-dollar', 'shoreline-electric', 'contact'];
 
 const browser = await chromium.launch();
 const page = await browser.newPage({ viewport: { width: 1200, height: 630 } });
