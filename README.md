@@ -20,8 +20,8 @@ index.html              Home
 services/index.html     Services
 about/index.html        About (copy from the Phase 1 spec, section 7)
 work/index.html         Work index (finished projects only; in-progress coursework stays on Home)
-work/sand-dollar/index.html      Sand Dollar case study (HTML, same copy as the PDF)
-work/sand-dollar-case-study.pdf   Sand Dollar case study (10-page PDF download)
+work/sand-dollar/index.html      Sand Dollar case study (HTML)
+work/sand-dollar-case-study.pdf   Sand Dollar case study PDF (kept, but no longer linked from the site)
 work/shoreline-electric/index.html   Shoreline Electric case study (HTML)
 resume/dylan-dwight-resume.pdf   Résumé (linked from the footer, drawer, and Work page)
 contact/index.html      Contact / project inquiry
