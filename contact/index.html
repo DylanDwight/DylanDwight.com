@@ -59,10 +59,8 @@
       "name": "Dylan Dwight Creative Technologies",
       "url": "https://dylandwight.com/",
       "email": "dylan@dylandwight.com",
-      "telephone": "+1-347-379-3273",
       "description": "Web design and front-end development for restaurants, artists, musicians, and small businesses.",
-      "areaServed": ["Brooklyn, NY", "Remote"],
-      "address": { "@type": "PostalAddress", "addressLocality": "Brooklyn", "addressRegion": "NY", "addressCountry": "US" },
+      "areaServed": "US",
       "founder": { "@id": "https://dylandwight.com/#person" },
       "sameAs": ["https://www.linkedin.com/in/dylan-dwight/", "https://github.com/DylanDwight"],
       "knowsAbout": ["Web design", "Front-end development", "UX/UI design", "Responsive design", "Web accessibility", "SEO foundations", "Website maintenance"]
@@ -74,7 +72,6 @@
       "jobTitle": "Web designer and front-end developer",
       "url": "https://dylandwight.com/",
       "email": "dylan@dylandwight.com",
-      "telephone": "+1-347-379-3273",
       "worksFor": { "@id": "https://dylandwight.com/#business" },
       "sameAs": ["https://www.linkedin.com/in/dylan-dwight/", "https://github.com/DylanDwight"]
     },
@@ -141,7 +138,6 @@
   </div>
   <div class="mobile-nav-meta">
     <a href="mailto:dylan@dylandwight.com">dylan@dylandwight.com</a>
-    <a href="tel:+13473793273">(347) 379-3273</a>
     <a href="https://www.linkedin.com/in/dylan-dwight/" target="_blank" rel="noopener noreferrer">LinkedIn<span class="sr-only"> (opens in a new tab)</span></a>
     <a href="https://github.com/DylanDwight" target="_blank" rel="noopener noreferrer">GitHub<span class="sr-only"> (opens in a new tab)</span></a>
     <a href="/resume/dylan-dwight-resume.pdf" target="_blank" rel="noopener">Résumé (PDF)<span class="sr-only"> (opens in a new tab)</span></a>
@@ -153,7 +149,7 @@
   <section class="page-hero" aria-labelledby="page-heading">
     <div class="grid-texture" aria-hidden="true"></div>
     <div class="wrap">
-      <span class="eyebrow">Contact · Brooklyn, NY · Remote</span>
+      <span class="eyebrow">Contact · Remote · US-based</span>
       <h1 id="page-heading">Start a project</h1>
       <p class="lede">Tell me about your business or project, what's not working today, and roughly when you'd like it done. I aim to reply within two business days.</p>
     </div>
@@ -205,17 +201,10 @@
             </div>
           </div>
 
-          <div class="field-row">
-            <div class="field">
-              <label for="f-phone">Phone number <span class="field-optional">(recommended)</span></label>
-              <input id="f-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" aria-describedby="f-phone-error" />
-              <p class="field-error" id="f-phone-error" data-error-for="f-phone" hidden></p>
-            </div>
-            <div class="field">
-              <label for="f-business">Business or organization <span class="req" aria-hidden="true">*</span></label>
-              <input id="f-business" name="business" type="text" autocomplete="organization" required aria-describedby="f-business-error" />
-              <p class="field-error" id="f-business-error" data-error-for="f-business" hidden></p>
-            </div>
+          <div class="field">
+            <label for="f-business">Business or organization <span class="req" aria-hidden="true">*</span></label>
+            <input id="f-business" name="business" type="text" autocomplete="organization" required aria-describedby="f-business-error" />
+            <p class="field-error" id="f-business-error" data-error-for="f-business" hidden></p>
           </div>
 
           <div class="field-row">
@@ -273,8 +262,7 @@
             <legend>Preferred contact method <span class="req" aria-hidden="true">*</span></legend>
             <div class="choices choices--inline">
               <label class="choice"><input type="radio" name="contact" value="Email" required checked /> <span>Email</span></label>
-              <label class="choice"><input type="radio" name="contact" value="Phone call" data-needs-phone /> <span>Phone call</span></label>
-              <label class="choice"><input type="radio" name="contact" value="Text message" data-needs-phone /> <span>Text message</span></label>
+              <label class="choice"><input type="radio" name="contact" value="Google Meet video call" /> <span>Google Meet video call</span></label>
             </div>
             <p class="field-error" id="f-contact-error" data-error-for="f-contact" hidden></p>
           </fieldset>
@@ -300,21 +288,20 @@
           <h3>Thank you. Your inquiry has been received.</h3>
           <p>Here's what happens next:</p>
           <ol class="next-steps">
-            <li><strong>Within two business days, you'll receive <span data-success-followup>an email</span> to set up a phone or video call.</strong></li>
-            <li><strong>On the call, we'll review your project details together.</strong></li>
+            <li><strong>Within two business days, you'll receive an email from me <span data-success-followup>to set up a Google Meet video call</span>.</strong></li>
+            <li><strong>We'll review your project details together, by email or on a video call.</strong></li>
             <li><strong>I'll then prepare a custom scope and quote so you can decide whether to move forward.</strong></li>
           </ol>
         </div>
       </div>
 
       <div class="contact-side" data-reveal>
-        <div class="phone-card">
-          <h2>Call or text</h2>
-          <p>Prefer to discuss your project directly? Call or send a text and I'll get back to you as soon as I can.</p>
-          <a class="phone-card-number" href="tel:+13473793273">(347) 379-3273</a>
-          <div class="phone-card-actions">
-            <a class="btn btn-primary" href="tel:+13473793273"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg> Call</a>
-            <a class="btn btn-secondary" href="sms:+13473793273"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><path d="M8 9h8M8 13h5"/></svg> Text</a>
+        <div class="meet-card">
+          <h2>Talk on Google Meet</h2>
+          <p>Prefer to talk it through face to face? Choose Google Meet in the form, or email me, and I'll send a calendar invite with a video link at a time that works for you.</p>
+          <div class="meet-card-actions">
+            <a class="btn btn-primary" href="mailto:dylan@dylandwight.com?subject=Google%20Meet%20request"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 13 5.2 3.5a.5.5 0 0 0 .8-.4V7.9a.5.5 0 0 0-.8-.4L16 11"/><rect x="2" y="6" width="14" height="12" rx="2"/></svg> Request a call</a>
+            <a class="btn btn-secondary" href="#inquiry">Use the form</a>
           </div>
         </div>
         <div>
@@ -349,7 +336,7 @@
         <svg class="logo-mark" viewBox="0 0 64 60" fill="none" aria-hidden="true"><path d="M10 14 H16 A16 16 0 0 1 16 46 H10 Z" fill="currentColor"/><path d="M54 14 H48 A16 16 0 0 0 48 46 H54 Z" fill="currentColor"/><circle class="logo-node" cx="32" cy="30" r="2.5"/></svg>
         <strong>Dylan Dwight Creative Technologies</strong>
         <p>Web design and front-end development for restaurants, artists, musicians, and small businesses.</p>
-        <span class="mono">Brooklyn, NY · Remote</span>
+        <span class="mono">Remote · US-based</span>
       </div>
       <nav aria-label="Footer">
         <h2 class="footer-heading">Site</h2>
@@ -364,7 +351,6 @@
         <h2 class="footer-heading">Elsewhere</h2>
         <ul class="footer-list">
           <li><a href="mailto:dylan@dylandwight.com">dylan@dylandwight.com</a></li>
-          <li><a href="tel:+13473793273">(347) 379-3273</a></li>
           <li><a href="https://www.linkedin.com/in/dylan-dwight/" target="_blank" rel="noopener noreferrer">LinkedIn<span class="sr-only"> (opens in a new tab)</span></a></li>
           <li><a href="https://github.com/DylanDwight" target="_blank" rel="noopener noreferrer">GitHub<span class="sr-only"> (opens in a new tab)</span></a></li>
           <li><a href="/resume/dylan-dwight-resume.pdf" target="_blank" rel="noopener">Résumé (PDF)<span class="sr-only"> (opens in a new tab)</span></a></li>
