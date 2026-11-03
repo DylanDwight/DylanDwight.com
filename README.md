@@ -22,6 +22,7 @@ about/index.html        About (copy from the Phase 1 spec, section 7)
 work/index.html         Work index (finished projects only; in-progress coursework stays on Home)
 work/sand-dollar/index.html      Sand Dollar case study (HTML, same copy as the PDF)
 work/sand-dollar-case-study.pdf   Sand Dollar case study (10-page PDF download)
+work/shoreline-electric/index.html   Shoreline Electric case study (HTML)
 resume/dylan-dwight-resume.pdf   Résumé (linked from the footer, drawer, and Work page)
 contact/index.html      Contact / project inquiry
 404.html                Not found (served automatically by Vercel)
@@ -59,7 +60,7 @@ Paths are root-relative (`/css/...`, `/js/...`) so nested pages resolve correctl
 - Text colors: `--color-text-subtle` is the quietest color allowed for words (WCAG AA). `--color-text-faint` is for decorative rules only.
 - Icons are inlined SVGs; edit the source in `assets/icons/` and update the inline copies.
 - Share images: edit copy and layout in `scripts/og/template.html`, then run `node scripts/og/render.mjs` (needs Playwright + Chromium). A new page gets a new key in both files and its own `og:image` / `twitter:image` tags.
-- Sand Dollar case study images have their frame baked in by `scripts/frame-shots.py` (needs Pillow). Frame new screenshots with it so they match.
+- Case study images (Sand Dollar, Shoreline Electric) have their frame baked in by `scripts/frame-shots.py` (needs Pillow). Frame new screenshots with it so they match.
 
 ## Running locally
 

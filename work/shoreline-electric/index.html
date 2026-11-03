@@ -1,0 +1,676 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Shoreline Electric Website Redesign — Case Study · Dylan Dwight</title>
+<meta name="description" content="How Dylan Dwight moved an Oregon Coast electrician off a slow Canva template onto a hand-built Astro site: mobile PageSpeed 55 to 100, phone load 15.5 s to 1.7 s, and 0 WAVE errors." />
+<meta name="theme-color" content="#0a0a0c" />
+
+<link rel="canonical" href="https://dylandwight.com/work/shoreline-electric/" />
+
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://dylandwight.com/work/shoreline-electric/" />
+<meta property="og:title" content="Shoreline Electric Website Redesign — Case Study · Dylan Dwight" />
+<meta property="og:description" content="How Dylan Dwight moved an Oregon Coast electrician off a slow Canva template onto a hand-built Astro site: mobile PageSpeed 55 to 100, phone load 15.5 s to 1.7 s, and 0 WAVE errors." />
+<meta property="og:site_name" content="Dylan Dwight Creative Technologies" />
+<meta property="og:image" content="https://dylandwight.com/assets/og/og-shoreline-electric.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="Shoreline Electric website redesign case study by Dylan Dwight, with a screenshot of the redesigned homepage." />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Shoreline Electric Website Redesign — Case Study · Dylan Dwight" />
+<meta name="twitter:description" content="How Dylan Dwight moved an Oregon Coast electrician off a slow Canva template onto a hand-built Astro site: mobile PageSpeed 55 to 100, phone load 15.5 s to 1.7 s, and 0 WAVE errors." />
+<meta name="twitter:image" content="https://dylandwight.com/assets/og/og-shoreline-electric.png" />
+<meta name="twitter:image:alt" content="Shoreline Electric website redesign case study by Dylan Dwight, with a screenshot of the redesigned homepage." />
+
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+<link rel="icon" href="/assets/favicon-32.png" sizes="32x32" type="image/png" />
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
+<link rel="icon" href="/favicon.ico" sizes="48x48" />
+<link rel="manifest" href="/site.webmanifest" />
+
+<!-- Marks JS as available before first paint (progressive-enhancement styles key off html.js). -->
+<script>document.documentElement.classList.add('js');</script>
+
+<link rel="preconnect" href="https://api.fontshare.com" />
+<link rel="preconnect" href="https://cdn.fontshare.com" crossorigin />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<!-- One Fontshare request per family: the combined multi-family request has been observed
+     returning the wrong second family, which left body text on the fallback font. -->
+<link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@700&display=swap" rel="stylesheet" />
+<link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+
+<link rel="stylesheet" href="/css/tokens.css" />
+<link rel="stylesheet" href="/css/base.css" />
+<link rel="stylesheet" href="/css/components.css" />
+<link rel="stylesheet" href="/css/pages.css" />
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "ProfessionalService",
+      "@id": "https://dylandwight.com/#business",
+      "name": "Dylan Dwight Creative Technologies",
+      "url": "https://dylandwight.com/",
+      "email": "dylan@dylandwight.com",
+      "telephone": "+1-347-379-3273",
+      "description": "Web design and front-end development for restaurants, artists, musicians, and small businesses.",
+      "areaServed": ["Brooklyn, NY", "Remote"],
+      "address": { "@type": "PostalAddress", "addressLocality": "Brooklyn", "addressRegion": "NY", "addressCountry": "US" },
+      "founder": { "@id": "https://dylandwight.com/#person" },
+      "sameAs": ["https://www.linkedin.com/in/dylan-dwight/", "https://github.com/DylanDwight"],
+      "knowsAbout": ["Web design", "Front-end development", "UX/UI design", "Responsive design", "Web accessibility", "SEO foundations", "Website maintenance"]
+    },
+    {
+      "@type": "Person",
+      "@id": "https://dylandwight.com/#person",
+      "name": "Dylan Dwight",
+      "jobTitle": "Web designer and front-end developer",
+      "url": "https://dylandwight.com/",
+      "email": "dylan@dylandwight.com",
+      "telephone": "+1-347-379-3273",
+      "worksFor": { "@id": "https://dylandwight.com/#business" },
+      "sameAs": ["https://www.linkedin.com/in/dylan-dwight/", "https://github.com/DylanDwight"]
+    },
+    {
+      "@type": "Article",
+      "@id": "https://dylandwight.com/work/shoreline-electric/#article",
+      "headline": "Shoreline Electric — Website Redesign",
+      "url": "https://dylandwight.com/work/shoreline-electric/",
+      "author": { "@id": "https://dylandwight.com/#person" },
+      "image": "https://dylandwight.com/assets/work/shoreline-electric-home-desktop.jpg",
+      "inLanguage": "en"
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://dylandwight.com/#website",
+      "url": "https://dylandwight.com/",
+      "name": "Dylan Dwight Creative Technologies",
+      "publisher": { "@id": "https://dylandwight.com/#business" }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<a href="#main" class="skip-link">Skip to content</a>
+
+<!-- ============ HEADER ============ -->
+<header class="header" id="site-header">
+  <div class="wrap header-inner">
+    <a href="/" class="logo-link" aria-label="Dylan Dwight — home">
+      <svg class="logo-mark" viewBox="0 0 64 60" fill="none" aria-hidden="true"><path d="M10 14 H16 A16 16 0 0 1 16 46 H10 Z" fill="currentColor"/><path d="M54 14 H48 A16 16 0 0 0 48 46 H54 Z" fill="currentColor"/><circle class="logo-node" cx="32" cy="30" r="2.5"/></svg>
+    </a>
+
+    <nav aria-label="Primary">
+      <ul class="nav-links">
+        <li><a href="/work/" aria-current="page">Work</a></li>
+<li><a href="/services/">Services</a></li>
+<li><a href="/about/">About</a></li>
+<li><a href="/contact/">Contact</a></li>
+      </ul>
+    </nav>
+
+    <div class="header-actions">
+      <a class="btn btn-primary btn-compact btn-nav-cta" href="/contact/">Start a project<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <button class="icon-btn nav-toggle" type="button" data-mobile-nav-open aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile drawer: hidden (out of the tab order) until opened -->
+<div class="mobile-nav" id="mobile-nav" data-mobile-nav role="dialog" aria-modal="true" aria-label="Site menu" hidden>
+  <div class="mobile-nav-top">
+    <a href="/" class="logo-link" aria-label="Dylan Dwight — home">
+      <svg class="logo-mark" viewBox="0 0 64 60" fill="none" aria-hidden="true"><path d="M10 14 H16 A16 16 0 0 1 16 46 H10 Z" fill="currentColor"/><path d="M54 14 H48 A16 16 0 0 0 48 46 H54 Z" fill="currentColor"/><circle class="logo-node" cx="32" cy="30" r="2.5"/></svg>
+    </a>
+    <button class="icon-btn" type="button" data-mobile-nav-close aria-label="Close menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </div>
+  <nav aria-label="Mobile">
+    <ul class="mobile-nav-links">
+      <li><a href="/work/" aria-current="page">Work</a></li>
+<li><a href="/services/">Services</a></li>
+<li><a href="/about/">About</a></li>
+<li><a href="/contact/">Contact</a></li>
+    </ul>
+  </nav>
+  <div class="mobile-nav-cta">
+    <a class="btn btn-primary" href="/contact/">Start a project</a>
+  </div>
+  <div class="mobile-nav-meta">
+    <a href="mailto:dylan@dylandwight.com">dylan@dylandwight.com</a>
+    <a href="tel:+13473793273">(347) 379-3273</a>
+    <a href="https://www.linkedin.com/in/dylan-dwight/" target="_blank" rel="noopener noreferrer">LinkedIn<span class="sr-only"> (opens in a new tab)</span></a>
+    <a href="https://github.com/DylanDwight" target="_blank" rel="noopener noreferrer">GitHub<span class="sr-only"> (opens in a new tab)</span></a>
+    <a href="/resume/dylan-dwight-resume.pdf" target="_blank" rel="noopener">Résumé (PDF)<span class="sr-only"> (opens in a new tab)</span></a>
+  </div>
+</div>
+
+
+<main id="main" class="cs-page">
+
+  <div class="cs-progress" aria-hidden="true" data-cs-progress></div>
+
+  <section class="page-hero cs-hero" aria-labelledby="page-heading">
+    <div class="grid-texture" aria-hidden="true"></div>
+    <div class="wrap">
+      <a href="/work/" class="text-link cs-back"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg> All work</a>
+      <p class="eyebrow eyebrow--wrap"><span>Client project</span><span class="eyebrow-sep" aria-hidden="true">·</span><span>Electrician website</span><span class="eyebrow-sep" aria-hidden="true">·</span><span>Case study</span></p>
+      <h1 id="page-heading">Shoreline Electric <span class="cs-subtitle">Website Redesign</span></h1>
+      <p class="lede">I moved my family’s electrical business off a slow Canva template &amp; onto a site built from scratch that it owns. On a phone, the main content now shows in 1.7 seconds instead of 15.5, and customers can call, text, or email from any part of the page.</p>
+
+      <dl class="cs-facts">
+        <div><dt>Designer</dt><dd>Dylan Dwight</dd></div>
+        <div><dt>Role</dt><dd>Web Designer &amp; Front-End Developer, UX/UI</dd></div>
+        <div><dt>Timeline</dt><dd>October 24–28, 2026<span>Launched on the real domain October 28</span></dd></div>
+        <div><dt>Stack</dt><dd>Astro, GitHub, Vercel</dd></div>
+      </dl>
+
+      <div class="cs-hero-actions">
+        <a href="https://shoreline-electric.com" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Visit the live site<span class="sr-only"> (opens in a new tab)</span></a>
+      </div>
+
+      <figure class="cs-hero-shot corner-panel">
+        <img src="/assets/work/shoreline-electric/new-home-hero.webp" srcset="/assets/work/shoreline-electric/new-home-hero-900.webp 900w, /assets/work/shoreline-electric/new-home-hero.webp 1722w" sizes="(max-width: 1240px) 100vw, 1180px" width="1722" height="1006" decoding="async" fetchpriority="high" alt="The redesigned Shoreline Electric homepage on desktop: a sticky header with the logo, Services, Service area, About, Contact, and an amber Call button, over a darkened drone video of Haystack Rock with the headline Local, Licensed, Insured Electrician, Call and Text us buttons, and Licensed, Insured, Oregon CCB# 259008.">
+        <figcaption class="cs-cap"><span class="label-chip label-chip--accent">After</span> Redesigned homepage · Desktop</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <div class="wrap cs-layout">
+
+    <nav class="cs-toc" aria-label="Case study sections">
+      <p class="cs-toc-title">On this page</p>
+      <ol>
+        <li class="cs-toc-rail" aria-hidden="true"></li>
+        <li><a href="#overview">Overview</a></li>
+        <li><a href="#role">My Role</a></li>
+        <li><a href="#research">UX Research &amp; Discovery</a></li>
+        <li><a href="#before-after">Before &amp; After</a></li>
+        <li><a href="#approach">Design &amp; Development Approach</a></li>
+        <li><a href="#build">The Build</a></li>
+        <li><a href="#launch">Moving Off Canva</a></li>
+        <li><a href="#seo">Local SEO</a></li>
+        <li><a href="#results">Results &amp; Impact</a></li>
+        <li><a href="#reflection">Reflection &amp; Next Steps</a></li>
+      </ol>
+    </nav>
+
+    <article class="cs-body">
+
+      <!-- ============ OVERVIEW ============ -->
+      <section class="cs-section" id="overview" aria-labelledby="overview-h">
+        <h2 id="overview-h">Overview</h2>
+        <p>Shoreline Electric is a licensed &amp; insured electrician on the Oregon Coast, in its first year of business. It does residential, commercial, and remodel work from Cannon Beach to Pacific City.</p>
+        <p>It’s also my family’s business. My dad owns it. That made this a real paid job with a real client, but one I had unusual access to, so I’ve been careful to report only what I measured.</p>
+        <p>The old site was a Canva template. It looked good on a big screen. On a phone it took 15.5 seconds to show its main content, the page weighed 13.3 MB, the phone number wasn’t tappable, and the icon links had no labels for screen readers. The business didn’t own the code, and the site lived on a Canva subscription.</p>
+        <p>I redesigned the site around one job, getting customers to reach the business, then built it from scratch in code &amp; moved the domain off Canva without touching the company email.</p>
+
+        <h3 class="cs-kicker">At a Glance <span>PageSpeed Insights, mobile: October 27, 2026</span></h3>
+        <ul class="cs-glance" role="list">
+          <li><strong>55 → 100</strong><span>Mobile PageSpeed performance score</span></li>
+          <li><strong>15.5 s → 1.7 s</strong><span>Time to show the main content on a phone (LCP)</span></li>
+          <li><strong>13.3 MB → 1.9 MB</strong><span>Page weight, about 7× lighter</span></li>
+          <li><strong>0 Errors</strong><span>WAVE accessibility errors &amp; contrast errors</span></li>
+        </ul>
+      </section>
+
+      <!-- ============ ROLE ============ -->
+      <section class="cs-section" id="role" aria-labelledby="role-h">
+        <h2 id="role-h">My Role</h2>
+        <p>I handled the whole project on my own: research, design, code, testing, hosting, and the domain move. I’m a front-end oriented web designer &amp; developer. I use UX/UI principles to decide what goes where: clear hierarchy, short paths to the main actions, and layouts that work on any screen.</p>
+        <ul class="cs-skills" role="list">
+          <li><strong>UX Research</strong><span>Competitor sites, site audit, baseline tests</span></li>
+          <li><strong>UI Design</strong><span>Layout, navigation, van illustration, highway sign</span></li>
+          <li><strong>Front-End Build</strong><span>Astro, HTML, CSS, a little JavaScript</span></li>
+          <li><strong>Accessibility</strong><span>WCAG 2.2 AA: contrast, keyboard, alt text, motion</span></li>
+          <li><strong>Local SEO</strong><span>Titles, schema, sitemap, share image</span></li>
+          <li><strong>Launch</strong><span>Hosting, DNS, keeping company email safe</span></li>
+        </ul>
+        <dl class="cs-table cs-table--kv">
+          <div><dt>Moved from</dt><dd>Canva website builder</dd></div>
+          <div><dt>Moved to</dt><dd>A hand-built Astro site, code on GitHub, hosted on Vercel Pro</dd></div>
+          <div><dt>Kept from the old site</dt><dd>The logo, the drone video, the services list, and the towns served</dd></div>
+          <div><dt>I designed &amp; built</dt><dd>Layout, navigation, the van illustration, the Highway 101 sign, all of the code, the share image, plus the domain &amp; hosting setup</dd></div>
+          <div><dt>Project value</dt><dd>$2,800</dd></div>
+        </dl>
+      </section>
+
+      <!-- ============ RESEARCH ============ -->
+      <section class="cs-section" id="research" aria-labelledby="research-h">
+        <h2 id="research-h">UX Research &amp; Discovery</h2>
+        <p class="cs-intro">Someone with a dead outlet or a tripped panel wants three answers, fast: Do you do this kind of work? Do you come to my town? How do I reach you?</p>
+        <p>I researched other electricians’ websites to see how trades businesses present their services, service areas, and contact options. Then I went through the Canva site the way a customer would, on a phone, and ran baseline tests before I changed anything.</p>
+
+        <div class="cs-split">
+          <div>
+            <h3>What the Old Site Showed</h3>
+            <ul>
+              <li>The navigation was two underlined text links, Services &amp; Contact, floating over the video.</li>
+              <li>The phone number was plain text, written “(971)456-1800.” On a phone you couldn’t tap it to call.</li>
+              <li>White text sat right on a bright beach video with nothing behind it.</li>
+              <li>Six images had no alt text, and four icon links had no name for screen readers.</li>
+              <li>A leftover Canva placeholder, “Your paragraph text,” was live on the page.</li>
+              <li>No structured data, so Google had to guess the business details.</li>
+            </ul>
+            <h3>Behind the Scenes</h3>
+            <p>The baseline report showed where the 13.3 MB went: two background videos (12.5 MB &amp; 7.3 MB files), a 2 MB Canva script, and six or more font files. Most of the business’s work comes in by phone, and customers text, call, or email. So every decision got judged on one question: does this make reaching the business easier?</p>
+          </div>
+          <figure class="cs-figure">
+            <img src="/assets/work/shoreline-electric/old-services.webp" width="1000" height="686" loading="lazy" decoding="async" alt="The old Canva services section: the heading Leave it to us! beside a phone icon and an envelope icon with no text labels, then two stock photo cards titled Residential Services and Commercial Service, each with a list of services in small white text on a grey gradient.">
+            <figcaption class="cs-cap"><span class="label-chip">Before</span> Services on the Canva site. Unlabeled phone &amp; email icons, and headings that don’t match.</figcaption>
+          </figure>
+        </div>
+
+        <h3>The Customer Path I Designed Around</h3>
+        <ol class="cs-path" role="list">
+          <li><span class="cs-path-n" aria-hidden="true">1</span><strong>Find</strong><span>Search for an electrician on Google or Maps</span></li>
+          <li><span class="cs-path-n" aria-hidden="true">2</span><strong>Check</strong><span>Do they do this work? Are they licensed?</span></li>
+          <li><span class="cs-path-n" aria-hidden="true">3</span><strong>Confirm</strong><span>Do they come to my town?</span></li>
+          <li><span class="cs-path-n" aria-hidden="true">4</span><strong>Reach out</strong><span>Call, text, or email in one tap</span></li>
+        </ol>
+
+        <h3>From Problem to Design Decision</h3>
+        <div class="cs-table-scroll" role="region" aria-label="Problems on the old site and what changed" tabindex="0">
+          <table class="cs-table">
+            <thead><tr><th scope="col">Problem on the old site</th><th scope="col">What I changed</th></tr></thead>
+            <tbody>
+              <tr><td data-label="Problem on the old site">15.5 s to show the main content on a phone</td><td data-label="What I changed">A static site with no builder script, one compressed video with a still poster frame, and two self-hosted fonts</td></tr>
+              <tr><td data-label="Problem on the old site">The phone number wasn’t a link</td><td data-label="What I changed">Call, Text, and Email are one-tap links in the hero, the header, and the contact section</td></tr>
+              <tr><td data-label="Problem on the old site">White text on a bright video</td><td data-label="What I changed">A dark gradient behind the text, checked frame by frame for contrast</td></tr>
+              <tr><td data-label="Problem on the old site">Two floating text links for navigation</td><td data-label="What I changed">A sticky header with Services, Service area, About, Contact, and a Call button</td></tr>
+              <tr><td data-label="Problem on the old site">Towns listed in a small paragraph</td><td data-label="What I changed">A Highway 101 road sign that lists every town, north to south</td></tr>
+              <tr><td data-label="Problem on the old site">Unlabeled icons &amp; images</td><td data-label="What I changed">Every link has a text label, and every image has alt text or is marked decorative</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ============ BEFORE & AFTER ============ -->
+      <section class="cs-section" id="before-after" aria-labelledby="ba-h">
+        <h2 id="ba-h">Before &amp; After: The Homepage</h2>
+        <div class="cs-compare">
+          <figure class="cs-figure">
+            <img src="/assets/work/shoreline-electric/old-home.webp" width="1100" height="695" loading="lazy" decoding="async" alt="The old Canva homepage on desktop: a bright drone shot of Haystack Rock, Services and Contact as underlined links, the logo at the top right, a large thin white headline, CCB# 259008, and the town list at the bottom right.">
+            <figcaption class="cs-cap"><span class="label-chip">Before</span> Canva</figcaption>
+            <h3>Nice Video, No Way to Call</h3>
+            <ul>
+              <li>Navigation: two underlined links</li>
+              <li>No call, text, or email button above the fold</li>
+              <li>White text right on the bright video</li>
+              <li>13.3 MB to download before it settles</li>
+            </ul>
+          </figure>
+          <figure class="cs-figure">
+            <img src="/assets/work/shoreline-electric/new-home.webp" width="1100" height="695" loading="lazy" decoding="async" alt="The redesigned homepage on desktop: a sticky dark header with a Call button, the same drone video darkened behind a bold headline, Call and Text us buttons, and a Licensed, Insured, Oregon CCB# 259008 line.">
+            <figcaption class="cs-cap"><span class="label-chip label-chip--accent">After</span> Astro · Redesigned Around Reaching the Business</figcaption>
+            <h3>Call or Text From the First Screen</h3>
+            <ul>
+              <li>A Call button in the sticky header, on every scroll position</li>
+              <li>Call &amp; Text us right under the headline</li>
+              <li>The license number in the first screen</li>
+              <li>Same drone video, compressed, with a pause button</li>
+            </ul>
+          </figure>
+        </div>
+
+        <h2 class="cs-h2-sub">Before &amp; After: On a Phone</h2>
+        <ul class="cs-phones" role="list">
+          <li>
+            <figure class="cs-figure cs-figure--phone">
+              <img src="/assets/work/shoreline-electric/old-mobile.webp" width="770" height="1733" loading="lazy" decoding="async" alt="The old Canva site on a phone: two underlined links, the logo, and white text over a bright beach video, with no call button.">
+              <figcaption class="cs-cap"><span class="label-chip">Before</span> Canva first screen</figcaption>
+            </figure>
+          </li>
+          <li>
+            <figure class="cs-figure cs-figure--phone">
+              <img src="/assets/work/shoreline-electric/new-mobile.webp" width="770" height="1733" loading="lazy" decoding="async" alt="The redesigned site on a phone: a header with the logo, a Call (971) 456-1800 button and a menu button, then the headline, Call and Text us buttons, and Licensed, Insured, Oregon CCB# 259008.">
+              <figcaption class="cs-cap"><span class="label-chip label-chip--accent">After</span> First screen</figcaption>
+            </figure>
+          </li>
+          <li>
+            <figure class="cs-figure cs-figure--phone">
+              <img src="/assets/work/shoreline-electric/mobile-services.webp" width="770" height="1733" loading="lazy" decoding="async" alt="The Residential Services card on a phone: an illustrated house, then a one-column list from Electrical Repairs to Electric Vehicle Chargers, with the van road strip along the bottom of the screen.">
+              <figcaption class="cs-cap"><span class="label-chip label-chip--accent">After</span> Services</figcaption>
+            </figure>
+          </li>
+          <li>
+            <figure class="cs-figure cs-figure--phone">
+              <img src="/assets/work/shoreline-electric/mobile-contact.webp" width="770" height="1733" loading="lazy" decoding="async" alt="The contact section on a phone: Tell us what you need, with large amber Call and Text cards for (971) 456-1800, then Email and Facebook cards.">
+              <figcaption class="cs-cap"><span class="label-chip label-chip--accent">After</span> Call, text, or email</figcaption>
+            </figure>
+          </li>
+        </ul>
+        <p class="cs-fine">Before screenshots were captured from the Canva site on October 25, 2026. After screenshots were captured from the production build at the same widths: 1366 px desktop &amp; 412 px phone.</p>
+      </section>
+
+      <!-- ============ APPROACH ============ -->
+      <section class="cs-section" id="approach" aria-labelledby="approach-h">
+        <h2 id="approach-h">Design &amp; Development Approach</h2>
+        <h3>Iteration 1: A Faithful Rebuild</h3>
+        <p>The first brief was a rebuild, not a redesign: same layout, copy, photos, and video, just fast, accessible, and owned by the business. I built that version first.</p>
+        <div class="cs-split">
+          <div>
+            <p>Seeing it next to the original made the real problem clear. Fixing what visitors can’t see wasn’t enough. The layout itself still had no clear place to call, and it still read like a template. So I changed direction to a custom redesign, and I kept the rebuild on its own branch as a fallback.</p>
+            <h3>Iterating on the Redesign</h3>
+            <ul>
+              <li>An illustrated coast scene replaced the video in the hero. It didn’t feel like the business, so the original drone video came back, darker &amp; compressed.</li>
+              <li>The first heading font was too wide. Barlow Condensed matched the lettering on the real van much better.</li>
+              <li>The service area went from a paragraph of towns to a Highway 101 road sign.</li>
+              <li>A road strip with the work van went along the bottom of the screen &amp; got simpler with each pass: a town sign, tick marks, then just the road, a guardrail, and the coast’s landmark rocks.</li>
+            </ul>
+          </div>
+          <figure class="cs-figure">
+            <img src="/assets/work/shoreline-electric/rebuild-draft.webp" width="1100" height="695" loading="lazy" decoding="async" alt="The faithful rebuild draft on desktop: the same layout as the Canva site, with the drone video, underlined Services and Contact links, the logo at the top right, and the thin white headline, now with a darker overlay behind the text.">
+            <figcaption class="cs-cap"><span class="label-chip">Draft</span> Iteration 1, the faithful rebuild. Faster &amp; cleaner, but the same layout.</figcaption>
+          </figure>
+        </div>
+
+        <h3>Visual Direction: Drawn From the Van</h3>
+        <p>The business’s strongest brand piece isn’t its website. It’s the white work van with the orange script lettering that drives around the coast every day. I drew the van from a photo, panel by panel, and pulled the site’s look from it: white &amp; dark navy panels, the orange script, bold condensed caps, and amber for every action.</p>
+        <div class="cs-compare">
+          <figure class="cs-figure">
+            <img src="/assets/work/shoreline-electric/van-photo.webp" width="1100" height="715" loading="lazy" decoding="async" alt="A photo of the real Shoreline Electric van: a white high-roof cargo van with the circular logo, orange script Shoreline Electric lettering, Remodel, Residential, Commercial, the phone number, the website, and CCB# 259008.">
+            <figcaption class="cs-cap"><span class="label-chip">Reference</span> The real van</figcaption>
+          </figure>
+          <figure class="cs-figure">
+            <img src="/assets/work/shoreline-electric/van-illustration.webp" width="1100" height="715" loading="lazy" decoding="async" alt="The flat vector illustration of the same van, with the same logo, lettering, phone number, website, and CCB number placed to match the photo.">
+            <figcaption class="cs-cap"><span class="label-chip label-chip--accent">After</span> The illustration I drew for the site</figcaption>
+          </figure>
+        </div>
+        <p>On the live site, the van drives along a strip of coast road at the bottom of the screen as you scroll. It passes Haystack Rock, Twin Rocks, and Three Arch Rocks near their towns, and reaches the end of the road at the contact section. Scroll back up and it turns around to show its driver side. It’s decorative, so screen readers skip it, and the turnaround animation is switched off for anyone who has reduced motion turned on.</p>
+
+        <figure class="cs-figure">
+          <img src="/assets/work/shoreline-electric/service-area.webp" width="1520" height="906" loading="lazy" decoding="async" alt="The service area section on desktop: the heading Up and Down the Coast with a short paragraph, and a green Highway 101 North to South road sign listing Cannon Beach, Manzanita, Nehalem, Wheeler, Rockaway Beach, Garibaldi, Bay City, Tillamook, Oceanside, Netarts, and Pacific City. The van drives the road strip along the bottom.">
+          <figcaption class="cs-cap"><span class="label-chip label-chip--accent">After</span> Service area. Every town on a Highway 101 sign, with the van on the road strip below.</figcaption>
+        </figure>
+      </section>
+
+      <!-- ============ BUILD ============ -->
+      <section class="cs-section" id="build" aria-labelledby="build-h">
+        <h2 id="build-h">The Build</h2>
+
+        <h3>Why Astro</h3>
+        <p>Astro lets me write plain HTML &amp; CSS in small components, then builds them into ordinary static pages. It ships no JavaScript unless I ask for it, so the page loads fast by default. All the business facts (phone, email, towns, services) live in one data file, so they’re the same everywhere they appear.</p>
+        <p>From the first build on, every round of changes went in as a pull request with its own private preview link: 15 in all between October 25 &amp; 28, each one checked on a preview before it went live.</p>
+
+        <h3>Navigation</h3>
+        <div class="cs-navmap">
+          <div class="cs-navmap-row">
+            <span class="label-chip">Before</span>
+            <ul class="cs-navmap-items" role="list" aria-label="Old navigation"><li>Services</li><li>Contact</li></ul>
+            <p>Underlined text links over the video. No call button.</p>
+          </div>
+          <div class="cs-navmap-row">
+            <span class="label-chip label-chip--accent">After</span>
+            <ul class="cs-navmap-items cs-navmap-items--after" role="list" aria-label="New navigation"><li>Services</li><li>Service area</li><li>About</li><li>Contact</li><li class="is-cta">Call</li></ul>
+            <p>A sticky header. On phones, the Call button stays in the header &amp; the links move into a menu.</p>
+          </div>
+        </div>
+
+        <div class="cs-split">
+          <div>
+            <h3>Accessibility: WCAG 2.2 AA</h3>
+            <ul>
+              <li>Contrast over the drone video, measured from screenshots taken every 3 seconds of the clip: white text at 9:1 or better, the amber word at 4.6:1 or better.</li>
+              <li>A skip link, a visible focus style on every link &amp; button, and nothing hidden under the sticky header.</li>
+              <li>A pause button on the video, which never autoplays with reduced motion turned on.</li>
+              <li>Tap targets at least 24 px, and no sideways scrolling from 360 px phones to 1920 px desktops.</li>
+              <li>No layout shift as the fonts load (CLS 0).</li>
+            </ul>
+          </div>
+          <figure class="cs-figure cs-figure--narrow">
+            <img src="/assets/work/shoreline-electric/wave-after.webp" width="439" height="429" loading="lazy" decoding="async" alt="The WAVE accessibility tool summary for the new site: 0 errors, 0 contrast errors, 3 alerts, 7 features, 19 structural elements, 37 ARIA, and an AIM score of 10 out of 10.">
+            <figcaption class="cs-cap"><span class="label-chip label-chip--accent">After</span> WAVE summary, October 27, 2026.</figcaption>
+          </figure>
+        </div>
+
+        <div class="cs-note">
+          <h3>What WAVE Taught Me</h3>
+          <p>My first WAVE run on the new site found 4 errors &amp; 11 contrast errors. The 4 errors were decorative rock drawings missing an “empty alt” marker. The 11 contrast errors were the 11 town names on the highway sign.</p>
+          <p>The towns flip onto the sign when it scrolls into view. Before that they waited at 0 opacity, and WAVE checks the page frozen at load, so it saw invisible text. I changed the starting state so the towns wait turned edge-on at full color instead. They still look the same when they flip in, and they’re readable to every tool &amp; screen reader. The final run: 0 errors, 0 contrast errors.</p>
+          <p class="cs-fine">Lesson: automated checkers test the page frozen at load, so an animation’s hidden starting state counts as real content.</p>
+        </div>
+      </section>
+
+      <!-- ============ LAUNCH ============ -->
+      <section class="cs-section" id="launch" aria-labelledby="launch-h">
+        <h2 id="launch-h">Moving Off Canva Without Breaking Email</h2>
+        <p class="cs-intro">The riskiest part of the project wasn’t the design. It was the domain. The company email runs on the same domain as the website, and one wrong DNS change would stop it.</p>
+        <p>Before touching anything, I looked up every DNS record &amp; saved a copy of the email ones. At launch, only the records that pointed at Canva changed.</p>
+        <div class="cs-table-scroll" role="region" aria-label="DNS records changed and kept at launch" tabindex="0">
+          <table class="cs-table">
+            <thead><tr><th scope="col">Record</th><th scope="col">What it does</th><th scope="col">At launch</th></tr></thead>
+            <tbody>
+              <tr><td data-label="Record">A record (main domain)</td><td data-label="What it does">Points the domain at the website</td><td data-label="At launch">Changed from Canva to Vercel</td></tr>
+              <tr><td data-label="Record">www</td><td data-label="What it does">Handles “www.” in front of the domain</td><td data-label="At launch">Pointed at Vercel, which redirects it to the main domain</td></tr>
+              <tr><td data-label="Record">Canva verification</td><td data-label="What it does">Proved the domain to Canva</td><td data-label="At launch">Removed</td></tr>
+              <tr><td data-label="Record">MX, SPF, DKIM, DMARC</td><td data-label="What it does">Deliver company email &amp; keep it out of spam</td><td data-label="At launch">Not touched</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Vercel issued the HTTPS certificate, and the company inbox sent &amp; received email after the switch. The business now owns its code, and nothing depends on a Canva account.</p>
+      </section>
+
+      <!-- ============ SEO ============ -->
+      <section class="cs-section" id="seo" aria-labelledby="seo-h">
+        <h2 id="seo-h">Local SEO: Getting Found</h2>
+        <p class="cs-intro">A local electrician gets found by town. The site needed to tell Google, in a format it can read, who the business is &amp; where it works.</p>
+        <div class="cs-cols">
+          <div class="card cs-card">
+            <h3>Search</h3>
+            <ul>
+              <li>A page title &amp; description written around the service &amp; the coast.</li>
+              <li>Electrician schema (structured data) with the name, phone, email, logo, and all 11 towns.</li>
+              <li>It’s a service-area business, so the schema lists towns, not a street address.</li>
+              <li>A sitemap, robots.txt, and a 404 page Google won’t index.</li>
+            </ul>
+          </div>
+          <div class="card cs-card">
+            <h3>Sharing</h3>
+            <ul>
+              <li>A designed preview image for when the link is texted or posted on Facebook.</li>
+              <li>A shorter share title, because text message previews cut off the full one.</li>
+              <li>Browser &amp; phone home-screen icons made from the logo.</li>
+              <li>The same name &amp; phone number everywhere on the page.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ RESULTS ============ -->
+      <section class="cs-section" id="results" aria-labelledby="results-h">
+        <h2 id="results-h">Results &amp; Impact</h2>
+        <p class="cs-intro">I ran the same tests on the old &amp; new sites on the same night, with the same tools.</p>
+
+        <div class="cs-metrics">
+          <section class="cs-metric-panel" aria-labelledby="psi-m-h">
+            <header>
+              <h3 id="psi-m-h">PageSpeed Insights · Mobile</h3>
+              <p>October 27, 2026 <span>Canva vs. the new site</span></p>
+            </header>
+            <ul class="cs-stats cs-stats--pairs" role="list">
+              <li><strong>55 → 100</strong><span>Performance score</span></li>
+              <li><strong>15.5 s → 1.7 s</strong><span>Largest Contentful Paint</span></li>
+              <li><strong>14.6 s → 1.1 s</strong><span>First Contentful Paint</span></li>
+              <li><strong>30 ms → 0 ms</strong><span>Total Blocking Time</span></li>
+            </ul>
+          </section>
+
+          <section class="cs-metric-panel" aria-labelledby="psi-d-h">
+            <header>
+              <h3 id="psi-d-h">PageSpeed Insights · Desktop</h3>
+              <p>October 27, 2026 <span>Canva vs. the new site</span></p>
+            </header>
+            <ul class="cs-stats cs-stats--pairs" role="list">
+              <li><strong>68 → 100</strong><span>Performance score</span></li>
+              <li><strong>2.7 s → 0.4 s</strong><span>Largest Contentful Paint</span></li>
+              <li><strong>90 → 100</strong><span>Accessibility score</span></li>
+              <li><strong>91 → 100</strong><span>SEO score</span></li>
+            </ul>
+          </section>
+        </div>
+
+        <h3>Before &amp; After, Side by Side</h3>
+        <div class="cs-table-scroll" role="region" aria-label="Before and after test results" tabindex="0">
+          <table class="cs-table">
+            <thead><tr><th scope="col">Measure</th><th scope="col">Canva (before)</th><th scope="col">New site (after)</th></tr></thead>
+            <tbody>
+              <tr><td data-label="Measure">Mobile performance</td><td data-label="Canva (before)">55</td><td data-label="New site (after)">100</td></tr>
+              <tr><td data-label="Measure">Mobile Largest Contentful Paint</td><td data-label="Canva (before)">15.5 s</td><td data-label="New site (after)">1.7 s</td></tr>
+              <tr><td data-label="Measure">Accessibility · Best Practices · SEO</td><td data-label="Canva (before)">90 · 96 · 91</td><td data-label="New site (after)">100 · 100 · 100</td></tr>
+              <tr><td data-label="Measure">Page weight</td><td data-label="Canva (before)">13.3 MB</td><td data-label="New site (after)">About 1.9 MB</td></tr>
+              <tr><td data-label="Measure">Images missing alt text</td><td data-label="Canva (before)">6</td><td data-label="New site (after)">0</td></tr>
+              <tr><td data-label="Measure">WAVE errors · contrast errors</td><td data-label="Canva (before)">Not testable (see below)</td><td data-label="New site (after)">0 · 0</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="cs-note">
+          <h3>Why the Old Site’s Perfect WAVE Score Didn’t Count</h3>
+          <p>WAVE gave the Canva site 0 errors &amp; an AIM score of 10 out of 10. But its own alerts said “No heading structure” &amp; “No page regions,” and the page showed up blank inside WAVE. It was scoring an empty page, not the real content. That’s why I lean on PageSpeed’s accessibility audit for the before numbers.</p>
+        </div>
+
+        <h3>What I’m Not Claiming</h3>
+        <p>The site went live at the end of October 2026, so it’s too early to say whether it brings in more calls. I haven’t measured calls, jobs, or revenue, and I’m not claiming any change in them.</p>
+        <p class="cs-fine">Speed &amp; accessibility are what this project changed, and they’re what I measured.</p>
+
+        <details class="cs-method">
+          <summary>Method and limitations</summary>
+          <p>PageSpeed Insights (Lighthouse 13.5.0) lab tests, run in my own Chrome on October 27, 2026: the Canva site at shoreline-electric.com at about 11:20 PM EDT, and the new site’s production deploy at shoreline-electric.vercel.app at 11:18 PM EDT. The desktop and the mobile Accessibility, Best Practices, and SEO scores for the new site come from a 10:55 PM run of the same deploy. That deploy is the same code that now runs on shoreline-electric.com, which went live on October 28. Real-user (field) data was “No Data” for both sites because of low traffic. The new site’s page weight is from a Lighthouse run of the production build, not PageSpeed. Before screenshots are from the Canva site on October 25, 2026; after screenshots are from the production build at the same widths. WAVE results are from the WebAIM browser extension, October 27, 2026 at 11:36 PM EDT. Lab tests simulate a mid-range phone on a slow connection and can vary run to run.</p>
+        </details>
+
+        <!-- PLACEHOLDER: replace this whole block with the owner's testimonial once he sends it.
+             Suggested markup when ready:
+             <blockquote><p>“…”</p></blockquote>
+             <p class="cs-fine">Owner, Shoreline Electric</p> -->
+        <div class="cs-note" data-placeholder="testimonial">
+          <h3><span class="label-chip">Placeholder</span> Owner Testimonial</h3>
+          <p>[TESTIMONIAL PENDING: a short quote from the owner of Shoreline Electric goes here.]</p>
+        </div>
+
+        <div class="cs-takeaway">
+          <h3>Key Takeaway</h3>
+          <p>A trades website has one job: help someone reach the business, fast, on a phone. The old site looked fine &amp; did that job badly. Making it 9× faster to show its main content &amp; putting call, text, and email on the first screen did more for that job than any visual flourish. The van is the fun part, but the Call button is the point.</p>
+        </div>
+      </section>
+
+      <!-- ============ REFLECTION ============ -->
+      <section class="cs-section" id="reflection" aria-labelledby="reflection-h">
+        <h2 id="reflection-h">Reflection &amp; Next Steps</h2>
+        <h3>What I Learned</h3>
+        <p>Building the faithful rebuild first was worth it, even though we moved past it. It proved the speed &amp; accessibility fixes on their own, and putting it next to the original is what showed the layout needed to change too.</p>
+        <p>This was my first domain &amp; DNS migration. Writing down every email record before changing anything turned the scariest step into a short checklist. It was also my first Astro project. Keeping every business fact in one data file is a habit I’ll bring to every small business site.</p>
+        <p>Working for family made it easy to skip the paperwork. I didn’t send a written estimate before starting, and I should have. The next client gets a scope &amp; estimate before any work begins.</p>
+
+        <h3>Timeline</h3>
+        <ol class="cs-timeline" role="list">
+          <li>
+            <p class="cs-timeline-date">October 24–25, 2026</p>
+            <p>Baseline tests &amp; screenshots of the Canva site, competitor research, the plan, and the faithful rebuild.</p>
+          </li>
+          <li>
+            <p class="cs-timeline-date">October 25–27, 2026</p>
+            <p>The custom redesign: van illustration, road strip, Highway 101 sign, and contact section, reviewed on private preview links.</p>
+          </li>
+          <li>
+            <p class="cs-timeline-date">October 27, 2026</p>
+            <p>Quality checks: PageSpeed, WAVE, keyboard, contrast, and five screen widths, plus the fixes they turned up.</p>
+          </li>
+          <li>
+            <p class="cs-timeline-date">October 28, 2026</p>
+            <p>The share image, then the domain moved off Canva. The site went live on shoreline-electric.com with email still working.</p>
+          </li>
+        </ol>
+
+        <h3>How I Use AI in My Workflow</h3>
+        <p>I used AI coding help throughout this project, for drafting code, running checks, and writing up notes. I directed the design, reviewed every change on a preview before it went live, ran the PageSpeed &amp; WAVE tests myself, and checked every claim in this case study.</p>
+
+        <h3>Next Steps</h3>
+        <ul>
+          <li>Update the Google Business Profile &amp; Facebook page so they match the new site.</li>
+          <li>Re-run the same tests on shoreline-electric.com now that it’s on the real domain.</li>
+          <li>Set up a simple way to track where calls come from, so the impact can be measured later.</li>
+          <li>Add a reviews section once the business has reviews it’s happy to quote.</li>
+        </ul>
+      </section>
+
+      <div class="cs-end">
+        <a href="https://shoreline-electric.com" class="text-link" target="_blank" rel="noopener noreferrer">Visit shoreline-electric.com <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg><span class="sr-only"> (opens in a new tab)</span></a>
+        <a href="/work/sand-dollar/" class="text-link">Next: Sand Dollar case study <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a href="/work/" class="text-link">Back to all work <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </div>
+
+    </article>
+  </div>
+
+  <div class="wrap"><div class="divider-hazard" aria-hidden="true"></div></div>
+  <section class="section section--tight" aria-labelledby="cta-heading">
+    <div class="wrap">
+      <div class="cta-panel" data-reveal>
+        <div class="grid-texture" aria-hidden="true"></div>
+        <span class="eyebrow eyebrow--accent">Contact</span>
+        <h2 id="cta-heading">Have a project in mind?</h2>
+        <p class="lede">Tell me what you're working on and what isn't working today. I aim to reply within two business days.</p>
+        <div class="cta-actions">
+          <a href="/contact/" class="btn btn-primary btn-lg">Start a project</a>
+          <a href="/resume/dylan-dwight-resume.pdf" class="text-link" target="_blank" rel="noopener">Hiring? Download my résumé <span class="work-card-meta">PDF</span><span class="sr-only"> (opens in a new tab)</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <svg class="logo-mark" viewBox="0 0 64 60" fill="none" aria-hidden="true"><path d="M10 14 H16 A16 16 0 0 1 16 46 H10 Z" fill="currentColor"/><path d="M54 14 H48 A16 16 0 0 0 48 46 H54 Z" fill="currentColor"/><circle class="logo-node" cx="32" cy="30" r="2.5"/></svg>
+        <strong>Dylan Dwight Creative Technologies</strong>
+        <p>Web design and front-end development for restaurants, artists, musicians, and small businesses.</p>
+        <span class="mono">Brooklyn, NY · Remote</span>
+      </div>
+      <nav aria-label="Footer">
+        <h2 class="footer-heading">Site</h2>
+        <ul class="footer-list">
+          <li><a href="/work/">Work</a></li>
+          <li><a href="/services/">Services</a></li>
+          <li><a href="/about/">About</a></li>
+          <li><a href="/contact/">Contact</a></li>
+        </ul>
+      </nav>
+      <div>
+        <h2 class="footer-heading">Elsewhere</h2>
+        <ul class="footer-list">
+          <li><a href="mailto:dylan@dylandwight.com">dylan@dylandwight.com</a></li>
+          <li><a href="tel:+13473793273">(347) 379-3273</a></li>
+          <li><a href="https://www.linkedin.com/in/dylan-dwight/" target="_blank" rel="noopener noreferrer">LinkedIn<span class="sr-only"> (opens in a new tab)</span></a></li>
+          <li><a href="https://github.com/DylanDwight" target="_blank" rel="noopener noreferrer">GitHub<span class="sr-only"> (opens in a new tab)</span></a></li>
+          <li><a href="/resume/dylan-dwight-resume.pdf" target="_blank" rel="noopener">Résumé (PDF)<span class="sr-only"> (opens in a new tab)</span></a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Dylan Dwight Creative Technologies</span>
+      <a href="/contact/">Start a project →</a>
+    </div>
+  </div>
+</footer>
+
+<script type="module" src="/js/app.js"></script>
+</body>
+</html>
