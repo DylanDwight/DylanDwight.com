@@ -216,7 +216,7 @@ export function initContactForm() {
   });
 
   // "Request a video call" (sidebar): choose Google Meet in the form, then
-  // bring the form into view and start at the first field. Without JS the
+  // bring the form into view and start at the email field. Without JS the
   // link still jumps to the form.
   document.querySelectorAll('[data-request-meet]').forEach((link) => {
     link.addEventListener('click', (event) => {
@@ -226,7 +226,7 @@ export function initContactForm() {
       saveDraft(form);
       const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       document.getElementById('inquiry').scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
-      form.querySelector('#f-name').focus({ preventScroll: true });
+      form.querySelector('#f-email').focus({ preventScroll: true });
     });
   });
 
