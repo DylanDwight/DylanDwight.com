@@ -27,16 +27,6 @@ const CHECKS = {
   'f-email': (value) => {
     if (!EMAIL_PATTERN.test(value)) return 'Enter an email address like name@example.com.';
   },
-  'f-phone': (value) => {
-    if (/[^\d\s().+-]/.test(value)) return 'Use numbers only, like (347) 555-0100.';
-    const digits = value.replace(/\D/g, '');
-    const us = digits.length === 10 || (digits.length === 11 && digits.startsWith('1'));
-    const intl = value.trim().startsWith('+') && digits.length >= 8 && digits.length <= 15;
-    if (!us && !intl) return 'Enter a 10-digit phone number, like (347) 555-0100.';
-    if (/^(\d)\1+$/.test(digits.slice(-10)) || /^0123456789$|^1234567890$/.test(digits.slice(-10))) {
-      return 'Please enter a real phone number.';
-    }
-  },
   'f-business': (value) => {
     if (!/\p{L}/u.test(value) || value.length < 2 || looksMashed(value)) return 'Please enter your business or project name.';
   },
@@ -74,17 +64,10 @@ function validate(form) {
   // Filled-in answers (required or optional) must also look real.
   Object.entries(CHECKS).forEach(([id, check]) => {
     const input = form.querySelector(`#${id}`);
-    if (input.closest('[hidden]')) return;
     const value = input.value.trim();
     const message = value && check(value);
     if (message) problems.push({ id, focus: input, message });
   });
-
-  // A call or text needs a number to reach.
-  const phone = form.querySelector('#f-phone');
-  if (form.querySelector('[data-needs-phone]:checked') && !phone.value.trim()) {
-    problems.push({ id: phone.id, focus: phone, message: 'Add the number I should call or text.' });
-  }
 
   // Keep the summary in the same order as the form.
   const order = [...form.querySelectorAll('[data-error-for]')].map((el) => el.dataset.errorFor);
@@ -183,13 +166,6 @@ function restoreDraft(form) {
   return draft.fields.length > 0;
 }
 
-// The phone number field only shows when "Phone" is the chosen contact method.
-function syncPhoneField(form) {
-  const wanted = Boolean(form.querySelector('[data-needs-phone]:checked'));
-  const field = form.querySelector('[data-phone-field]');
-  field.hidden = !wanted;
-}
-
 function setStatus(form, html) {
   form.querySelector('[data-form-status]').innerHTML = html;
 }
@@ -214,34 +190,13 @@ export function initContactForm() {
   const fallback = `<a href="mailto:${EMAIL}">${EMAIL}</a>`;
   const draftNote = form.querySelector('[data-draft-note]');
   if (restoreDraft(form)) draftNote.hidden = false;
-  syncPhoneField(form);
-  form.addEventListener('change', (event) => {
-    if (event.target.name === 'contact') syncPhoneField(form);
-  });
   form.addEventListener('input', () => saveDraft(form));
   form.addEventListener('change', () => saveDraft(form));
   form.querySelector('[data-draft-clear]').addEventListener('click', () => {
     clearDraft();
     form.reset();
-    syncPhoneField(form);
     draftNote.hidden = true;
     form.querySelector('input:not([type="hidden"])').focus();
-  });
-
-  // "Request a video call" (sidebar): choose Google Meet in the form, then
-  // bring the form into view and start at the email field. Without JS the
-  // link still jumps to the form.
-  document.querySelectorAll('[data-request-meet]').forEach((link) => {
-    link.addEventListener('click', (event) => {
-      event.preventDefault();
-      const meet = form.querySelector('[name="contact"][value="Google Meet video call"]');
-      meet.checked = true;
-      syncPhoneField(form);
-      saveDraft(form);
-      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      document.getElementById('inquiry').scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
-      form.querySelector('#f-email').focus({ preventScroll: true });
-    });
   });
 
   // Clear a field's error as soon as it's fixed. Text fields clear while
@@ -289,7 +244,7 @@ export function initContactForm() {
       if (!result.ok) throw new Error(result.error || 'Not saved');
       const contact = form.querySelector('[name="contact"]:checked').value;
       success.querySelector('[data-success-followup]').textContent =
-        ({ Email: 'email', 'Phone call or text': 'phone or text' })[contact] || 'email with a Google Meet invite';
+        contact === 'Email' ? 'email' : 'email with a Google Meet invite';
       clearDraft();
       form.hidden = true;
       success.hidden = false;

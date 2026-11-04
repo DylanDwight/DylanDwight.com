@@ -211,7 +211,7 @@
 
           <div class="field-row">
             <div class="field">
-              <label for="f-service">What do you need? <span class="req" aria-hidden="true">*</span></label>
+              <label for="f-service">Service needed <span class="req" aria-hidden="true">*</span></label>
               <select id="f-service" name="service" required aria-describedby="f-service-error">
               <option value="">Select a service</option>
               <option value="Landing page">Landing page</option>
@@ -247,22 +247,15 @@
             <p class="field-error" id="f-details-error" data-error-for="f-details" hidden></p>
           </div>
 
-          <fieldset class="field" id="f-contact" data-required-group aria-describedby="f-contact-error">
+          <fieldset class="field" id="f-contact" data-required-group aria-describedby="f-contact-hint f-contact-error">
             <legend>How should I reach you? <span class="req" aria-hidden="true">*</span></legend>
+            <p class="field-hint" id="f-contact-hint">I'll stick with what you choose. You can switch any time.</p>
             <div class="choices choices--inline">
               <label class="choice"><input type="radio" name="contact" value="Email" required checked /> <span>Email</span></label>
-              <label class="choice"><input type="radio" name="contact" value="Google Meet video call" /> <span>Google Meet</span></label>
-              <label class="choice"><input type="radio" name="contact" value="Phone call or text" data-needs-phone /> <span>Phone</span></label>
+              <label class="choice"><input type="radio" name="contact" value="Google Meet video call" /> <span>Google Meet video call</span></label>
             </div>
             <p class="field-error" id="f-contact-error" data-error-for="f-contact" hidden></p>
           </fieldset>
-
-          <!-- js/contact-form.js shows this only when "Phone" is chosen above. -->
-          <div class="field" data-phone-field>
-            <label for="f-phone">Phone number <span class="req" aria-hidden="true">*</span></label>
-            <input id="f-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" aria-describedby="f-phone-error" />
-            <p class="field-error" id="f-phone-error" data-error-for="f-phone" hidden></p>
-          </div>
 
           <!-- Spam trap: hidden from people and screen readers, never sent. -->
           <div class="hp-field" aria-hidden="true">
@@ -294,13 +287,12 @@
 
       <div class="contact-side" data-reveal>
         <div class="phone-card">
-          <h2>Prefer to talk?</h2>
-          <p>Call, text, or set up a Google Meet video call. For a video call I'll email you an invite at a time that works for you.</p>
+          <h2>Call or text</h2>
+          <p>Prefer your phone? Call or text and I'll keep in touch that way. You can switch any time.</p>
           <a class="phone-card-number" href="tel:+13473793273">(347) 379-3273</a>
           <div class="phone-card-actions">
             <a class="btn btn-primary" href="tel:+13473793273"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg> Call</a>
             <a class="btn btn-secondary" href="sms:+13473793273"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><path d="M8 9h8M8 13h5"/></svg> Text</a>
-            <a class="btn btn-secondary phone-card-wide" href="#inquiry" data-request-meet><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 13 5.2 3.5a.5.5 0 0 0 .8-.4V7.9a.5.5 0 0 0-.8-.4L16 11"/><rect x="2" y="6" width="14" height="12" rx="2"/></svg> Google Meet video call</a>
           </div>
         </div>
         <div>

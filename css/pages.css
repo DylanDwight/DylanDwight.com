@@ -1713,7 +1713,7 @@ table.cs-table td:first-child {
   flex-wrap: wrap;
   gap: var(--space-1) var(--space-6);
 }
-/* Contact sidebar: call, text, or Google Meet */
+/* Contact sidebar: call or text card */
 .phone-card {
   padding: var(--space-6);
   border: 1px solid var(--color-border);
@@ -1731,12 +1731,6 @@ table.cs-table td:first-child {
   color: var(--color-text);
   text-decoration: none;
   white-space: nowrap;
-}
-.phone-card-wide {
-  grid-column: 1 / -1;
-}
-.field[hidden] {
-  display: none;
 }
 .phone-card-actions {
   display: grid;
