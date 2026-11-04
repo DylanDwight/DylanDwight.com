@@ -74,6 +74,7 @@ function validate(form) {
   // Filled-in answers (required or optional) must also look real.
   Object.entries(CHECKS).forEach(([id, check]) => {
     const input = form.querySelector(`#${id}`);
+    if (input.closest('[hidden]')) return;
     const value = input.value.trim();
     const message = value && check(value);
     if (message) problems.push({ id, focus: input, message });
@@ -82,7 +83,7 @@ function validate(form) {
   // A call or text needs a number to reach.
   const phone = form.querySelector('#f-phone');
   if (form.querySelector('[data-needs-phone]:checked') && !phone.value.trim()) {
-    problems.push({ id: phone.id, focus: phone, message: 'Add a phone number so I can call or text you.' });
+    problems.push({ id: phone.id, focus: phone, message: 'Add the number I should call or text.' });
   }
 
   // Keep the summary in the same order as the form.
@@ -182,6 +183,13 @@ function restoreDraft(form) {
   return draft.fields.length > 0;
 }
 
+// The phone number field only shows when "Phone" is the chosen contact method.
+function syncPhoneField(form) {
+  const wanted = Boolean(form.querySelector('[data-needs-phone]:checked'));
+  const field = form.querySelector('[data-phone-field]');
+  field.hidden = !wanted;
+}
+
 function setStatus(form, html) {
   form.querySelector('[data-form-status]').innerHTML = html;
 }
@@ -206,11 +214,16 @@ export function initContactForm() {
   const fallback = `<a href="mailto:${EMAIL}">${EMAIL}</a>`;
   const draftNote = form.querySelector('[data-draft-note]');
   if (restoreDraft(form)) draftNote.hidden = false;
+  syncPhoneField(form);
+  form.addEventListener('change', (event) => {
+    if (event.target.name === 'contact') syncPhoneField(form);
+  });
   form.addEventListener('input', () => saveDraft(form));
   form.addEventListener('change', () => saveDraft(form));
   form.querySelector('[data-draft-clear]').addEventListener('click', () => {
     clearDraft();
     form.reset();
+    syncPhoneField(form);
     draftNote.hidden = true;
     form.querySelector('input:not([type="hidden"])').focus();
   });
@@ -223,6 +236,7 @@ export function initContactForm() {
       event.preventDefault();
       const meet = form.querySelector('[name="contact"][value="Google Meet video call"]');
       meet.checked = true;
+      syncPhoneField(form);
       saveDraft(form);
       const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       document.getElementById('inquiry').scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
@@ -275,7 +289,7 @@ export function initContactForm() {
       if (!result.ok) throw new Error(result.error || 'Not saved');
       const contact = form.querySelector('[name="contact"]:checked').value;
       success.querySelector('[data-success-followup]').textContent =
-        ({ Email: 'email', 'Phone call': 'phone', 'Text message': 'text' })[contact] || 'email with a Google Meet invite';
+        ({ Email: 'email', 'Phone call or text': 'phone or text' })[contact] || 'email with a Google Meet invite';
       clearDraft();
       form.hidden = true;
       success.hidden = false;
