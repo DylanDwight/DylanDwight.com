@@ -1713,9 +1713,8 @@ table.cs-table td:first-child {
   flex-wrap: wrap;
   gap: var(--space-1) var(--space-6);
 }
-/* Contact sidebar: phone number and Google Meet cards */
-.phone-card,
-.meet-card {
+/* Contact sidebar: call or text card */
+.phone-card {
   padding: var(--space-6);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
@@ -1732,10 +1731,6 @@ table.cs-table td:first-child {
   color: var(--color-text);
   text-decoration: none;
   white-space: nowrap;
-}
-.meet-card-actions {
-  display: grid;
-  margin-top: var(--space-4);
 }
 .phone-card-actions {
   display: grid;
