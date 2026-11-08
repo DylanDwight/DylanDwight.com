@@ -1,6 +1,6 @@
 # DylanDwight.com
 
-Source code for [dylandwight.com](https://dylandwight.com) — the portfolio and services site of Dylan Dwight Creative Technologies: web design and front-end development for restaurants, artists, musicians, and small businesses.
+Source code for [dylandwight.com](https://dylandwight.com) — the portfolio and services site of Dylan Dwight: web design and front-end development for restaurants, artists, musicians, and small businesses.
 
 ## Overview
 
