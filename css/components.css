@@ -729,6 +729,49 @@ h3 {
   color: var(--color-text);
 }
 
+/* Client testimonial. Quotes are verbatim from the client's own words;
+   the attribution names the person and their role. */
+.quote {
+  margin: 0;
+  position: relative;
+  padding-left: var(--space-8);
+}
+.quote::before {
+  content: "\201C";
+  position: absolute;
+  left: 0;
+  top: -0.1em;
+  font-family: var(--font-display);
+  font-size: 2.75rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--color-primary);
+}
+.quote blockquote {
+  margin: 0;
+}
+.quote blockquote p,
+.work-card .quote blockquote p {
+  color: var(--color-text);
+  font-size: var(--text-base);
+  line-height: 1.55;
+  max-width: var(--measure-default);
+}
+.quote figcaption {
+  margin-top: var(--space-3);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.04em;
+  color: var(--color-text-subtle);
+}
+.quote figcaption span {
+  display: block;
+  margin-top: var(--space-1);
+}
+.quote--cs blockquote p {
+  font-size: var(--text-lg);
+}
+
 /* Project screenshot */
 .work-shot {
   display: block;

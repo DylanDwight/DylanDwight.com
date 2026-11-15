@@ -1161,6 +1161,9 @@ table.cs-table td:first-child {
 .cs-section > .cs-takeaway {
   margin-top: var(--space-8);
 }
+.cs-section > .quote {
+  margin-block: var(--space-8);
+}
 .cs-takeaway p {
   color: var(--color-text);
   font-size: var(--text-lg);
