@@ -21,7 +21,7 @@ const looksMashed = (value) => /[bcdfghjklmnpqrstvwxz]{6,}/i.test(value) || /(.)
 
 const CHECKS = {
   'f-name': (value) => {
-    if (!/^[\p{L}][\p{L}\p{M}' .-]*$/u.test(value)) return 'Use letters only for your name.';
+    if (!/^[\p{L}][\p{L}\p{M}'’ .-]*$/u.test(value)) return 'Use letters only for your name.';
     if (value.replace(/[^\p{L}]/gu, '').length < 2 || looksMashed(value)) return 'Please enter your real name.';
   },
   'f-email': (value) => {
@@ -116,11 +116,14 @@ function showErrors(form, problems) {
 function buildPayload(form) {
   const data = new FormData(form);
   data.forEach((value, key) => data.set(key, value.trim()));
+  // Time since the page loaded. The Apps Script treats a post without it
+  // (a bot posting straight to the URL) or one sent too fast as spam.
+  data.set('form_ms', String(Math.round(performance.now())));
   return new URLSearchParams(data);
 }
 
 function saveDraft(form) {
-  const fields = [...new FormData(form)].filter(([, value]) => value !== '');
+  const fields = [...new FormData(form)].filter(([name, value]) => value !== '' && name !== 'hp');
   try {
     if (fields.length) {
       localStorage.setItem(DRAFT_KEY, JSON.stringify({ savedAt: Date.now(), fields }));
