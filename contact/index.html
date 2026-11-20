@@ -257,11 +257,17 @@
             <p class="field-error" id="f-contact-error" data-error-for="f-contact" hidden></p>
           </fieldset>
 
-          <!-- Spam trap: hidden from people and screen readers, never sent. -->
+          <!-- Spam trap: off-screen, hidden from screen readers and skipped by Tab.
+               People never fill it; the Apps Script files anything that does under Filtered. -->
           <div class="hp-field" aria-hidden="true">
             <label for="f-website">Leave this empty</label>
-            <input id="f-website" type="text" tabindex="-1" autocomplete="off" data-honeypot />
+            <input id="f-website" name="hp" type="text" tabindex="-1" autocomplete="off" data-honeypot />
           </div>
+
+          <noscript>
+            <p class="form-status">This form needs JavaScript to send. You can email me at
+              <a href="mailto:dylan@dylandwight.com">dylan@dylandwight.com</a> instead.</p>
+          </noscript>
 
           <div class="form-actions">
             <button class="btn btn-primary btn-lg btn-submit" type="submit" data-submit>
