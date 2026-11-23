@@ -1206,3 +1206,25 @@ html.js [data-reveal].is-visible {
   .logo-link .logo-mark .logo-node { animation: none; }
   .logo-link:hover .logo-mark path { transform: none; }
 }
+
+/* Three-outcome grid (Services top + homepage preview). Stays 3-up until
+   phones so three cards never leave an orphan in a 2-column row. */
+@media (max-width: 1024px) {
+  .service-grid--three {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media (max-width: 860px) {
+  .service-grid--three {
+    grid-template-columns: 1fr;
+  }
+}
+.service-item .service-proof {
+  margin-top: auto;
+  padding-top: var(--space-2);
+  font-size: var(--text-sm);
+}
+.page-hero .outcomes-grid {
+  position: relative;
+  margin-block: var(--space-8);
+}
